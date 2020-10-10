@@ -21,7 +21,7 @@ rm -rf ubiquitous-journey/.github
 
 #### `ubiquitous-journey/ubiquitous-journey/values-tooling.yaml`
 
-Edit this file and choose tools we want by enabling them as `true` (the rest we set to false):
+Edit this file and choose tools we want by enabling them as `true` (the rest we set to false). In this example we are using nexus, sonarqube and tekton:
 ```bash
 
 enabled: true
@@ -53,9 +53,11 @@ Replace source with new git repo:
 sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd/ubiquitous-journey|' ubiquitous-journey/argo-app-of-apps.yaml
 ```
 
-Check all of it in
+Check all of it into git:
 ```bash
-
+git add .
+git commit -m 'initial commit'
+git push
 ```
 
 #### Bootstrap
