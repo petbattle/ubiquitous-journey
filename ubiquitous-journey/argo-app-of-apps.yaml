@@ -7,7 +7,7 @@ applications:
     destination: labs-ci-cd
     enabled: true
     source: https://github.com/eformat/pb-ci-cd.git
-    source_path: ubiquitous-journey/
+    source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
     sync_policy_automated: false
     helm_values:
@@ -16,7 +16,7 @@ applications:
     destination: labs-ci-cd
     enabled: true
     source: https://github.com/eformat/pb-ci-cd.git
-    source_path: ubiquitous-journey/
+    source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
     sync_policy_automated: false
     helm_values:
@@ -25,7 +25,7 @@ applications:
     destination: labs-ci-cd
     enabled: true
     source: https://github.com/eformat/pb-ci-cd.git
-    source_path: ubiquitous-journey/
+    source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
     sync_policy_automated: false
     helm_values:
