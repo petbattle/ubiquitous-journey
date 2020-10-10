@@ -48,9 +48,10 @@ Edit this file and set all of these to false (we dont need them for now).
 
 #### `ubiquitous-journey/argo-app-of-apps.yaml`
 
-Replace source with new git repo:
+Replace source with new git repo (github now uses main instead of master):
 ```bash
 sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd|' ubiquitous-journey/argo-app-of-apps.yaml
+sed -i -e 's|source_ref: master|source_ref: main|' ubiquitous-journey/argo-app-of-apps.yaml
 ```
 
 Check all of it into git:
