@@ -2,7 +2,7 @@
 
 An end to end tutorial for using UJ in your own project. This example uses the Java Quarkus pet battle applications as examples.
 
-### Setup UJ
+### Bootstrap your CI/CD environment
 Create a directory to hold your CICD tooling automation.
 ```bash
 mkdir pb-ci-cd
@@ -132,3 +132,17 @@ application.argoproj.io/ubiquitous-journey created
 application.argoproj.io/uj-extras created
 application.argoproj.io/uj-day2ops created
 ```
+
+### Check out deployments in UI
+
+Find the argocd Route in the labs-ci-cd namespace `argocd-server`
+![argo-route.png](images/argo-route.png)
+
+Browse to it and login via OpenShift
+![argo-login.png](images/argo-login.png)
+
+All the apps should be syncing and deploying (we set auto sync true):
+![argo-uj-all.png](images/argo-uj-all.png)
+
+If you select one of the `app-of-app` applications e.g. `ubiquitous-journey` we can see out CICD tooling deployed. You can further drill-down from here as well.
+![argo-login.png](images/argo-app-of-apps-uj.png)
