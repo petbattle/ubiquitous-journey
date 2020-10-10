@@ -46,6 +46,18 @@ Set `sonarqube plugins values`
 
 Edit this file and set all of these to false (we dont need them for now).
 
+#### `ubiquitous-journey/argo-app-of-apps.yaml`
+
+Replace source with new git repo:
+```bash
+sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd/ubiquitous-journey|' ubiquitous-journey/argo-app-of-apps.yaml
+```
+
+Check all of it in
+```bash
+
+```
+
 #### Bootstrap
 
 Login to openshift as a user with `cluster-admin`

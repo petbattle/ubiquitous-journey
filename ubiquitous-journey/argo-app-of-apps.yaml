@@ -1,0 +1,41 @@
+##############
+# 🛎 Argo App of Apps. Points to a repo which contains some helm stuff
+#############
+
+applications:
+  - name: ubiquitous-journey
+    destination: labs-ci-cd
+    enabled: true
+    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source_path: ubiquitous-journey/
+    source_ref: master
+    sync_policy_automated: false
+    helm_values:
+      - values-tooling.yaml
+  - name: uj-extras
+    destination: labs-ci-cd
+    enabled: true
+    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source_path: ubiquitous-journey/
+    source_ref: master
+    sync_policy_automated: false
+    helm_values:
+      - values-extratooling.yaml
+  - name: uj-day2ops
+    destination: labs-ci-cd
+    enabled: true
+    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source_path: ubiquitous-journey/
+    source_ref: master
+    sync_policy_automated: false
+    helm_values:
+      - values-day2ops.yaml
+  - name: example-deployment
+    destination: labs-ci-cd
+    enabled: false
+    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source_path: example-deployment
+    source_ref: "master"
+    sync_policy_automated: true
+    helm_values:
+      - values-applications.yaml
