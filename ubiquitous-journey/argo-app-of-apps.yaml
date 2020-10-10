@@ -6,7 +6,7 @@ applications:
   - name: ubiquitous-journey
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source: https://github.com/eformat/pb-ci-cd.git
     source_path: ubiquitous-journey/
     source_ref: master
     sync_policy_automated: false
@@ -15,7 +15,7 @@ applications:
   - name: uj-extras
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source: https://github.com/eformat/pb-ci-cd.git
     source_path: ubiquitous-journey/
     source_ref: master
     sync_policy_automated: false
@@ -24,7 +24,7 @@ applications:
   - name: uj-day2ops
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source: https://github.com/eformat/pb-ci-cd.git
     source_path: ubiquitous-journey/
     source_ref: master
     sync_policy_automated: false
@@ -33,7 +33,7 @@ applications:
   - name: example-deployment
     destination: labs-ci-cd
     enabled: false
-    source: https://github.com/eformat/pb-ci-cd/ubiquitous-journey.git
+    source: https://github.com/eformat/pb-ci-cd.git
     source_path: example-deployment
     source_ref: "master"
     sync_policy_automated: true

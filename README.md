@@ -50,7 +50,7 @@ Edit this file and set all of these to false (we dont need them for now).
 
 Replace source with new git repo:
 ```bash
-sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd/ubiquitous-journey|' ubiquitous-journey/argo-app-of-apps.yaml
+sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd|' ubiquitous-journey/argo-app-of-apps.yaml
 ```
 
 Check all of it into git:
