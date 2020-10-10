@@ -1,22 +1,33 @@
 ## pb-ci-cd
 
+An end to end tutorial for using UJ in your own project. This example uses the Java Quarkus pet battle applications as examples.
 
 ### Setup UJ
-Create this directory
+Create a directory to hold your CICD tooling automation.
 ```bash
 mkdir pb-ci-cd
 ```
 
-Document all the things:
+Document all the things here:
 ```bash
 cd pb-ci-cd && touch README.md
 ```
 
-Clone UJ:
+Clone UJ into your project:
 ```bash
 git clone https://github.com/rht-labs/ubiquitous-journey
 rm -rf ubiquitous-journey/.git/
 rm -rf ubiquitous-journey/.github
+```
+
+Initialize git repository in the top level folder.
+```bash
+git init
+git add README.md
+git commit -m  "🐪 initial commit 🐪"
+git branch -M main
+git remote add origin git@github.com:eformat/pb-ci-cd.git
+git push -u origin main
 ```
 
 #### `ubiquitous-journey/ubiquitous-journey/values-tooling.yaml`
@@ -53,6 +64,7 @@ Replace source with new git repo, github now uses main instead of master and fix
 sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd|' ubiquitous-journey/argo-app-of-apps.yaml
 sed -i -e 's|source_ref: master|source_ref: main|' ubiquitous-journey/argo-app-of-apps.yaml
 sed -i -e 's|source_path: ubiquitous-journey|source_path: ubiquitous-journey/ubiquitous-journey|' ubiquitous-journey/argo-app-of-apps.yaml
+sed -i -e 's|sync_policy_automated: false|sync_policy_automated: true|' ubiquitous-journey/argo-app-of-apps.yaml
 ```
 
 Check all of it into git:
@@ -120,4 +132,3 @@ application.argoproj.io/ubiquitous-journey created
 application.argoproj.io/uj-extras created
 application.argoproj.io/uj-day2ops created
 ```
-

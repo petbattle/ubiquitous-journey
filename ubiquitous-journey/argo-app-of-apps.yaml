@@ -9,7 +9,7 @@ applications:
     source: https://github.com/eformat/pb-ci-cd.git
     source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
-    sync_policy_automated: false
+    sync_policy_automated: true
     helm_values:
       - values-tooling.yaml
   - name: uj-extras
@@ -18,7 +18,7 @@ applications:
     source: https://github.com/eformat/pb-ci-cd.git
     source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
-    sync_policy_automated: false
+    sync_policy_automated: true
     helm_values:
       - values-extratooling.yaml
   - name: uj-day2ops
@@ -27,7 +27,7 @@ applications:
     source: https://github.com/eformat/pb-ci-cd.git
     source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
-    sync_policy_automated: false
+    sync_policy_automated: true
     helm_values:
       - values-day2ops.yaml
   - name: example-deployment
