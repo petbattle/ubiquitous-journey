@@ -40,7 +40,7 @@ git push -u origin main
 
 #### [ubiquitous-journey/ubiquitous-journey/values-tooling.yaml](ubiquitous-journey/ubiquitous-journey/values-tooling.yaml)
 
-Edit this file and choose tools we want by enabling them as `true` (the rest we set to false). In this example we are using nexus, sonarqube and tekton:
+Edit this file and choose the tools we want by enabling them as `true` (the rest we set to false). In this example we are using nexus, sonarqube and tekton:
 ```bash
 
 enabled: true
@@ -91,7 +91,7 @@ oc login
 cd pb-ci-cd/ubiquitous-journey
 ```
 
-Boostrap ArgoCD (run this command again if you see a `no matches for kind "ArgoCD" in version "argoproj.io/v1alpha1"` warning - this is fine, the CR was not found yet)
+Boostrap ArgoCD. Run this command again if you see a `no matches for kind "ArgoCD" in version "argoproj.io/v1alpha1"` warning - this is fine, the CR was not found yet.
 ```bash
 $ helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
 
@@ -166,15 +166,15 @@ mkdir -p applications operators persistent-volume-claims pipelines rolebindings 
 
 ![tekton-dir-structure.png](images/tekton-dir-structure.png)
 
-### Copy pre-defined artefacts
+### Copy pre-defined artifacts
 
-We wish to assemble pipeline artefacts. We can copy previous examples or source new ones from
+We wish to assemble pipeline artifacts. We can copy previous examples or source new ones from
 
 - [https://hub-preview.tekton.dev](https://hub-preview.tekton.dev)
 
 #### PVC
 
-We want to use [tekton workspaces](https://tekton.dev/docs/pipelines/workspaces/) to hold our build artefacts, so we first copy in Persistent Volume Claim definitions. We use RWX file systems to we can run parallel tasks using the same file system.
+We want to use [tekton workspaces](https://tekton.dev/docs/pipelines/workspaces/) to hold our build artifacts, so we first copy in Persistent Volume Claim definitions. We use RWX file systems to we can run parallel tasks using the same file system.
 
 Prerequisites:
 - AWS EFS storage class is configured on your cluster:
@@ -259,7 +259,9 @@ EOF
 
 ### Applications
 
-We are going to deploy out application using the Helm chart that is part of the application. This chart does not contain a kubernetes `BuildConfig`, so we need to create that here. Our pipeline will create this resource for us.
+We are going to deploy out application using the Helm chart that is part of the [application](https://github.com/eformat/pet-battle-api/tree/master/chart)
+
+This chart does not contain a kubernetes `BuildConfig`, so we need to create that here. Our pipeline will create this resource for us.
 
 Create a directory to hold build artifacts:
 ```bash
@@ -341,7 +343,7 @@ bases:
 EOF
 ```
 
-Now, we also need to create our app-of-apps argocd definition - which is a helm chart.
+Now, we also need to create our app-of-apps argocd definition - which is also a helm chart.
 
 Create a directory to hold build artifacts:
 ```bash
@@ -784,7 +786,7 @@ EOF
 
 ### Create a template
 
-We have not configuring webhooks yet to start our pipeline. It is useful to define a template to test our pipeline manually:
+It is useful to define a template to test our pipeline manually. Webhooks will be configured later to do trigger the pipeline run automatically.
 ```bash
 cat <<'EOF' > templates/pet-battle-api.yaml
 ---
@@ -851,7 +853,6 @@ resources:
 - pet-battle-api.yaml
 EOF
 ```
-
 
 ### Create top level Kustomization and check in
 
@@ -935,10 +936,10 @@ Use the template to trigger a pipeline run (could also start from the UI)
 oc -n labs-ci-cd process pet-battle-api | oc -n labs-ci-cd create -f-
 ```
 
-You can use the UI or the `tkn` cli to look at the logs of your pipelines and task runs
+You can use the UI or the `tkn` cli to look at the logs of your pipeline runs and task runs:
 ```bash
-tkn o list
 tkn pr list
+tkn pr logs pet-battle-api-9ls6c
 tkn tr list
 tkn tr logs pet-battle-api-9ls6c-code-analysis-ktxdb -f
 ```
@@ -979,6 +980,7 @@ I put this section at the end .. really this is a tutorial to help you understan
 ```bash
 # bootstrap to install argocd and create projects
 helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
+# create the argocd token secret in labs-ci-cd namespace see above section ^^^
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
