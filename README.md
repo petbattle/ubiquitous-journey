@@ -797,6 +797,9 @@ objects:
   kind: PipelineRun
   metadata:
     generateName: pet-battle-api-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:
     pipelineRef:
       name: maven-pipeline
