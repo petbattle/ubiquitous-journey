@@ -921,6 +921,10 @@ This also requires adding in labels to ALL checked in resources so the sync succ
     rht-labs.com/uj: pb-ci-cd
 ```
 
+GitOps All the things!
+
+![gitops-ci-cd.png](images/gitops-ci-cd.png)
+
 ### Run pipeline manually
 
 Use the template to trigger a pipeline run (could also start from the UI)
