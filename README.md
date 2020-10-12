@@ -178,6 +178,21 @@ curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volum
 curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volume-claims/kustomization.yaml -o persistent-volume-claims/kustomization.yaml
 ```
 
+### RBAC
+
+We want our Tekton `pipeline` service account to be able to tag images in our namespaces.
+```bash
+curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/rolebindings/edit-0.yaml -o rolebindings/edit-0.yaml
+
+cat <<EOF > rolebindings/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- edit-0.yaml
+EOF
+```
+
 ### Tasks
 
 [Tasks](https://tekton.dev/docs/pipelines/tasks/) make up the steps in our pipeline.
@@ -842,7 +857,7 @@ bases:
 - conditionals
 #- configmaps
 #- secrets
-#- rolebindings
+- rolebindings
 - tasks
 - pipelines
 - templates
