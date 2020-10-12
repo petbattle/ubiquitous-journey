@@ -70,7 +70,7 @@ sed -i -e 's|sync_policy_automated: false|sync_policy_automated: true|' ubiquito
 Check all of it into git:
 ```bash
 git add .
-git commit -m 'initial commit'
+git commit -m  "🐪 initial commit 🐪"
 git push
 ```
 
@@ -84,7 +84,7 @@ cd pb-ci-cd/ubiquitous-journey
 
 Boostrap ArgoCD (run this command again if you see a `no matches for kind "ArgoCD" in version "argoproj.io/v1alpha1"` warning - this is fine, the CR was not found yet)
 ```bash
-helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
+$ helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
 
 namespace/labs-ci-cd unchanged
 namespace/labs-pm unchanged
@@ -126,7 +126,7 @@ You should see your pods and deployments spinning up:
 
 Give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 ```bash
-helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
+$ helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 
 application.argoproj.io/ubiquitous-journey created
 application.argoproj.io/uj-extras created
@@ -524,7 +524,7 @@ spec:
         - name: url
           value: "https://github.com/eformat/pb-ci-cd.git"
         - name: revision
-          value: "master"
+          value: "main"
         - name: subdirectory
           value: "$(params.APPLICATION_NAME)/cicd"
         - name: deleteExisting
@@ -852,19 +852,47 @@ EOF
 Check all of it into git:
 ```bash
 git add .
-git commit -m 'adding tekton pipeline resources'
+git commit -m "🐪 adding tekton pipeline resources 🐪"
 git push
 ```
 
-### Apply to cluster and run pipeline
+### Apply to cluster
 
-Apply configurtion to cluster. This can be rerun whenever you make a change:
+Apply configurtion to cluster. You rerun this command whenever you make a change to the checked in source code.
 ```
-oc project labs-ci-cd
-kustomize build | oc apply -f-
+$ oc project labs-ci-cd
+$ kustomize build | oc apply -f-
+
+condition.tekton.dev/is-equal unchanged
+condition.tekton.dev/is-not-equal unchanged
+pipeline.tekton.dev/maven-pipeline created
+task.tekton.dev/argocd-sync-and-wait configured
+task.tekton.dev/git-clone configured
+task.tekton.dev/helm-template-from-source configured
+task.tekton.dev/maven configured
+task.tekton.dev/openshift-client configured
+task.tekton.dev/openshift-kustomize configured
+persistentvolumeclaim/build-images unchanged
+persistentvolumeclaim/maven-source unchanged
+template.template.openshift.io/pet-battle-api unchanged
 ```
 
-## Extension work to be done:
+### Run pipeline manually
+
+Use the template to trigger a pipeline run (could also start from the UI)
+```bash
+oc -n labs-ci-cd process pet-battle-api | oc -n labs-ci-cd create -f-
+```
+
+You can use the UI or the `tkn` cli to look at the logs of your pipelines and task runs
+```bash
+tkn o list
+tkn pr list
+tkn tr list
+tkn tr logs pet-battle-api-9ls6c-code-analysis-ktxdb -f
+```
+
+## Work to be done:
 - make secrets better - sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4
 - quarkus hashicorp integration - https://quarkus.io/guides/vault
 - delete deprecated tekton conditionals -> when syntax
@@ -881,3 +909,6 @@ kustomize build | oc apply -f-
           operator: notin
           values: ["master"]
 ```
+- add argocd app for the cicd kustomize code
+- tekton-tidy.sh, clean artefacts in workspace, from pipeline job?
+- ubi quarkus build image with tools, check base now we have new images
