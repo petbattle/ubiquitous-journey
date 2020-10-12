@@ -4,7 +4,7 @@ An end to end tutorial for using Ubiquitous Journey in your own project with Tek
 
 This example uses the Java Quarkus Pet Battle applications as an example.
 
-We scaffold from scratch the pieces required to run a CI/CD pipeline including build, deploy, code quality checking.
+We scaffold this repo from scratch the pieces required to run a CI/CD pipeline including build, deploy, code quality checking.
 
 ### Bootstrap your CI/CD environment
 Create a directory to hold your CICD tooling automation.
