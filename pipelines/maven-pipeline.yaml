@@ -187,10 +187,13 @@ spec:
         - oc-start-build
 
     - name: oc-tag-image-test
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: in
-          values: ["master"]
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
       taskRef:
         name: openshift-client
       workspaces:
@@ -209,10 +212,13 @@ spec:
         - oc-start-build
 
     - name: helm-argocd-apps-master # deploy to dev + test
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: in
-          values: ["master"]
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
       taskRef:
         name: helm-template-from-source
       workspaces:
@@ -234,10 +240,13 @@ spec:
         - oc-tag-image-test
 
     - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: notin
-          values: ["master"]
+      conditions:
+      - conditionRef: is-not-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
       taskRef:
         name: helm-template-from-source
       workspaces:
