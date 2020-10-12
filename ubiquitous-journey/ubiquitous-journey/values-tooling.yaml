@@ -188,8 +188,8 @@ applications:
   - name: pb-ci-cd
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/eformat/pb-ci-cd.git
-    source_path: ""
-    source_ref: "main"
+    source: https://github.com/eformat/pb-ci-cd
+    source_path: ./
+    source_ref: main
     sync_policy: *sync_policy_true
     no_helm: true

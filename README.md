@@ -899,7 +899,7 @@ template.template.openshift.io/pet-battle-api unchanged
 
 ### Apply to cluster automatically
 
-We can configure ArgoCD to automatically apply this repo using kustomize by adding this application to [argo-app-of-apps.yaml](ubiquitous-journey/argo-app-of-apps.yaml)
+We can configure ArgoCD to automatically apply this repo using kustomize by adding this application to [values-tooling.yaml](ubiquitous-journey/ubiquitous-journey/values-tooling.yaml)
 ```yaml
   - name: pb-ci-cd
     destination: labs-ci-cd
