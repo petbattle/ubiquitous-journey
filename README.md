@@ -945,7 +945,8 @@ And identify real and false positive CVE's in the dependency-check:
 ## To Be Done
 - make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 - delete deprecated tekton conditionals once pipeline operator updated -> when syntax
-```bash
+
+```yaml
     - name: oc-tag-image-test
       when:
         - input: "$(params.GIT_BRANCH)"
@@ -958,6 +959,7 @@ And identify real and false positive CVE's in the dependency-check:
           operator: notin
           values: ["master"]
 ```
+
 - add argocd app for the cicd kustomize code
 - tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - ubi quarkus ubi build image with tools, check base now we have new images (using custom one)
