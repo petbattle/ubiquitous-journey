@@ -412,6 +412,15 @@ applications:
 EOF
 ```
 
+### Conditionals (deprecated)
+
+Conditions in tasks are replaced by `when` upstream in tekton,but for now:
+```bash
+curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/conditionals/is-equal.yaml -o conditionals/is-equal.yaml
+curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/conditionals/is-not-equal.yaml -o conditionals/is-not-equal.yaml
+curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/conditionals/kustomization.yaml -o conditionals/kustomization.yaml
+```
+
 ### Pipeline
 
 We are going to create our pipeline definition which knows how to build our application. The pipeline steps are:
@@ -623,10 +632,13 @@ spec:
         - oc-start-build
 
     - name: oc-tag-image-test
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: in
-          values: ["master"]
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
       taskRef:
         name: openshift-client
       workspaces:
@@ -645,10 +657,13 @@ spec:
         - oc-start-build
 
     - name: helm-argocd-apps-master # deploy to dev + test
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: in
-          values: ["master"]
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
       taskRef:
         name: helm-template-from-source
       workspaces:
@@ -670,10 +685,13 @@ spec:
         - oc-tag-image-test
 
     - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: notin
-          values: ["master"]
+      conditions:
+      - conditionRef: is-not-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
       taskRef:
         name: helm-template-from-source
       workspaces:
@@ -820,6 +838,7 @@ kind: Kustomization
 
 bases:
 - persistent-volume-claims
+- conditionals
 #- configmaps
 #- secrets
 #- rolebindings
@@ -839,9 +858,26 @@ git push
 
 ### Apply to cluster and run pipeline
 
-
+Apply configurtion to cluster. This can be rerun whenever you make a change:
+```
+oc project labs-ci-cd
+kustomize build | oc apply -f-
+```
 
 ## Extension work to be done:
 - make secrets better - sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4
 - quarkus hashicorp integration - https://quarkus.io/guides/vault
 - delete deprecated tekton conditionals -> when syntax
+```bash
+    - name: oc-tag-image-test
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: in
+          values: ["master"]
+
+    - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: notin
+          values: ["master"]
+```
