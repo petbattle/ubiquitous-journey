@@ -3,6 +3,8 @@ apiVersion: v1
 kind: Template
 metadata:
   name: pet-battle-api
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 objects:
 - apiVersion: tekton.dev/v1beta1
   kind: PipelineRun
