@@ -897,6 +897,29 @@ persistentvolumeclaim/maven-source unchanged
 template.template.openshift.io/pet-battle-api unchanged
 ```
 
+### Apply to cluster automatically
+
+We can configure ArgoCD to automatically apply this repo using kustomize by adding this application to [argo-app-of-apps.yaml](ubiquitous-journey/argo-app-of-apps.yaml)
+```yaml
+  - name: pb-ci-cd
+    destination: labs-ci-cd
+    enabled: true
+    source: https://github.com/eformat/pb-ci-cd.git
+    source_path: "/"
+    source_ref: "master"
+    sync_policy: *sync_policy_true
+    no_helm: true
+```
+
+And applying:
+```bash
+cd ubiquitous-journey
+$ helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
+
+
+```
+
+
 ### Run pipeline manually
 
 Use the template to trigger a pipeline run (could also start from the UI)

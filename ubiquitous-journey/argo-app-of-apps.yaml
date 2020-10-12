@@ -41,12 +41,11 @@ applications:
     sync_policy: *sync_policy_true
     helm_values:
       - values-day2ops.yaml
-  - name: example-deployment
+  - name: pb-ci-cd
     destination: labs-ci-cd
-    enabled: false
+    enabled: true
     source: https://github.com/eformat/pb-ci-cd.git
-    source_path: example-deployment
+    source_path: "/"
     source_ref: "master"
-    sync_policy_automated: true
-    helm_values:
-      - values-applications.yaml
+    sync_policy: *sync_policy_true
+    no_helm: true
