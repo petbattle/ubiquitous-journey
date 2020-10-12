@@ -2,7 +2,7 @@
 
 An end to end tutorial for using Ubiquitous Journey in your own project with Tekton pipelines.
 
-This example uses the Java Quarkus pet battle applications as an example. 
+This example uses the Java Quarkus Pet Battle applications as an example.
 
 We scaffold from scratch the pieces required to run a CI/CD pipeline including build, deploy, code quality checking.
 
