@@ -34,7 +34,7 @@ git remote add origin git@github.com:eformat/pb-ci-cd.git
 git push -u origin main
 ```
 
-#### `ubiquitous-journey/ubiquitous-journey/values-tooling.yaml`
+#### [ubiquitous-journey/ubiquitous-journey/values-tooling.yaml](ubiquitous-journey/ubiquitous-journey/values-tooling.yaml)
 
 Edit this file and choose tools we want by enabling them as `true` (the rest we set to false). In this example we are using nexus, sonarqube and tekton:
 ```bash
@@ -58,11 +58,11 @@ Set `sonarqube plugins values`
           - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.6/sonar-dependency-check-plugin-2.0.6.jar
 ```
 
-#### `ubiquitous-journey/ubiquitous-journey/values-extratooling.yaml`
+#### [ubiquitous-journey/ubiquitous-journey/values-extratooling.yaml](ubiquitous-journey/ubiquitous-journey/values-extratooling.yaml)
 
 Edit this file and set all of these to false (we dont need them for now).
 
-#### `ubiquitous-journey/argo-app-of-apps.yaml`
+#### [ubiquitous-journey/argo-app-of-apps.yaml](ubiquitous-journey/argo-app-of-apps.yaml)
 
 Replace source with new git repo, github now uses main instead of master and fix path:
 ```bash
