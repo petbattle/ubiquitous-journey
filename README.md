@@ -980,9 +980,9 @@ And identify real and false positive CVE's in the dependency-check:
           values: ["master"]
 ```
 
-- add argocd app for the cicd kustomize code
 - tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - ubi quarkus ubi build image with tools, check base now we have new images (using custom one)
 - code quality gates - configure pipeline args to fail on quality gates
 - document PR'sand branches .. tooling supports this now
 - document webhook triggers, auto create them using tekton task
+- dev-ex-dashboard configure
