@@ -1,0 +1,60 @@
+{{- if .Values.applications }}
+{{- range $app, $val := .Values.applications }}
+{{- if .enabled }}
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: {{ .name }}
+  labels:
+{{- if contains .values.fullnameOverride .name }}
+    app.kubernetes.io/instance: {{ .values.fullnameOverride }}
+{{- else -}}
+    app.kubernetes.io/instance: {{ .name }}
+{{- end }}
+spec:
+  destination:
+    namespace: {{ .destination | default "labs-ci-cd" }}
+    server: {{ .cluster_api | default "https://kubernetes.default.svc" }}
+{{- if .project.enabled }}
+  project: {{ .project.name }}
+{{- else -}}
+  project: default
+{{- end }}
+  source:
+{{- if not .no_helm }}
+    helm:
+      releaseName: {{ .name }}
+{{- if .helm_values }}
+      valueFiles:
+{{- toYaml .helm_values | nindent 8 }}
+{{- end }}
+{{- if .values }}
+      values: |
+{{- toYaml .values | nindent 8 }}
+{{- end }}
+{{- end }}
+    {{- if .source_path }}
+    path: {{ .source_path }}
+    {{- end }}
+    repoURL: {{ .source }}
+    targetRevision: {{ .source_ref | default "master" | quote }}
+    {{- if .chart_name }}
+    chart: {{ .chart_name }}
+    {{- end}}
+{{- if .sync_policy_automated }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      validate: true
+{{- end }}
+{{- if .ignore_differences}}
+{{ toYaml .ignore_differences | indent 2 }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

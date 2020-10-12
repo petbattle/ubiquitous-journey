@@ -1,0 +1,292 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: maven-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+    - name: maven-settings
+    - name: argocd-env-secret
+  params:
+  - name: APPLICATION_NAME
+    type: string
+    default: ""
+  - name: GIT_URL
+    type: string
+    default: ""
+  - name: GIT_REVISION
+    type: string
+    default: "master"
+  - name: GIT_REF
+    type: string
+    default: "refs/heads/master"
+  - name: GIT_SHORT_REVISION
+    type: string
+    default: ""
+  - name: GIT_BRANCH
+    type: string
+    default: "master"
+  - name: MAVEN_MIRROR_URL
+    type: string
+    default: "http://repo1.maven.org/maven2"
+  - name: MAVEN_OPTS
+    type: string
+    default: ""
+  - name: MAVEN_BUILD_OPTS
+    description: maven build options
+    type: array
+    default: []
+  - name: BUILD_NAMESPACE
+    type: string
+    default: "labs-ci-cd"
+  - name: DEV_NAMESPACE
+    type: string
+    default: "labs-dev"
+  - name: TEST_NAMESPACE
+    type: string
+    default: "labs-test"
+  - name: APP_OF_APPS_DEV_KEY
+    default: ""
+  - name: APP_OF_APPS_TEST_KEY
+    type: string
+    default: ""
+  tasks:
+    - name: fetch-app-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: "$(params.GIT_URL)"
+        - name: revision
+          value: "$(params.GIT_REVISION)"
+        - name: refspec
+          value: "$(params.GIT_REF)"
+        - name: subdirectory
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        - name: deleteExisting
+          value: "true"
+
+    - name: fetch-cicd-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: "https://github.com/eformat/pb-ci-cd.git"
+        - name: revision
+          value: "master"
+        - name: subdirectory
+          value: "$(params.APPLICATION_NAME)/cicd"
+        - name: deleteExisting
+          value: "true"
+      runAfter:
+        - fetch-app-repository
+
+    - name: code-analysis
+      taskRef:
+        name: maven
+      params:
+        - name: MAVEN_MIRROR_URL
+          value: "$(params.MAVEN_MIRROR_URL)"
+        - name: MAVEN_OPTS
+          value: "$(params.MAVEN_OPTS)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        - name: GOALS
+          value:
+            - install
+            - org.owasp:dependency-check-maven:check
+            - sonar:sonar
+        - name: MAVEN_BUILD_OPTS
+          value:
+            - '-Dsonar.host.url=http://sonarqube-sonarqube:9000'
+            - '-Dsonar.userHome=/tmp/sonar'
+      runAfter:
+        - fetch-cicd-repository
+      workspaces:
+        - name: maven-settings
+          workspace: maven-settings
+        - name: output
+          workspace: shared-workspace
+
+    - name: maven-run
+      taskRef:
+        name: maven
+      params:
+        - name: MAVEN_MIRROR_URL
+          value: "$(params.MAVEN_MIRROR_URL)"
+        - name: MAVEN_OPTS
+          value: "$(params.MAVEN_OPTS)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        - name: GOALS
+          value:
+            - "package"
+        - name: MAVEN_BUILD_OPTS
+          value:
+            - "$(params.MAVEN_BUILD_OPTS)"
+      runAfter:
+        - code-analysis
+      workspaces:
+        - name: maven-settings
+          workspace: maven-settings
+        - name: output
+          workspace: shared-workspace
+
+    - name: kustomize-build-config
+      taskRef:
+        name: openshift-kustomize
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: SCRIPT
+          value: "kustomize build $1 | oc apply -f-"
+        - name: ARGS
+          value:
+            - "$(params.APPLICATION_NAME)/cicd/applications/build"
+      runAfter:
+        - maven-run
+
+    - name: oc-start-build
+      taskRef:
+        name: openshift-client
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: SCRIPT
+          value: "oc start-build $1 --from-dir=$(params.APPLICATION_NAME)/$(params.GIT_REF) --follow"
+        - name: ARGS
+          value:
+            - "$(params.APPLICATION_NAME)"
+      runAfter:
+        - kustomize-build-config
+
+    - name: oc-tag-image-dev
+      taskRef:
+        name: openshift-client
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: SCRIPT
+          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
+        - name: ARGS
+          value:
+            - "$(params.APPLICATION_NAME)"
+            - "$(params.DEV_NAMESPACE)"
+            - "$(params.BUILD_NAMESPACE)"
+            - "$(params.GIT_SHORT_REVISION)"
+      runAfter:
+        - oc-start-build
+
+    - name: oc-tag-image-test
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: in
+          values: ["master"]
+      taskRef:
+        name: openshift-client
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: SCRIPT
+          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
+        - name: ARGS
+          value:
+            - "$(params.APPLICATION_NAME)"
+            - "$(params.TEST_NAMESPACE)"
+            - "$(params.BUILD_NAMESPACE)"
+            - "$(params.GIT_SHORT_REVISION)"
+      runAfter:
+        - oc-start-build
+
+    - name: helm-argocd-apps-master # deploy to dev + test
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: in
+          values: ["master"]
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: values-applications.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values # strictly speaking not very gitops
+          value: "applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME),applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APP_OF_APPS_DEV_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APP_OF_APPS_DEV_KEY).values.image_namespace=$(params.DEV_NAMESPACE),applications.$(params.APP_OF_APPS_TEST_KEY).values.fullnameOverride=$(params.APPLICATION_NAME),applications.$(params.APP_OF_APPS_TEST_KEY).enabled=true,applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APP_OF_APPS_TEST_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APP_OF_APPS_TEST_KEY).values.image_namespace=$(params.TEST_NAMESPACE)"
+      runAfter:
+        - oc-tag-image-dev
+        - oc-tag-image-test
+
+    - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: notin
+          values: ["master"]
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: values-applications.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values # strictly speaking not very gitops
+          value: "applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).name=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APPLICATION_NAME).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APPLICATION_NAME).values.image_namespace=$(params.DEV_NAMESPACE)"
+      runAfter:
+        - oc-tag-image-dev
+
+    - name: argocd-sync-application-branches
+      retries: 3
+      taskRef:
+        name: argocd-sync-and-wait
+      workspaces:
+      - name: argocd-env-secret
+        workspace: argocd-env-secret
+      params:
+      - name: application-name
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH)" # sync by label, multiple apps different namespaces synced good thing
+      - name: flags
+        value: --insecure
+      - name: revision
+        value: "$(params.GIT_REVISION)"
+      runAfter:
+      - helm-argocd-apps-branches
+
+    - name: argocd-sync-application-master
+      retries: 3
+      taskRef:
+        name: argocd-sync-and-wait
+      workspaces:
+      - name: argocd-env-secret
+        workspace: argocd-env-secret
+      params:
+      - name: application-name
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)" # sync by label, multiple apps different namespaces synced good thing
+      - name: flags
+        value: --insecure
+      - name: revision
+        value: "$(params.GIT_REVISION)"
+      runAfter:
+      - helm-argocd-apps-master

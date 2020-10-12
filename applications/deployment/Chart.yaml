@@ -1,0 +1,6 @@
+apiVersion: v1
+name: pb-api-deploy
+description: pet battle api deployment
+type: application
+version: 0.0.1
+appVersion: 0.0.1
