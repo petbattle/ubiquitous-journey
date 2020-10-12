@@ -149,7 +149,7 @@ Browse to it and login via OpenShift
 All the apps should be syncing and deploying (we set auto sync true):
 ![argo-uj-all.png](images/argo-uj-all.png)
 
-If you select one of the `app-of-app` applications e.g. `ubiquitous-journey` we can see out CICD tooling deployed. You can further drill-down from here as well.
+If you select one of the `app-of-app` applications e.g. `ubiquitous-journey` we can see our CICD tooling deployed. You can further drill-down from here as well.
 ![argo-login.png](images/argo-app-of-apps-uj.png)
 
 ### Create Tekton directory structure
@@ -165,7 +165,8 @@ mkdir -p applications operators persistent-volume-claims pipelines rolebindings 
 ### Copy pre-defined artefacts
 
 We wish to assemble pipeline artefacts. We can copy previous examples or source new ones from
-- https://hub-preview.tekton.dev
+
+- [https://hub-preview.tekton.dev](https://hub-preview.tekton.dev)
 
 #### PVC
 
@@ -173,8 +174,7 @@ We want to use [tekton workspaces](https://tekton.dev/docs/pipelines/workspaces/
 
 Prerequisites:
 - AWS EFS storage class is configured on your cluster:
-- https://docs.openshift.com/container-platform/4.5/storage/persistent_storage/persistent-storage-efs.html
-- 
+- [persistent-storage-efs](https://docs.openshift.com/container-platform/4.5/storage/persistent_storage/persistent-storage-efs.html)
 ```bash
 curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volume-claims/build-images.yaml -o persistent-volume-claims/build-images.
 yaml
@@ -234,7 +234,7 @@ Get a token for the admin user (substitute your openshift username here):
 ```bash
 oc project labs-ci-cd
 oc edit cm argocd-cm
-
+# add
 data:
   accounts.admin: apiKey
 
@@ -432,7 +432,7 @@ applications:
 EOF
 ```
 
-### Conditionals (deprecated)
+### Conditionals [deprecated](https://tekton.dev/docs/pipelines/pipelines/#guard-task-execution-using-whenexpressions)
 
 Conditions in tasks are replaced by `when` upstream in tekton,but for now:
 ```bash
