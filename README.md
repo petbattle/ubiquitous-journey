@@ -986,3 +986,4 @@ And identify real and false positive CVE's in the dependency-check:
 - document PR'sand branches .. tooling supports this now
 - document webhook triggers, auto create them using tekton task
 - dev-ex-dashboard configure
+- add in petbattle ui, nsfw apps to this guide
