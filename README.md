@@ -1,6 +1,10 @@
 ## pb-ci-cd
 
-An end to end tutorial for using Ubiquitous Journey in your own project with Tekton pipelines. This example uses the Java Quarkus pet battle applications as an example. We scaffold from scratch the pieces required to run a CI/CD pipeline.
+An end to end tutorial for using Ubiquitous Journey in your own project with Tekton pipelines.
+
+This example uses the Java Quarkus pet battle applications as an example. 
+
+We scaffold from scratch the pieces required to run a CI/CD pipeline including build, deploy, code quality checking.
 
 ### Bootstrap your CI/CD environment
 Create a directory to hold your CICD tooling automation.
@@ -908,10 +912,35 @@ tkn tr list
 tkn tr logs pet-battle-api-9ls6c-code-analysis-ktxdb -f
 ```
 
-## Work to be done:
-- make secrets better - sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4
-- quarkus hashicorp integration - https://quarkus.io/guides/vault
-- delete deprecated tekton conditionals -> when syntax
+### Check out the built and deployed applications
+
+Once the pipeline run has finished for main you should see this in the UI
+
+![pr-success.png](images/pr-success.png)
+
+You can check the deployed application in the `labs-dev` or `labs-test` namespace
+
+![developer-view.png](images/developer-view.png)
+
+Check the application works by selecting the Route arrow
+
+![working-app.png](images/working-app.png)
+
+If you browse to `sonarqube` in the `labs-ci-cd` namespace, you should see code quality checks that have run
+
+![code-quality.png](images/code-quality.png)
+
+You can drilldown to the security hotspots:
+
+![code-quality-random.png](images/code-quality-random.png)
+
+And identify real and false positive CVE's in the dependency-check:
+
+![dep-check.png](images/dep-check.png)
+
+## To Be Done
+- make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
+- delete deprecated tekton conditionals once pipeline operator updated -> when syntax
 ```bash
     - name: oc-tag-image-test
       when:
@@ -926,5 +955,6 @@ tkn tr logs pet-battle-api-9ls6c-code-analysis-ktxdb -f
           values: ["master"]
 ```
 - add argocd app for the cicd kustomize code
-- tekton-tidy.sh, clean artefacts in workspace, from pipeline job?
-- ubi quarkus build image with tools, check base now we have new images
+- tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
+- ubi quarkus ubi build image with tools, check base now we have new images (using custom one)
+- code quality gates - configure pipeline args to fail on quality gates
