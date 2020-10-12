@@ -918,6 +918,10 @@ Once the pipeline run has finished for main you should see this in the UI
 
 ![pr-success.png](images/pr-success.png)
 
+If you select the `pet-battle-dev,pet-battle-test` argocd projects, you can see the helm chart deployed
+
+![argocd-apps.png](images/argocd-apps.png)
+
 You can check the deployed application in the `labs-dev` or `labs-test` namespace
 
 ![developer-view.png](images/developer-view.png)
