@@ -784,7 +784,7 @@ We have not configuring webhooks yet to start our pipeline. It is useful to defi
 ```bash
 cat <<'EOF' > templates/pet-battle-api.yaml
 ---
-apiVersion: v1
+apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
   name: pet-battle-api
@@ -911,7 +911,7 @@ We can configure ArgoCD to automatically apply this repo using kustomize by addi
     no_helm: true
 ```
 
-This also requires adding in labels to all checked in resources so the sync succeeds in argocd:
+This also requires adding in labels to ALL checked in resources so the sync succeeds in argocd (checked in with this example)
 ```yaml
   labels:
     rht-labs.com/uj: pb-ci-cd
