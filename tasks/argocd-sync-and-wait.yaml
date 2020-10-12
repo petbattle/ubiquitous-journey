@@ -2,6 +2,8 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: argocd-sync-and-wait
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 spec:
   workspaces:
   - name: argocd-env-secret

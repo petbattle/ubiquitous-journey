@@ -3,7 +3,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   creationTimestamp: null
-  name: edit-0
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+  name: edit-01
   namespace: labs-ci-cd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -18,7 +20,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   creationTimestamp: null
-  name: edit-0
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+  name: edit-01
   namespace: labs-dev
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -33,7 +37,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   creationTimestamp: null
-  name: edit-0
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+  name: edit-01
   namespace: labs-test
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -48,6 +54,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   creationTimestamp: null
+  labels:
+    rht-labs.com/uj: pb-ci-cd
   name: edit-1
   namespace: labs-ci-cd
 roleRef:
@@ -63,6 +71,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   creationTimestamp: null
+  labels:
+    rht-labs.com/uj: pb-ci-cd
   name: edit-1
   namespace: labs-dev
 roleRef:
@@ -78,6 +88,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   creationTimestamp: null
+  labels:
+    rht-labs.com/uj: pb-ci-cd
   name: edit-1
   namespace: labs-test
 roleRef:

@@ -2,6 +2,8 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: maven-pipeline
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 spec:
   workspaces:
     - name: shared-workspace

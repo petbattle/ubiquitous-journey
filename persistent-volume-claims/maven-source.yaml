@@ -4,6 +4,8 @@ metadata:
   name: maven-source
   annotations:
     volume.beta.kubernetes.io/storage-provisioner: openshift.org/aws-efs
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 spec:
   resources:
     requests:

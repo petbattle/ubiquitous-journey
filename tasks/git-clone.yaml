@@ -4,6 +4,7 @@ metadata:
   name: git-clone
   labels:
     app.kubernetes.io/version: "0.2"
+    rht-labs.com/uj: pb-ci-cd
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: git

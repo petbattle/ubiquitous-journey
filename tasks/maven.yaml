@@ -4,6 +4,7 @@ metadata:
   name: maven
   labels:
     app.kubernetes.io/version: "0.1"
+    rht-labs.com/uj: pb-ci-cd
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: build-tool

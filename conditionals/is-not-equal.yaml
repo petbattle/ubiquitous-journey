@@ -1,7 +1,9 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Condition
 metadata:
- name: is-not-equal
+  name: is-not-equal
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 spec:
  params:
  - name: left
