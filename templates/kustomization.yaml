@@ -3,3 +3,5 @@ kind: Kustomization
 
 resources:
 - pet-battle-api.yaml
+
+namespace: labs-ci-cd
