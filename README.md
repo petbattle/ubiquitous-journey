@@ -897,7 +897,7 @@ persistentvolumeclaim/maven-source unchanged
 template.template.openshift.io/pet-battle-api unchanged
 ```
 
-### Apply to cluster automatically
+### Apply pb-ci-cd to cluster automatically
 
 We can configure ArgoCD to automatically apply this repo using kustomize by adding this application to [values-tooling.yaml](ubiquitous-journey/ubiquitous-journey/values-tooling.yaml)
 ```yaml
