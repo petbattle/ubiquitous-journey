@@ -906,19 +906,21 @@ We can configure ArgoCD to automatically apply this repo using kustomize by addi
     enabled: true
     source: https://github.com/eformat/pb-ci-cd.git
     source_path: "/"
-    source_ref: "master"
+    source_ref: "main"
     sync_policy: *sync_policy_true
     no_helm: true
 ```
 
 And applying:
 ```bash
-cd ubiquitous-journey
+$ cd ubiquitous-journey
 $ helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 
-
+application.argoproj.io/ubiquitous-journey unchanged
+application.argoproj.io/uj-extras unchanged
+application.argoproj.io/uj-day2ops unchanged
+application.argoproj.io/pb-ci-cd created
 ```
-
 
 ### Run pipeline manually
 
