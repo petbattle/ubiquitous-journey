@@ -911,15 +911,10 @@ We can configure ArgoCD to automatically apply this repo using kustomize by addi
     no_helm: true
 ```
 
-And applying:
-```bash
-$ cd ubiquitous-journey
-$ helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
-
-application.argoproj.io/ubiquitous-journey unchanged
-application.argoproj.io/uj-extras unchanged
-application.argoproj.io/uj-day2ops unchanged
-application.argoproj.io/pb-ci-cd created
+This also requires adding in labels to all checked in resources so the sync succeeds in argocd:
+```yaml
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 ```
 
 ### Run pipeline manually
