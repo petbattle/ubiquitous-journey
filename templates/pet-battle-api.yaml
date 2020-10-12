@@ -10,7 +10,7 @@ objects:
   kind: PipelineRun
   metadata:
     generateName: pet-battle-api-
-    labels:
+    annotations:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:

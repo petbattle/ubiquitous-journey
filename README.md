@@ -970,6 +970,18 @@ And identify real and false positive CVE's in the dependency-check:
 
 ![dep-check.png](images/dep-check.png)
 
+### 🤠 For the impatient 🤠
+
+I put this section at the end .. really this is a tutorial to help you understand bootstrapping. But if you wanna skip the whole lot and just run this code:
+```bash
+# bootstrap to install argocd and create projects
+helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
+# give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
+helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
+# start a pipeline run
+oc -n labs-ci-cd process pet-battle-api | oc -n labs-ci-cd create -f-
+```
+
 ## To Be Done
 - make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 - delete deprecated tekton conditionals once pipeline operator updated -> when syntax
