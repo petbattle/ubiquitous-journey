@@ -1,4 +1,4 @@
-## pb-ci-cd
+## ☘️ pb-ci-cd ☘️
 
 An end to end tutorial for using Ubiquitous Journey in your own project with Tekton pipelines.
 
