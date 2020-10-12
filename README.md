@@ -4,7 +4,11 @@ An end to end tutorial for using Ubiquitous Journey in your own project with Tek
 
 This example uses the Java Quarkus Pet Battle applications as an example.
 
-We scaffold this repo from scratch and put together the pieces required to run a CI/CD pipeline including build, test, deploy and code quality checking.
+We scaffold this repo from scratch and put together the pieces required to run a CI/CD pipeline including build, test, deploy and code quality checking. 
+
+We use a Pull Model of deployment - Tekton for the CI pipeline, and ArgoCD to deploy changes using GitOps.
+
+![pull-model.png](images/pull-model.png)
 
 ### Bootstrap your CI/CD environment
 Create a directory to hold your CICD tooling automation.
