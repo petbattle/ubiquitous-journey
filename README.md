@@ -1008,6 +1008,7 @@ helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml b
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
 oc -n labs-ci-cd process pet-battle-api | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle | oc -n labs-ci-cd create -f-
 ```
 
 ## To Be Done
