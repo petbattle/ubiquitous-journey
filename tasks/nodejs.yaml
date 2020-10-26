@@ -25,6 +25,7 @@ spec:
       type: string
     - name: NPM_MIRROR_URL
       type: string
+      description: The NPM repository mirror url
       default: "http://registry.npmjs.org/npm"
     - name: GOALS
       description: npm goals to run
@@ -32,15 +33,10 @@ spec:
       default:
         - "run"
         - "build"
-    - name: NPM_MIRROR_URL
-      description: The NPM repository mirror url
-      type: string
-      default: ""
   steps:
     - command:
         - npm
         - "$(params.GOALS)"
-        - "--registry http://${NPM_MIRROR_URL}"
       image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs:$(params.VERSION)
       name: npm-goals
       resources: {}
