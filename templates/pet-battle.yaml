@@ -15,7 +15,7 @@ objects:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:
     pipelineRef:
-      name: pet-battle-ui
+      name: pet-battle-ui-pipeline
     workspaces:
     - name: shared-workspace
       persistentVolumeClaim:
