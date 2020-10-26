@@ -114,6 +114,8 @@ spec:
       workspaces:
         - name: maven-settings
           workspace: maven-settings
+        - name: maven-m2
+          workspace: maven-m2
         - name: output
           workspace: shared-workspace
 
@@ -138,6 +140,8 @@ spec:
       workspaces:
         - name: maven-settings
           workspace: maven-settings
+        - name: maven-m2
+          workspace: maven-m2
         - name: output
           workspace: shared-workspace
 
