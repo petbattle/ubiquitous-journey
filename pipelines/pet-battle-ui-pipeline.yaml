@@ -79,9 +79,9 @@ spec:
       runAfter:
         - fetch-app-repository
 
-    - name: maven-run
+    - name: npm-run
       taskRef:
-        name: maven
+        name: nodejs
       params:
         - name: NPM_MIRROR_URL
           value: "$(params.MAVEN_MIRROR_URL)"
