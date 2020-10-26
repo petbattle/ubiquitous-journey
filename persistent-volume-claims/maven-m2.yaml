@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: maven-m2
+  annotations:
+    volume.beta.kubernetes.io/storage-provisioner: openshift.org/aws-efs
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: aws-efs
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany

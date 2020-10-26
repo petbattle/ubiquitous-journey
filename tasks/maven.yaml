@@ -15,6 +15,7 @@ spec:
   workspaces:
     - name: output
     - name: maven-settings
+    - name: maven-m2
   params:
     - name: MAVEN_IMAGE
       type: string
@@ -84,6 +85,7 @@ spec:
             <!-- The proxies added here are generated from environment variables. Don't change. -->
             <!-- ### HTTP proxy from ENV ### -->
           </proxies>
+          <localRepository>$(workspaces.maven-m2.path).m2/repository</localRepository>
         </settings>
         EOF
 

@@ -6,3 +6,4 @@ namespace: labs-ci-cd
 resources:
 - maven-source.yaml
 - build-images.yaml
+- maven-m2.yaml

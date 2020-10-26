@@ -26,6 +26,9 @@ objects:
     - name: argocd-env-secret
       secret:
         secretName: argocd-env
+    - name: maven-m2
+      persistentVolumeClaim:
+        claimName: maven-m2
     params:
     - name: APPLICATION_NAME
       value: pet-battle-api
