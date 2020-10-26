@@ -36,6 +36,8 @@ objects:
       value: "master"
     - name: GIT_BRANCH
       value: "master"
+    - name: NPM_MIRROR_URL
+      value: "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/labs-npm"
     - name: BUILD_NAMESPACE
       value: "labs-ci-cd"
     - name: DEV_NAMESPACE

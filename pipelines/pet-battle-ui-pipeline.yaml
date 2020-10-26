@@ -25,6 +25,9 @@ spec:
   - name: GIT_BRANCH
     type: string
     default: "master"
+  - name: NPM_MIRROR_URL
+    type: string
+    default: "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/labs-npm"
   - name: BUILD_NAMESPACE
     type: string
     default: "labs-ci-cd"
@@ -76,20 +79,23 @@ spec:
       runAfter:
         - fetch-app-repository
 
-    - name: kustomize-build-config
+    - name: maven-run
       taskRef:
-        name: openshift-kustomize
+        name: maven
+      params:
+        - name: NPM_MIRROR_URL
+          value: "$(params.MAVEN_MIRROR_URL)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        - name: GOALS
+          value:
+            - "run"
+            - "build"
+      runAfter:
+        - fetch-cicd-repository
       workspaces:
         - name: output
           workspace: shared-workspace
-      params:
-        - name: SCRIPT
-          value: "kustomize build $1 | oc apply -f-"
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)/cicd/applications/build"
-      runAfter:
-        - fetch-cicd-repository
 
     - name: oc-start-build
       taskRef:

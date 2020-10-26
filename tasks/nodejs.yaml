@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: nodejs
+  labels:
+    app.kubernetes.io/version: '0.1'
+    rht-labs.com/uj: pb-ci-cd
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+spec:
+  description: >-
+    npm tasks
+
+  workspaces:
+    - name: output
+  params:
+    - default: '12'
+      description: The version of the nodejs
+      name: VERSION
+      type: string
+    - default: .
+      description: The location of the path to run from.
+      name: PATH_CONTEXT
+      type: string
+    - name: NPM_MIRROR_URL
+      type: string
+      default: "http://registry.npmjs.org/npm"
+    - name: GOALS
+      description: npm goals to run
+      type: array
+      default:
+        - "run"
+        - "build"
+    - name: NPM_MIRROR_URL
+      description: The NPM repository mirror url
+      type: string
+      default: ""
+  steps:
+    - command:
+        - npm
+        - "$(params.GOALS)"
+        - "--registry http://${NPM_MIRROR_URL}"
+      image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs:$(params.VERSION)
+      name: npm-goals
+      resources: {}
