@@ -85,7 +85,7 @@ spec:
             <!-- The proxies added here are generated from environment variables. Don't change. -->
             <!-- ### HTTP proxy from ENV ### -->
           </proxies>
-          <localRepository>$(workspaces.maven-m2.path).m2/repository</localRepository>
+          <localRepository>$(workspaces.maven-m2.path)/.m2/repository</localRepository>
         </settings>
         EOF
 
