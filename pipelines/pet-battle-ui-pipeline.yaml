@@ -110,7 +110,7 @@ spec:
           value:
             - "$(params.APPLICATION_NAME)"
       runAfter:
-        - kustomize-build-config
+        - npm-run
 
     - name: oc-tag-image-dev
       taskRef:
