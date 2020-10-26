@@ -15,7 +15,7 @@ spec:
   workspaces:
     - name: output
   params:
-    - default: '12'
+    - default: 'latest'
       description: The version of the nodejs
       name: VERSION
       type: string
@@ -40,7 +40,7 @@ spec:
     - command:
         - npm
         - "$(params.GOALS)"
-      image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs:$(params.VERSION)
+      image: quay.io/eformat/jenkins-agent-npm:$(params.VERSION)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       name: npm-goals
       resources: {}
