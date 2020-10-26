@@ -180,10 +180,33 @@ Prerequisites:
 - AWS EFS storage class is configured on your cluster:
 - [persistent-storage-efs](https://docs.openshift.com/container-platform/4.5/storage/persistent_storage/persistent-storage-efs.html)
 ```bash
-curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volume-claims/build-images.yaml -o persistent-volume-claims/build-images.
-yaml
+curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volume-claims/build-images.yaml -o persistent-volume-claims/build-images.yaml
 curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volume-claims/maven-source.yaml -o persistent-volume-claims/maven-source.yaml
 curl https://raw.githubusercontent.com/tripvibe/tv-ci-cd/master/persistent-volume-claims/kustomization.yaml -o persistent-volume-claims/kustomization.yaml
+```
+
+We are also going to create a PVC to cache our m2 artifacts to help speed up the builds:
+```bash
+cat <<EOF > persistent-volume-claims/maven-m2.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: maven-m2
+  annotations:
+    volume.beta.kubernetes.io/storage-provisioner: openshift.org/aws-efs
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: aws-efs
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+EOF
+
+echo '- maven-m2.yaml' >> persistent-volume-claims/kustomization.yaml
 ```
 
 ### RBAC
