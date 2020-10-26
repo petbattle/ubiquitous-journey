@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
 - maven-pipeline.yaml
+- pet-battle-ui-pipeline.yaml
