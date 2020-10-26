@@ -85,8 +85,6 @@ spec:
       params:
         - name: NPM_MIRROR_URL
           value: "$(params.NPM_MIRROR_URL)"
-        - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
         - name: GOALS
           value:
             - "run"
