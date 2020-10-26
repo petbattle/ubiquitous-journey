@@ -33,10 +33,14 @@ spec:
       default:
         - "run"
         - "build"
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
   steps:
     - command:
         - npm
         - "$(params.GOALS)"
       image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs:$(params.VERSION)
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       name: npm-goals
       resources: {}

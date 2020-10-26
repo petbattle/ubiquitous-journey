@@ -89,6 +89,8 @@ spec:
           value:
             - "run"
             - "build"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
       runAfter:
         - fetch-cicd-repository
       workspaces:
