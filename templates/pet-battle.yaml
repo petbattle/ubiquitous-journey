@@ -25,7 +25,7 @@ objects:
         secretName: argocd-env
     params:
     - name: APPLICATION_NAME
-      value: pet-battle-api
+      value: pet-battle
     - name: GIT_URL
       value: https://github.com/springdo/pet-battle.git
     - name: GIT_REVISION
