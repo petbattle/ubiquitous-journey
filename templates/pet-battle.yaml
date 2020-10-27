@@ -18,7 +18,8 @@ objects:
       name: pet-battle-ui-pipeline
     workspaces:
     - name: shared-workspace
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: build-images-npm
     - name: argocd-env-secret
       secret:
         secretName: argocd-env
