@@ -72,7 +72,7 @@ applications:
     destination: labs-dev
     source_ref: master
     values:
-      app_tag: latest
+      app_tag: master
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
@@ -89,7 +89,7 @@ applications:
     destination: labs-test
     source_ref: master
     values:
-      app_tag: latest
+      app_tag: master
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
