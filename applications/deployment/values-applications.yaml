@@ -69,7 +69,7 @@ applications:
     source: https://github.com/springdo/pet-battle.git
     source_path: chart
     sync_policy_automated: true
-    destination: *dev_ns
+    destination: labs-dev
     source_ref: master
     values:
       app_tag: latest
@@ -83,7 +83,7 @@ applications:
     source: https://github.com/springdo/pet-battle.git
     source_path: chart
     sync_policy_automated: true
-    destination: *test_ns
+    destination: labs-test
     source_ref: master
     values:
       app_tag: latest
