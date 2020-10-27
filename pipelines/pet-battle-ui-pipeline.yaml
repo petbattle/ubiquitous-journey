@@ -79,7 +79,7 @@ spec:
       runAfter:
         - fetch-app-repository
 
-    - name: npm-run
+    - name: npm-install
       taskRef:
         name: nodejs
       params:
@@ -88,6 +88,22 @@ spec:
         - name: GOALS
           value:
             - "install"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+      runAfter:
+        - fetch-cicd-repository
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+
+    - name: npm-run-build
+      taskRef:
+        name: nodejs
+      params:
+        - name: NPM_MIRROR_URL
+          value: "$(params.NPM_MIRROR_URL)"
+        - name: GOALS
+          value:
             - "run"
             - "build"
         - name: WORK_DIRECTORY

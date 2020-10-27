@@ -32,8 +32,6 @@ spec:
       type: array
       default:
         - "install"
-        - "run"
-        - "build"
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
       type: string
