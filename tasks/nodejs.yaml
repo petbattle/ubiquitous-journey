@@ -31,6 +31,7 @@ spec:
       description: npm goals to run
       type: array
       default:
+        - "install"
         - "run"
         - "build"
     - name: WORK_DIRECTORY

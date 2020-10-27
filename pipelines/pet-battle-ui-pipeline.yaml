@@ -87,6 +87,7 @@ spec:
           value: "$(params.NPM_MIRROR_URL)"
         - name: GOALS
           value:
+            - "install"
             - "run"
             - "build"
         - name: WORK_DIRECTORY
