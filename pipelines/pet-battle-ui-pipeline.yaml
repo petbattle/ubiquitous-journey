@@ -96,6 +96,24 @@ spec:
         - name: output
           workspace: shared-workspace
 
+    - name: code-analysis
+      taskRef:
+        name: nodejs
+      params:
+        - name: NPM_MIRROR_URL
+          value: "$(params.NPM_MIRROR_URL)"
+        - name: GOALS
+          value:
+            - "run"
+            - "sonar"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+      runAfter:
+        - npm-install
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+
     - name: npm-run-build
       taskRef:
         name: nodejs
@@ -109,7 +127,7 @@ spec:
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
       runAfter:
-        - npm-install
+        - code-analysis
       workspaces:
         - name: output
           workspace: shared-workspace
