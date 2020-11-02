@@ -35,7 +35,7 @@ objects:
     - name: GIT_SHORT_REVISION
       value: "feature-sonarqube"
     - name: GIT_BRANCH
-      value: "feature/sonarqube"
+      value: "feature-sonarqube"
     - name: NPM_MIRROR_URL
       value: "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/labs-npm"
     - name: BUILD_NAMESPACE
