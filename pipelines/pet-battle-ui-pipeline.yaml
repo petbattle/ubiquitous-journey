@@ -105,7 +105,7 @@ spec:
         - name: GOALS
           value:
             - "run"
-            - "tesst:ci"
+            - "test:ci"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
       runAfter:
