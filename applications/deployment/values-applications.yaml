@@ -70,9 +70,9 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
-    source_ref: feature/sonarqube
+    source_ref: master
     values:
-      app_tag: feature-sonarqube
+      app_tag: master
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
@@ -88,9 +88,9 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-test
-    source_ref: feature/sonarqube
+    source_ref: master
     values:
-      app_tag: feature-sonarqube
+      app_tag: master
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
