@@ -10,6 +10,8 @@ We use a Pull Model of deployment - Tekton for the CI pipeline, and ArgoCD to de
 
 ![pull-model.png](images/pull-model.png)
 
+This repository also contains tekton pipeline builds for other Pet Battle applications (e.g. the nodejs user interface, but we don't scaffold those from the ground up - an exercise left for the user!)
+
 ### Bootstrap your CI/CD environment
 Create a directory to hold your CICD tooling automation.
 ```bash
