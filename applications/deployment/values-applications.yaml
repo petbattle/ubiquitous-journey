@@ -65,7 +65,7 @@ applications:
       enabled: true
   pet_battle_dev:
     name: pet-battle-dev
-    enabled: true
+    enabled: false # overridden by pipeline
     source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
@@ -76,13 +76,14 @@ applications:
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
+      image_namespace: labs-dev
       config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox879.opentlc.com'"
     project:
       name: pet-battle-dev
       enabled: true
   pet_battle_test:
     name: pet-battle-test
-    enabled: true
+    enabled: false # overridden by pipeline
     source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
@@ -93,6 +94,7 @@ applications:
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
+      image_namespace: labs-test
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox879.opentlc.com'"
     project:
       name: pet-battle-test
