@@ -66,13 +66,13 @@ applications:
   pet_battle_dev:
     name: pet-battle-dev
     enabled: true
-    source: https://github.com/springdo/pet-battle.git
+    source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
-    source_ref: master
+    source_ref: feature/sonarqube
     values:
-      app_tag: master
+      app_tag: feature-sonarqube
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
@@ -83,13 +83,13 @@ applications:
   pet_battle_test:
     name: pet-battle-test
     enabled: true
-    source: https://github.com/springdo/pet-battle.git
+    source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-test
-    source_ref: master
+    source_ref: feature/sonarqube
     values:
-      app_tag: master
+      app_tag: feature-sonarqube
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
