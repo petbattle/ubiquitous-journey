@@ -33,7 +33,7 @@ objects:
     - name: GIT_REF
       value: ""
     - name: GIT_SHORT_REVISION
-      value: "feature/sonarqube"
+      value: "feature-sonarqube"
     - name: GIT_BRANCH
       value: "feature/sonarqube"
     - name: NPM_MIRROR_URL
