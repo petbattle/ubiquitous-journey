@@ -29,13 +29,13 @@ objects:
     - name: GIT_URL
       value: https://github.com/eformat/pet-battle.git
     - name: GIT_REVISION
-      value: feature/sonarqube # or git tag, revision
+      value: master # or git tag, revision
     - name: GIT_REF
       value: ""
     - name: GIT_SHORT_REVISION
-      value: "feature-sonarqube"
+      value: "master"
     - name: GIT_BRANCH
-      value: "feature-sonarqube"
+      value: "master"
     - name: NPM_MIRROR_URL
       value: "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/labs-npm"
     - name: BUILD_NAMESPACE
