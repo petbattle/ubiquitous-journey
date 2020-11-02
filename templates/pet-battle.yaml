@@ -27,7 +27,7 @@ objects:
     - name: APPLICATION_NAME
       value: pet-battle
     - name: GIT_URL
-      value: https://github.com/springdo/pet-battle.git
+      value: https://github.com/eformat/pet-battle.git
     - name: GIT_REVISION
       value: master # or git tag, revision
     - name: GIT_REF
