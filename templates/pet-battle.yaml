@@ -22,7 +22,7 @@ objects:
         claimName: build-images
     - name: argocd-env-secret
       secret:
-        secretName: argocd-env
+        secretName: argocd-token
     params:
     - name: APPLICATION_NAME
       value: pet-battle

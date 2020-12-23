@@ -25,7 +25,7 @@ objects:
         claimName: maven-source
     - name: argocd-env-secret
       secret:
-        secretName: argocd-env
+        secretName: argocd-token
     - name: maven-m2
       persistentVolumeClaim:
         claimName: maven-m2
