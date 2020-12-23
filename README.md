@@ -1024,6 +1024,7 @@ helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd ap
 # start a pipeline run
 oc -n labs-ci-cd process pet-battle-api | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process pet-battle | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-tournament | oc -n labs-ci-cd create -f-
 ```
 
 ## To Be Done

@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
 - pet-battle-api.yaml
 - pet-battle.yaml
+- pet-battle-tournament.yaml
 
 namespace: labs-ci-cd
