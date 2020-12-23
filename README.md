@@ -956,6 +956,17 @@ GitOps All the things!
 
 ![gitops-ci-cd.png](images/gitops-ci-cd.png)
 
+Also if you wanted to add this repo (without UJ) to another ArgoCD instance, run
+```bash
+argocd app create pb-ci-cd \
+    --dest-namespace labs-ci-cd \
+    --dest-server https://kubernetes.default.svc \
+    --repo https://github.com/eformat/pb-ci-cd.git \
+    --revision main \
+    --sync-policy automated \
+    --path "."
+```
+
 ### Run pipeline manually
 
 Use the template to trigger a pipeline run (could also start from the UI)
