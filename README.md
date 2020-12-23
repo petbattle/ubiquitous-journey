@@ -270,8 +270,9 @@ data:
   accounts.admin: apiKey
 
 HOST=$(oc get route argocd-server --template='{{ .spec.host }}')
-argocd login $HOST:443 --sso --insecure --username admin
-TOKEN=$(argocd account generate-token --account admin)
+USERNAME=admin
+argocd login $HOST:443 --sso --insecure --username ${USERNAME}
+TOKEN=$(argocd account generate-token --account ${USERNAME})
 
 cat <<EOF | oc apply -f -
 apiVersion: v1
@@ -280,7 +281,8 @@ metadata:
   name: argocd-env
   namespace: labs-ci-cd
 data:
-  ARGOCD_TOKEN: "$(echo -n ${TOKEN} | base64 -w0)"
+  username: "$(echo -n ${USERNAME} | base64 -w0)"
+  password: "$(echo -n ${TOKEN} | base64 -w0)"
 EOF
 ```
 
