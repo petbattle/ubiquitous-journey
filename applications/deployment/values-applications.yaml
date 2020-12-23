@@ -77,7 +77,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-dev
-      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox879.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1862.opentlc.com'"
     project:
       name: pet-battle-dev
       enabled: true
@@ -95,7 +95,44 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox879.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1862.opentlc.com'"
     project:
       name: pet-battle-test
       enabled: true
+  pet_battle_tournament_dev:
+    name: pet-battle-tournament-dev
+    enabled: false # overridden by pipeline
+    source: https://github.com/petbattle/tournamentservice-v1.git
+    source_path: chart
+    sync_policy_automated: true
+    destination: labs-dev
+    source_ref: master
+    values:
+      app_tag: master
+      fullnameOverride: pet-battle-tournament
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle-tournament
+      image_namespace: labs-dev
+      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1862.opentlc.com'"
+    project:
+      name: pet-battle-dev
+      enabled: true
+  pet_battle_tournament_test:
+    name: pet-battle-tournament-test
+    enabled: false # overridden by pipeline
+    source: https://github.com/petbattle/tournamentservice-v1.git
+    source_path: chart
+    sync_policy_automated: true
+    destination: labs-test
+    source_ref: master
+    values:
+      app_tag: master
+      fullnameOverride: pet-battle-tournament
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle
+      image_namespace: labs-test
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1862.opentlc.com'"
+    project:
+      name: pet-battle-test
+      enabled: true
+
