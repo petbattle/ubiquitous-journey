@@ -115,7 +115,8 @@ applications:
       image_namespace: labs-dev
       config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1862.opentlc.com'"
       operatorgroup:
-        targetNamespaces: {'labs-dev'}
+        targetNamespaces: 
+          - labs-dev
     project:
       name: pet-battle-dev
       enabled: true
@@ -135,7 +136,8 @@ applications:
       image_namespace: labs-test
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1862.opentlc.com'"
       operatorgroup:
-        targetNamespaces: {'labs-test'}
+        targetNamespaces: 
+          - labs-test
     project:
       name: pet-battle-test
       enabled: true
