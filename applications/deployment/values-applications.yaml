@@ -117,6 +117,7 @@ applications:
       operatorgroup:
         targetNamespaces: 
           - labs-dev
+    ignore_differences: *ignore_differences
     project:
       name: pet-battle-dev
       enabled: true
@@ -138,6 +139,7 @@ applications:
       operatorgroup:
         targetNamespaces: 
           - labs-test
+    ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
       enabled: true
