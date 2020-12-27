@@ -38,6 +38,7 @@ spec:
     type: string
     default: "labs-test"
   - name: APP_OF_APPS_DEV_KEY
+    type: string
     default: ""
   - name: APP_OF_APPS_TEST_KEY
     type: string
