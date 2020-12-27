@@ -77,7 +77,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-dev
-      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1862.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox139.opentlc.com'"
     project:
       name: pet-battle-dev
       enabled: true
@@ -95,7 +95,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1862.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox139.opentlc.com'"
     project:
       name: pet-battle-test
       enabled: true
@@ -113,7 +113,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-dev
-      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1862.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox139.opentlc.com'"
       operatorgroup:
         targetNamespaces: 
           - labs-dev
@@ -135,7 +135,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1862.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox139.opentlc.com'"
       operatorgroup:
         targetNamespaces: 
           - labs-test
