@@ -47,6 +47,7 @@ applications:
       image_name: pet-battle-api
       istag:
         enabled: false
+      deploymentConfig: false
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-dev
@@ -65,6 +66,7 @@ applications:
       image_name: pet-battle-api
       istag:
         enabled: false
+      deploymentConfig: false
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
