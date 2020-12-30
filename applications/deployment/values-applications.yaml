@@ -1,10 +1,6 @@
 ##############
 # Application Custom Values
 #############
-pet_battle_api_values: &pet_battle_api_values
-  fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
-  image_repository: image-registry.openshift-image-registry.svc:5000
-  image_name: pet-battle-api
 dev_allowed_destinations: &dev_allowed_destinations # argocd project
   - namespace: labs-dev
     server: https://kubernetes.default.svc
@@ -45,7 +41,12 @@ applications:
     sync_policy_automated: true
     destination: labs-dev
     source_ref: master # overridden by git revision in pipeline trigger
-    values: *pet_battle_api_values
+    values:
+      fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle-api
+      istag:
+        enabled: false
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-dev
@@ -58,7 +59,12 @@ applications:
     sync_policy_automated: true
     destination: labs-test
     source_ref: master # overridden by git revision in pipeline trigger
-    values: *pet_battle_api_values
+    values:
+      fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle-api
+      istag:
+        enabled: false
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
