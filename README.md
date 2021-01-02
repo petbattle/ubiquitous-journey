@@ -23,7 +23,7 @@ oc -n labs-ci-cd process pet-battle-tournament | oc -n labs-ci-cd create -f-
 ```
 
 ## To Be Done
-- [] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
+- [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 
 ```bash
 # manually mount secrets for now
@@ -38,7 +38,7 @@ sed -i -e "s|  password:.*|  password: ${TOKEN}|" ~/tmp/argocd-token.yaml
 oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 ```
 
-- [] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
+- [ ] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
 
 ```yaml
     - name: oc-tag-image-test
@@ -54,11 +54,11 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
           values: ["master"]
 ```
 
-- [] Operator split into charts requiring privilege
-- [] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
-- [] ubi quarkus ubi build image with tools, check base now we have new images (using custom one)
-- [] code quality gates - configure pipeline args to fail on quality gates
-- [] document PR'sand branches .. tooling supports this now
-- [] document webhook triggers, auto create them using tekton task
-- [] dev-ex-dashboard configure
-- [] add nsfw apps to this guide
+- [ ] Operator split into charts requiring privilege
+- [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
+- [ ] ubi quarkus ubi build image with tools, check base now we have new images (using custom one)
+- [ ] code quality gates - configure pipeline args to fail on quality gates
+- [ ] document PR'sand branches .. tooling supports this now
+- [ ] document webhook triggers, auto create them using tekton task
+- [ ] dev-ex-dashboard configure
+- [ ] add nsfw apps to this guide
