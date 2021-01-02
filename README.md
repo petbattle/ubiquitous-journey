@@ -9,11 +9,11 @@ We use a Pull Model of deployment - Tekton for the CI pipeline, and ArgoCD to de
 ![pull-model.png](images/pull-model.png)
 ### 🤠 For the impatient 🤠
 
-I put this section at the end .. really this is a tutorial to help you understand bootstrapping. But if you wanna skip the whole lot and just run this code:
+Just run this code as a cluster admin user:
 ```bash
 # bootstrap to install argocd and create projects
 helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
-# create the argocd token secret in labs-ci-cd namespace see above section ^^^
+# create the argocd token secret in labs-ci-cd namespace see TBD below
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
