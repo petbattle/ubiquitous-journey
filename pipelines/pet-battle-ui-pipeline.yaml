@@ -60,7 +60,7 @@ spec:
         - name: subdirectory
           value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
         - name: deleteExisting
-          value: "true"
+          value: "false"
 
     - name: fetch-cicd-repository
       taskRef:
