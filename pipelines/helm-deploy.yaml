@@ -101,13 +101,13 @@ spec:
         - name: charts_dir
           value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
-          value: argo-app-of-apps.yaml
+          value: values-applications.yaml
         - name: release_name
           value: my
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
-          value: "applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).name=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).values.image_namespace=$(params.DEV_NAMESPACE)"
+          value: "applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).name=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APPLICATION_NAME).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APPLICATION_NAME).values.image_namespace=$(params.DEV_NAMESPACE)"
       runAfter:
         - fetch-cicd-repository
 
