@@ -13,4 +13,4 @@ spec:
   storageClassName: gp2
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
