@@ -97,12 +97,10 @@ spec:
           # We don't just "rm -rf $CHECKOUT_DIR" because $CHECKOUT_DIR might be "/"
           # or the root of a mounted volume.
           if [[ -d "$CHECKOUT_DIR" ]] ; then
-            # Delete non-hidden files and directories
-            rm -rf "$CHECKOUT_DIR"/*
-            # Delete files and directories starting with . but excluding ..
-            rm -rf "$CHECKOUT_DIR"/.[!.]*
-            # Delete files and directories starting with .. plus any other character
-            rm -rf "$CHECKOUT_DIR"/..?*
+            # delete all files
+            find "$CHECKOUT_DIR" -type f -delete
+            # delete all dirs
+            find "$CHECKOUT_DIR"/* -type d -delete
           fi
         }
 
