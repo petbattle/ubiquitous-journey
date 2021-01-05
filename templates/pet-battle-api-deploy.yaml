@@ -1,0 +1,51 @@
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: pet-battle-api-deploy
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+objects:
+- apiVersion: tekton.dev/v1beta1
+  kind: PipelineRun
+  metadata:
+    generateName: pet-battle-api-deploy-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+  spec:
+    pipelineRef:
+      name: helm-deploy-pipeline
+    workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: build-images
+    - name: argocd-env-secret
+      secret:
+        secretName: argocd-token
+    params:
+    - name: APPLICATION_NAME
+      value: pet-battle-api
+    - name: GIT_URL
+      value: https://github.com/eformat/pet-battle-api.git
+    - name: GIT_REVISION
+      value: master # or git tag, revision
+    - name: GIT_REF
+      value: ""
+    - name: GIT_SHORT_REVISION
+      value: "master"
+    - name: GIT_BRANCH
+      value: "master"
+    - name: BUILD_NAMESPACE
+      value: "labs-ci-cd"
+    - name: DEV_NAMESPACE
+      value: "labs-dev"
+    - name: TEST_NAMESPACE
+      value: "labs-test"
+    - name: APP_OF_APPS_DEV_KEY
+      value: "pet_battle_api_dev"
+    - name: APP_OF_APPS_TEST_KEY
+      value: "pet_battle_api_test"
+#    - name: MAVEN_BUILD_OPTS # disable tests for example
+#      value:
+#        - -DskipTests

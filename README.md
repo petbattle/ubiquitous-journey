@@ -24,6 +24,13 @@ oc -n labs-ci-cd process pet-battle | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process pet-battle-tournament | oc -n labs-ci-cd create -f-
 ```
 
+If you have already built and tagged images and you have app-of-app config changes, you can redeploy the argocd application using helm with:
+```bash
+oc -n labs-ci-cd process pet-battle-api-deploy | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-deploy | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-tournament-deploy | oc -n labs-ci-cd create -f-
+```
+
 ## To Be Done
 - [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 

@@ -6,5 +6,7 @@ resources:
 - pet-battle.yaml
 - pet-battle-tournament.yaml
 - pet-battle-deploy.yaml
+- pet-battle-api-deploy.yaml
+- pet-battle-tournament-deploy.yaml
 
 namespace: labs-ci-cd
