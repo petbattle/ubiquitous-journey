@@ -69,6 +69,10 @@ spec:
       description: log the commands used during execution
       type: string
       default: "true"
+    - name: gitInitImage
+      description: the image used where the git-init binary is
+      type: string
+      default: "gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.18.1"
   results:
     - name: commit
       description: The precise commit SHA that was fetched by this Task
@@ -76,7 +80,7 @@ spec:
       description: The precise URL that was fetched by this Task
   steps:
     - name: clone
-      image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.16.2
+      image: $(params.gitInitImage)
       script: |
         #!/bin/sh
         set -eu -o pipefail
