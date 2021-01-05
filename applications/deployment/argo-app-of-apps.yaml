@@ -25,32 +25,6 @@ applications:
     sync_policy_automated: true
     helm_values:
       - values-applications.yaml
-    # values: # pipeline will override these values, here for testing purposes
-    #   applications:
-    #     pet_battle_dev:
-    #       enabled: false
-    #       source_ref: master
-    #       image_version: master
-    #     pet_battle_test:
-    #       enabled: false
-    #       source_ref: master
-    #       image_version: master
-    #     pet_battle_api_dev:
-    #       enabled: false
-    #       source_ref: master
-    #       image_version: master
-    #     pet_battle_api_test:
-    #       enabled: false
-    #       source_ref: master
-    #       image_version: master
-    #     pet_battle_tournament_dev:
-    #       enabled: false
-    #       source_ref: master
-    #       image_version: master
-    #     pet_battle_tournament_test:
-    #       enabled: false
-    #       source_ref: master
-    #       image_version: master
     project:
       name: pet-battle-suite
       enabled: true
