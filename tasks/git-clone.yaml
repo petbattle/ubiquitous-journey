@@ -92,15 +92,8 @@ spec:
         CHECKOUT_DIR="$(workspaces.output.path)/$(params.subdirectory)"
 
         cleandir() {
-          # Delete any existing contents of the repo directory if it exists.
-          #
-          # We don't just "rm -rf $CHECKOUT_DIR" because $CHECKOUT_DIR might be "/"
-          # or the root of a mounted volume.
-          if [[ -d "$CHECKOUT_DIR" ]] ; then
-            # delete all files
-            find "$CHECKOUT_DIR" -type f -delete
-            # delete all dirs
-            find "$CHECKOUT_DIR"/* -type d -delete
+          if [[ -d "$CHECKOUT_DIR" && "$CHECKOUT_DIR" != "/" ]] ; then
+            rm -rf "$CHECKOUT_DIR"
           fi
         }
 
