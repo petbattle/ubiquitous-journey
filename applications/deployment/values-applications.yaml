@@ -128,10 +128,11 @@ applications:
       image_name: pet-battle-tournament
       image_namespace: labs-dev
       config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox139.opentlc.com'"
-      operatorgroup:
-        enabled: true
-        targetNamespaces: 
-          - labs-dev
+      pet-battle-infra:
+        operatorgroup:
+          enabled: true
+          targetNamespaces: 
+            - labs-dev
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-dev
@@ -151,10 +152,11 @@ applications:
       image_name: pet-battle
       image_namespace: labs-test
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox139.opentlc.com'"
-      operatorgroup:
-        enabled: true
-        targetNamespaces: 
-          - labs-test
+      pet-battle-infra:
+        operatorgroup:
+          enabled: true
+          targetNamespaces: 
+            - labs-test
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
