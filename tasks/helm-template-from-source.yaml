@@ -23,9 +23,6 @@ spec:
     - name: release_name
       description: The helm release name
       default: "helm-release"
-    - name: release_namespace
-      description: The helm release namespace
-      default: ""
     - name: overwrite_values
       description: "Specify the values you want to overwrite, comma separated: autoscaling.enabled=true,replicas=1"
       default: ""
@@ -43,7 +40,7 @@ spec:
       workingDir: /workspace/source
       script: |
         echo current installed helm releases
-        helm list --namespace "$(inputs.params.release_namespace)"
+        helm list --namespace "$(inputs.params.target_namespace)"
 
         echo installing helm chart...
         helm template $(inputs.params.release_name) -f $(inputs.params.charts_dir)/$(inputs.params.values_file) $(inputs.params.charts_dir) --set $(inputs.params.overwrite_values) | oc apply -n $(inputs.params.target_namespace) -f-
