@@ -11,6 +11,8 @@ We use a Pull Model of deployment - Tekton for the CI pipeline, and ArgoCD to de
 
 Just run this code as a cluster admin user:
 ```bash
+# clone this repo and
+cd ubiquitous-journey
 # bootstrap to install argocd and create projects
 helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
 # create the argocd token secret in labs-ci-cd namespace see TBD below
@@ -31,7 +33,7 @@ oc -n labs-ci-cd apply -f ~/tmp/git-auth.yaml
 
 # generate argocd cd token
 oc -n labs-ci-cd patch cm argocd-cm --type='json' -p='[{"op": "add", "path": "/data", "value": {"accounts.admin": "apiKey"}}]'
-HOST=$(oc get route argocd-server --template='{{ .spec.host }}')
+HOST=$(oc -n labs-ci-cd get route argocd-server --template='{{ .spec.host }}')
 argocd login $HOST:443 --sso --insecure --username admin
 TOKEN=$(argocd account generate-token --account admin | base64 -w0)
 sed -i -e "s|  password:.*|  password: ${TOKEN}|" ~/tmp/argocd-token.yaml
