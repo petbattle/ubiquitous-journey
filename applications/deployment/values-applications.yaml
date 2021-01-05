@@ -127,6 +127,8 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-dev
+      istag:
+        enabled: false
       config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1438.opentlc.com'"
       pet-battle-infra:
         operatorgroup:
@@ -151,6 +153,8 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
+      istag:
+        enabled: false
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
       pet-battle-infra:
         operatorgroup:
