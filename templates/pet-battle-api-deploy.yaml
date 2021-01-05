@@ -43,9 +43,9 @@ objects:
     - name: TEST_NAMESPACE
       value: "labs-test"
     - name: APP_OF_APPS_DEV_KEY
-      value: "pet_battle_api_dev"
+      value: "${APP_OF_APPS_DEV_KEY}"
     - name: APP_OF_APPS_TEST_KEY
-      value: "pet_battle_api_test"
+      value: "${APP_OF_APPS_TEST_KEY}"
 #    - name: MAVEN_BUILD_OPTS # disable tests for example
 #      value:
 #        - -DskipTests
@@ -70,3 +70,13 @@ parameters:
   name: GIT_BRANCH
   required: true
   value: master
+- description: Argo dev app of app key name (use underscores only)
+  displayName: Argo dev app of app key name (use underscores only)
+  name: APP_OF_APPS_DEV_KEY
+  required: true
+  value: "pet_battle_api_dev"
+- description: Argo test app of app key name (use underscores only)
+  displayName: Argo test app of app key name (use underscores only)
+  name: APP_OF_APPS_TEST_KEY
+  required: true
+  value: "pet_battle_api_test"
