@@ -1,6 +1,6 @@
 {{- if .Values.applications }}
-{{- range $app, $val := .Values.applications }}
-{{- if .enabled }}
+{{- range $app := .Values.applications }}
+{{- if $app.enabled }}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -10,19 +10,25 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
   name: {{ .name }}
   labels:
+{{- if .values }}
+{{- if .values.fullnameOverride }}
 {{- if contains .values.fullnameOverride .name }}
     app.kubernetes.io/instance: {{ .values.fullnameOverride }}
+{{- end }}
 {{- else -}}
     app.kubernetes.io/instance: {{ .name }}
+{{- end }}
 {{- end }}
 spec:
   destination:
     namespace: {{ .destination | default "labs-ci-cd" }}
     server: {{ .cluster_api | default "https://kubernetes.default.svc" }}
+{{- if .project }}
 {{- if .project.enabled }}
   project: {{ .project.name }}
 {{- else -}}
   project: default
+{{- end }}
 {{- end }}
   source:
 {{- if not .no_helm }}
