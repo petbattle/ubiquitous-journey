@@ -5,6 +5,9 @@ metadata:
 spec:
   workspaces:
   - name: git-auth-secret
+  volumes:
+  - name: tekton-internal-tools
+    emptyDir: {}
   params:
     - name: ExternalDomain
       description: "The external domain for the EventListener e.g. `$(params.EventListenerName).<PROXYIP>.nip.io`"
