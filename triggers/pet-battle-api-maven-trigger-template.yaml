@@ -25,7 +25,7 @@ spec:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: $(params.git-repo-name)-
+        generateName: $(tt.params.git-repo-name)-
         labels:
           tekton.dev/pipeline: maven-pipeline
         annotations:
@@ -37,17 +37,17 @@ spec:
           name: maven-pipeline
         params:
           - name: APPLICATION_NAME
-            value: $(params.git-repo-name)
+            value: $(tt.params.git-repo-name)
           - name: GIT_URL
-            value: $(params.git-repo-url)
+            value: $(tt.params.git-repo-url)
           - name: GIT_REVISION
-            value: $(params.git-revision)
+            value: $(tt.params.git-revision)
           - name: GIT_SHORT_REVISION
-            value: $(params.git-short-revision)
+            value: $(tt.params.git-short-revision)
           - name: GIT_REF
-            value: $(params.git-ref)
+            value: $(tt.params.git-ref)
           - name: GIT_BRANCH
-            value: $(params.git-branch)
+            value: $(tt.params.git-branch)
           - name: MAVEN_MIRROR_URL
             value: http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/maven-public
           - name: BUILD_NAMESPACE
@@ -57,9 +57,9 @@ spec:
           - name: TEST_NAMESPACE
             value: "labs-test"
           - name: APP_OF_APPS_DEV_KEY
-            value: $(params.git-app-of-apps-key)_dev
+            value: $(tt.params.git-app-of-apps-key)_dev
           - name: APP_OF_APPS_TEST_KEY
-            value: $(params.git-app-of-apps-key)_test
+            value: $(tt.params.git-app-of-apps-key)_test
 #          - name: MAVEN_BUILD_OPTS
 #            value:
 #              - -DskipTests
