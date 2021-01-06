@@ -209,7 +209,7 @@ spec:
       runAfter:
         - oc-start-build
 
-    - name: helm-argocd-apps-master # deploy to dev + test
+    - name: helm-argocd-apps-master # deploy full app suite to dev + test
       conditions:
       - conditionRef: is-equal
         params:
@@ -226,13 +226,13 @@ spec:
         - name: charts_dir
           value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
-          value: values-applications.yaml
+          value: argo-app-of-apps.yaml
         - name: release_name
           value: my
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values # strictly speaking not very gitops
-          value: "applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME),applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APP_OF_APPS_DEV_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APP_OF_APPS_DEV_KEY).values.image_namespace=$(params.DEV_NAMESPACE),applications.$(params.APP_OF_APPS_TEST_KEY).values.fullnameOverride=$(params.APPLICATION_NAME),applications.$(params.APP_OF_APPS_TEST_KEY).enabled=true,applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APP_OF_APPS_TEST_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APP_OF_APPS_TEST_KEY).values.image_namespace=$(params.TEST_NAMESPACE)"
+          value: "foo=bar"
       runAfter:
         - oc-tag-image-dev
         - oc-tag-image-test
@@ -260,7 +260,7 @@ spec:
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values # strictly speaking not very gitops
-          value: "applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).name=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APPLICATION_NAME).source_ref=$(params.GIT_REVISION),applications.$(params.APPLICATION_NAME).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APPLICATION_NAME).values.image_namespace=$(params.DEV_NAMESPACE)"
+          value: "applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).name=$(params.APPLICATION_NAME)-$(params.GIT_BRANCH),applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.$(params.APP_OF_APPS_DEV_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.$(params.APP_OF_APPS_DEV_KEY).values.image_namespace=$(params.DEV_NAMESPACE)"
       runAfter:
         - oc-tag-image-dev
 
