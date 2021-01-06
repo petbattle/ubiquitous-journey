@@ -8,7 +8,7 @@ objects:
   kind: TaskRun
   metadata:
     generateName: pet-battle-api-create-webhook-
-  spec:
+  taskSpec:
     taskRef:
       kind: Task
       name: create-webhook
