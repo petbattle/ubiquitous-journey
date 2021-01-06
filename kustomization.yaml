@@ -10,4 +10,4 @@ bases:
 - tasks
 - pipelines
 - templates
-#- triggers
+- triggers
