@@ -14,11 +14,11 @@ objects:
       name: create-webhook
     params:
     - name: GitHubOrg
-      value: "tripvibe"
+      value: "eformat"
     - name: GitHubUser
       value: "tekton"
     - name: GitHubRepo
-      value: "tv-submit"
+      value: "pet-battle-api"
     - name: GitHubAccessTokenKey
       value: password
     - name: GitHubSecretStringKey
