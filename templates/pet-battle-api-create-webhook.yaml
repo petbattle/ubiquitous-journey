@@ -13,8 +13,6 @@ objects:
       kind: Task
       name: create-webhook
     params:
-    - name: GitHubSecretName
-      value: "git-auth"
     - name: GitHubOrg
       value: "eformat"
     - name: GitHubUser
