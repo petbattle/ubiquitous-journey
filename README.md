@@ -31,6 +31,11 @@ oc -n labs-ci-cd process pet-battle-deploy | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process pet-battle-tournament-deploy | oc -n labs-ci-cd create -f-
 ```
 
+To create webhooks in github repos run these (TaskRuns) once manually
+```bash
+oc -n labs-ci-cd process pet-battle-api-create-webhook | oc -n labs-ci-cd create -f-
+```
+
 ## To Be Done
 - [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 

@@ -9,3 +9,4 @@ resources:
 - helm-template-from-source.yaml
 - argocd-sync-and-wait.yaml
 - nodejs.yaml
+- create-webhook-task.yaml
