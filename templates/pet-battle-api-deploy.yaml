@@ -63,7 +63,6 @@ parameters:
 - description: Git ref
   displayName: Git ref
   name: GIT_REF
-  required: false
   value: ""
 - description: Git short revision
   displayName: Git short revision
