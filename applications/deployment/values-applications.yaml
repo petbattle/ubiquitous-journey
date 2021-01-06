@@ -129,9 +129,8 @@ applications:
       image_name: pet-battle-tournament
       image_namespace: labs-dev
       image_version: master
-      istag: # default tag which we dont want
+      istag:
         enabled: false
-      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1438.opentlc.com'"
       pet-battle-infra:
         operatorgroup:
           enabled: true
@@ -155,9 +154,8 @@ applications:
       image_name: pet-battle
       image_namespace: labs-test
       image_version: master
-      istag: # default tag which we dont want
+      istag:
         enabled: false
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
       pet-battle-infra:
         operatorgroup:
           enabled: true
