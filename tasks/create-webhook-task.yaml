@@ -3,8 +3,10 @@ kind: Task
 metadata:
   name: create-webhook
 spec:
-  workspaces:
+  volumes:
   - name: git-auth-secret
+    secret:
+      secretName: git-auth
   params:
     - name: ExternalDomain
       description: "The external domain for the EventListener e.g. `$(params.EventListenerName).<PROXYIP>.nip.io`"
@@ -28,12 +30,15 @@ spec:
   - name: create-webhook
     image: registry.access.redhat.com/ubi8/ubi-minimal:latest
     command: ["/bin/bash", "-c"]
+    volumeMounts:
+    - name: git-auth-secret
+      mountPath: /var/secret
     args:
     - |
       set -e
       echo "Create Webhook"
       if [ $(params.GitHubDomain) = "github.com" ];then
-        curl -H "Accept: application/vnd.github.v3+json" -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubSecretStringKey))\"}}" -u $(params.GitHubUser):$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubAccessTokenKey)) -L https://api.github.com/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
+        curl -H "Accept: application/vnd.github.v3+json" -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat /var/secret/$(params.GitHubSecretStringKey))\"}}" -u $(params.GitHubUser):$(cat /var/secret/$(params.GitHubAccessTokenKey)) -L https://api.github.com/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       else
-        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubSecretStringKey))\"}}" -u $(params.GitHubUser):$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubAccessTokenKey)) -L https://$(params.GitHubDomain)/api/v3/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
+        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat /var/secret/$(params.GitHubSecretStringKey))\"}}" -u $(params.GitHubUser):$(cat /var/secret/$(params.GitHubAccessTokenKey)) -L https://$(params.GitHubDomain)/api/v3/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       fi
