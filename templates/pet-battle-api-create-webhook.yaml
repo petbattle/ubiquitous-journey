@@ -30,6 +30,6 @@ objects:
     timeout: 1h0m0s
     serviceAccountName: pipeline
     workspaces:
-      - name: git-auth-secret
-        secret:
-          secretName: git-auth
+    - name: git-auth-secret
+      secret:
+        secretName: git-auth
