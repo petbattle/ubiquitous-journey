@@ -33,8 +33,8 @@ spec:
     - |
       set -e
       echo "Create Webhook"
-      if [ $(inputs.params.GitHubDomain) = "github.com" ];then
-        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(inputs.params.WebhookEvents),\"config\": {\"url\": \"$(inputs.params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat $(workspaces.git-auth-secret.path)/$(inputs.params.GitHubSecretStringKey))\"}}" -X POST -u $(inputs.params.GitHubUser):$(cat $(workspaces.git-auth-secret.path)/$(inputs.params.GitHubAccessTokenKey)) -L https://api.github.com/repos/$(inputs.params.GitHubOrg)/$(inputs.params.GitHubRepo)/hooks
+      if [ $(params.GitHubDomain) = "github.com" ];then
+        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubSecretStringKey))\"}}" -X POST -u $(params.GitHubUser):$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubAccessTokenKey)) -L https://api.github.com/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       else
-        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(inputs.params.WebhookEvents),\"config\": {\"url\": \"$(inputs.params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat $(workspaces.git-auth-secret.path)/$(inputs.params.GitHubSecretStringKey))\"}}" -X POST -u $(inputs.params.GitHubUser):$(cat $(workspaces.git-auth-secret.path)/$(inputs.params.GitHubAccessTokenKey)) -L https://$(inputs.params.GitHubDomain)/api/v3/repos/$(inputs.params.GitHubOrg)/$(inputs.params.GitHubRepo)/hooks
+        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubSecretStringKey))\"}}" -X POST -u $(params.GitHubUser):$(cat $(workspaces.git-auth-secret.path)/$(params.GitHubAccessTokenKey)) -L https://$(params.GitHubDomain)/api/v3/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       fi
