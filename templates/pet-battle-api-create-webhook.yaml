@@ -12,6 +12,10 @@ objects:
     taskRef:
       kind: Task
       name: create-webhook
+    podTemplate:
+        securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
     params:
     - name: GitHubOrg
       value: "eformat"
