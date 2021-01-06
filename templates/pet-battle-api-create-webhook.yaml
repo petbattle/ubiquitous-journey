@@ -13,6 +13,8 @@ objects:
       kind: Task
       name: create-webhook
     params:
+    - name: GitHubSecretName
+      value: "git-auth"
     - name: GitHubOrg
       value: "eformat"
     - name: GitHubUser
@@ -27,7 +29,3 @@ objects:
       value: http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com
     timeout: 1h0m0s
     serviceAccountName: pipeline
-    workspaces:
-      - name: git-auth-secret
-        secret:
-          secretName: git-auth
