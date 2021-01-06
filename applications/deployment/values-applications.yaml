@@ -51,7 +51,7 @@ applications:
       fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      istag:
+      istag: # default tag which we dont want
         enabled: false
       deploymentConfig: false
     ignore_differences: *ignore_differences
@@ -70,7 +70,7 @@ applications:
       fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      istag:
+      istag: # default tag which we dont want
         enabled: false
       deploymentConfig: false
     ignore_differences: *ignore_differences
@@ -127,7 +127,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-dev
-      istag:
+      istag: # default tag which we dont want
         enabled: false
       config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1438.opentlc.com'"
       pet-battle-infra:
@@ -153,7 +153,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      istag:
+      istag: # default tag which we dont want
         enabled: false
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
       pet-battle-infra:
