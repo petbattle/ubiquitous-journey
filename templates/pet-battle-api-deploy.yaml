@@ -31,7 +31,7 @@ objects:
     - name: GIT_REVISION
       value: "${GIT_REVISION}"
     - name: GIT_REF
-      value: ""
+      value: "${GIT_REF}"
     - name: GIT_SHORT_REVISION
       value: "${GIT_SHORT_REVISION}"
     - name: GIT_BRANCH
@@ -60,6 +60,11 @@ parameters:
   name: GIT_REVISION
   required: true
   value: master
+- description: Git ref
+  displayName: Git ref
+  name: GIT_REF
+  required: false
+  value: ""
 - description: Git short revision
   displayName: Git short revision
   name: GIT_SHORT_REVISION
