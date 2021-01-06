@@ -37,17 +37,17 @@ spec:
           name: maven-pipeline
         params:
           - name: APPLICATION_NAME
-            value: '$(params.git-repo-name)'
+            value: "$(params.git-repo-name)"
           - name: GIT_URL
-            value: '$(params.git-repo-url)'
+            value: "$(params.git-repo-url)"
           - name: GIT_REVISION
-            value: '$(params.git-revision)'
+            value: "$(params.git-revision)"
           - name: GIT_SHORT_REVISION
-            value: '$(params.git-short-revision)'
+            value: "$(params.git-short-revision)"
           - name: GIT_REF
-            value: '$(params.git-ref)'
+            value: "$(params.git-ref)"
           - name: GIT_BRANCH
-            value: '$(params.git-branch)'
+            value: "$(params.git-branch)"
           - name: MAVEN_MIRROR_URL
             value: http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/maven-public
           - name: BUILD_NAMESPACE
