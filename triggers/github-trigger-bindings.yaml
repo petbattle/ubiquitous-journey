@@ -1,0 +1,21 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: github-trigger-binding
+spec:
+  params:
+    - name: git-repo-url
+      value: $(body.repository.url)
+    - name: git-repo-name
+      value: $(body.repository.name)
+    - name: git-revision
+      value: $(body.head_commit.id)
+    - name: git-ref
+      value: $(body.ref)
+    - name: git-branch
+      value: $(body.extensions.branch_name)
+    - name: git-short-revision
+      value: $(body.extensions.truncated_sha)
+    - name: git-app-of-apps-key
+      value: $(body.extensions.app_of_apps_key)

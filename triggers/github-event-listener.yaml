@@ -1,0 +1,63 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: github-webhook
+  labels:
+    app: github
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: pet-battle-api-webhook-all-branches
+      interceptors: # fixme add secret.ref
+        - cel:
+            filter: >-
+              (header.match('X-GitHub-Event', 'push') &&
+                body.repository.full_name == 'eformat/pet-battle-api')
+            overlays:
+            - key: extensions.truncated_sha
+              expression: "body.head_commit.id.substring(0,7)"
+            - key: extensions.branch_name
+              expression: "body.ref.split('/')[2]"
+            - key: extensions.app_of_apps_key
+              expression: "body.repository.name.replace('-','_',-1)"
+      bindings:
+      - ref: github-trigger-binding
+      template:
+        name: pet-battle-api-maven-trigger-template
+    - name: pet-battle-api-webhook-pr
+      interceptors: # fixme add secret.ref
+        - cel:
+            filter: >-
+              (header.match('X-GitHub-Event', 'pull_request') &&
+                body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
+                body.pull_request.head.repo.full_name == 'eformat/pet-battle-api'
+            overlays:
+            - key: extensions.truncated_sha
+              expression: "body.pull_request.head.sha.substring(0,7)"
+            - key: extensions.branch_name
+              expression: body.pull_request.head.ref
+            - key: extensions.pr
+              expression: body.pull_request.number
+            - key: extensions.app_of_apps_key
+              expression: "body.repository.name.replace('-','_',-1)"
+      bindings:
+      - ref: github-trigger-binding-pr
+      template:
+        name: pet-battle-api-maven-trigger-template
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: webhook
+  labels:
+    app.kubernetes.io/managed-by: EventListener
+    app.kubernetes.io/part-of: Triggers
+    eventlistener: github-webhook
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: 'Service'
+    name: el-github-webhook
+    weight: 100
