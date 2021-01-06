@@ -29,7 +29,6 @@ spec:
   steps:
   - name: create-webhook
     image: registry.access.redhat.com/ubi8/ubi-minimal:latest
-    command: ["/bin/bash", "-c"]
     volumeMounts:
     - name: git-auth-secret
       mountPath: /var/secret
