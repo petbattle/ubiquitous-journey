@@ -13,7 +13,7 @@ objects:
       kind: Task
       name: create-webhook
     podTemplate:
-        securityContext:
+      securityContext:
         runAsNonRoot: true
         runAsUser: 1001
     params:
