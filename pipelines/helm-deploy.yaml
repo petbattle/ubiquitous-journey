@@ -80,7 +80,7 @@ spec:
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
-          value: ""
+          value: "foo=bar"
       runAfter:
         - fetch-cicd-repository
 
