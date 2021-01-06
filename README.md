@@ -71,3 +71,4 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 - [ ] document webhook triggers, auto create them using tekton task
 - [ ] dev-ex-dashboard configure
 - [ ] add nsfw apps to this guide
+- [ ] add github triggers work
