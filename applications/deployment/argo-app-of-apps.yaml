@@ -25,6 +25,32 @@ applications:
     sync_policy_automated: true
     helm_values:
       - values-applications.yaml
+    values:
+      applications:
+        pet_battle_dev:
+          enabled: true
+          source_ref: master
+          image_version: master
+        pet_battle_test:
+          enabled: true
+          source_ref: master
+          image_version: master
+        pet_battle_api_dev:
+          enabled: true
+          source_ref: master
+          image_version: master
+        pet_battle_api_test:
+          enabled: true
+          source_ref: master
+          image_version: master
+        pet_battle_tournament_dev:
+          enabled: true
+          source_ref: master
+          image_version: master
+        pet_battle_tournament_test:
+          enabled: true
+          source_ref: master
+          image_version: master
     project:
       name: pet-battle-suite
       enabled: true

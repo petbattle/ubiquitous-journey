@@ -41,7 +41,7 @@ argocd_projects:
 applications:
   pet_battle_api_dev:
     name: pet-battle-api-dev
-    enabled: false # overridden by pipeline
+    enabled: false  # overridden by pipeline
     source: https://github.com/eformat/pet-battle-api.git
     source_path: chart
     sync_policy_automated: true

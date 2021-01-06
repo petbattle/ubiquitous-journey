@@ -80,7 +80,7 @@ spec:
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
-          value: "applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).values.fullnameOverride=$(params.APPLICATION_NAME),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).enabled=true,applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=$(params.GIT_REVISION),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).values.image_namespace=$(params.DEV_NAMESPACE),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).values.fullnameOverride=$(params.APPLICATION_NAME),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).enabled=true,applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=$(params.GIT_REVISION),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).values.image_version=$(params.GIT_SHORT_REVISION),applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).values.image_namespace=$(params.TEST_NAMESPACE)"
+          value: ""
       runAfter:
         - fetch-cicd-repository
 
