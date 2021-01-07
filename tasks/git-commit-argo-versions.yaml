@@ -75,14 +75,14 @@ spec:
           set -x
         fi
 
-        test -z "$(params.HTTPPROXY)" || export HTTP_PROXY=$(params.HTTPPROXY)
-        test -z "$(params.HTTPSPROXY)" || export HTTPS_PROXY=$(params.HTTPSPROXY)
-        test -z "$(params.NOPROXY)" || export NO_PROXY=$(params.NOPROXY)
-        test -z "$(params.GIT_TAG)" || export GIT_REF=$(params.GIT_TAG)
+        test -z $(params.HTTPPROXY) || export HTTP_PROXY=$(params.HTTPPROXY)
+        test -z $(params.HTTPSPROXY) || export HTTPS_PROXY=$(params.HTTPSPROXY)
+        test -z $(params.NOPROXY) || export NO_PROXY=$(params.NOPROXY)
+        test -z $(params.GIT_TAG) || export GIT_REF=$(params.GIT_TAG)
 
         # Setting up the config for the git
-        git config --global user.email "$(params.GIT_USER_EMAIL)"
-        git config --global user.name "$(params.GIT_USER_NAME)"
+        git config --global user.email $(params.GIT_USER_EMAIL)
+        git config --global user.name $(params.GIT_USER_NAME)
         git config --global push.default simple
 
         # Setup app suite values
