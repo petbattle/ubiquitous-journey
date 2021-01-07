@@ -5,3 +5,4 @@ resources:
 - maven-pipeline.yaml
 - pet-battle-ui-pipeline.yaml
 - helm-deploy.yaml
+- test-tagging.yaml
