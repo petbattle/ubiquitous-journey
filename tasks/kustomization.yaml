@@ -10,3 +10,4 @@ resources:
 - argocd-sync-and-wait.yaml
 - nodejs.yaml
 - create-webhook-task.yaml
+- git-commit-argo-versions.yaml

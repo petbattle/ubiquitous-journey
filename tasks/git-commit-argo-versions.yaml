@@ -30,7 +30,7 @@ spec:
       type: string
       description: |
         Git user name for performing git operation.
-      default: "Tekton"
+      default: "tekton"
     - name: GIT_USER_EMAIL
       type: string
       description: |
@@ -86,10 +86,10 @@ spec:
         git config --global push.default simple
 
         # Setup app suite values
-        yq w -i ${ARGOCD_CONFIG_REPO_PATH} "applications.pet_battle_suite.values.applications(name==${APP_OF_APPS_DEV_KEY}).source_ref" ${GIT_TAG}
-        yq w -i ${ARGOCD_CONFIG_REPO_PATH} "applications.pet_battle_suite.values.applications(name==${APP_OF_APPS_DEV_KEY}).image_version" ${GITHUB_TAG::7}
-        yq w -i ${ARGOCD_CONFIG_REPO_PATH} "applications.pet_battle_suite.values.applications(name==${APP_OF_APPS_TEST_KEY}).source_ref" ${GIT_TAG}
-        yq w -i ${ARGOCD_CONFIG_REPO_PATH} "applications.pet_battle_suite.values.applications(name==${APP_OF_APPS_TEST_KEY}).image_version" ${GITHUB_TAG::7}
+        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_DEV_KEY}.source_ref=\"${GIT_TAG}\"" ${ARGOCD_CONFIG_REPO_PATH}
+        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_DEV_KEY}.image_version=\"${GIT_TAG::7}\"" ${ARGOCD_CONFIG_REPO_PATH}
+        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_TEST_KEY}.source_ref=\"${GIT_TAG}\"" ${ARGOCD_CONFIG_REPO_PATH}
+        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_TEST_KEY}.image_version=\"${GIT_TAG::7}\"" ${ARGOCD_CONFIG_REPO_PATH}
 
         # Auto commit
         git add ${ARGOCD_CONFIG_REPO_PATH}
