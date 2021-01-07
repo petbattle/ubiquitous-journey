@@ -17,6 +17,7 @@ spec:
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
       type: string
+      default: "$(params.APPLICATION_NAME)/cicd"
     - name: GIT_REPO_URL
       type: string
       description: Git repo url
@@ -87,7 +88,7 @@ spec:
           workspace: shared-workspace
       params:
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
+        value: "$(params.WORK_DIRECTORY)"
       - name: GIT_TAG
         value: "$(params.GIT_TAG)"
       - name: APP_OF_APPS_DEV_KEY
