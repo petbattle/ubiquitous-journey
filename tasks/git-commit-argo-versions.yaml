@@ -81,6 +81,7 @@ spec:
         test -z "$(params.NOPROXY)" || export NO_PROXY=$(params.NOPROXY)
 
         GIT_REF="$(params.GIT_TAG)"
+        echo "${GIT_REF}"
 
         # Setting up the config for the git
         git config --global user.email $(params.GIT_USER_EMAIL)
