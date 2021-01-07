@@ -37,8 +37,8 @@ applications:
           image_version: master
         pet_battle_api_dev:
           enabled: true
-          source_ref: master
-          image_version: master
+          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
+          image_version: 144686b
         pet_battle_api_test:
           enabled: true
           source_ref: master
