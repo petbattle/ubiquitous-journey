@@ -59,13 +59,13 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
       when:
         - input: "$(params.GIT_BRANCH)"
           operator: in
-          values: ["master"]
+          values: ["main"]
 
     - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
       when:
         - input: "$(params.GIT_BRANCH)"
           operator: notin
-          values: ["master"]
+          values: ["main"]
 ```
 
 - [ ] Operator split into charts requiring privilege

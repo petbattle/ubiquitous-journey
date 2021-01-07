@@ -46,12 +46,12 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
-    source_ref: master
+    source_ref: main
     values:
       fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: master
+      image_version: main
       istag: # default tag which we dont want
         enabled: false
       deploymentConfig: false
@@ -66,12 +66,12 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-test
-    source_ref: master
+    source_ref: main
     values:
       fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: master
+      image_version: main
       istag: # default tag which we dont want
         enabled: false
       deploymentConfig: false
@@ -86,9 +86,9 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
-    source_ref: master
+    source_ref: main
     values:
-      app_tag: master
+      app_tag: main
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
@@ -104,9 +104,9 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-test
-    source_ref: master
+    source_ref: main
     values:
-      app_tag: master
+      app_tag: main
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
@@ -122,13 +122,13 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
-    source_ref: master
+    source_ref: main
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-dev
-      image_version: master
+      image_version: main
       istag:
         enabled: false
       pet-battle-infra:
@@ -147,13 +147,13 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-test
-    source_ref: master
+    source_ref: main
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: master
+      image_version: main
       istag:
         enabled: false
       pet-battle-infra:

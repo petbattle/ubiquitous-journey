@@ -67,7 +67,7 @@ parameters:
   displayName: Git tag or revision
   name: GIT_REVISION
   required: true
-  value: master
+  value: main
 - description: Git ref
   displayName: Git ref
   name: GIT_REF
@@ -75,12 +75,12 @@ parameters:
   displayName: Git short revision
   name: GIT_SHORT_REVISION
   required: true
-  value: master
+  value: main
 - description: Git branch name
   displayName: Git branch name
   name: GIT_BRANCH
   required: true
-  value: master
+  value: main
 - description: Argo dev app of app key name (use underscores only)
   displayName: Argo dev app of app key name (use underscores only)
   name: APP_OF_APPS_DEV_KEY

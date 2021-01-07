@@ -15,16 +15,16 @@ spec:
     default: ""
   - name: GIT_REVISION
     type: string
-    default: "master"
+    default: "main"
   - name: GIT_REF
     type: string
-    default: "refs/heads/master"
+    default: "refs/heads/main"
   - name: GIT_SHORT_REVISION
     type: string
     default: ""
   - name: GIT_BRANCH
     type: string
-    default: "master"
+    default: "main"
   - name: BUILD_NAMESPACE
     type: string
     default: "labs-ci-cd"
@@ -57,12 +57,12 @@ spec:
         - name: deleteExisting
           value: "true"
 
-    - name: helm-argocd-apps-master # deploy to dev + test
+    - name: helm-argocd-apps-main # deploy to dev + test
       conditions:
       - conditionRef: is-equal
         params:
           - name: left
-            value: "master"
+            value: "main"
           - name: right
             value: "$(params.GIT_BRANCH)"
       taskRef:
@@ -89,7 +89,7 @@ spec:
       - conditionRef: is-not-equal
         params:
           - name: left
-            value: "master"
+            value: "main"
           - name: right
             value: "$(params.GIT_BRANCH)"
       taskRef:
@@ -128,7 +128,7 @@ spec:
       runAfter:
       - helm-argocd-apps-branches
 
-    - name: argocd-sync-application-master
+    - name: argocd-sync-application-main
       retries: 3
       taskRef:
         name: argocd-sync-and-wait
@@ -143,4 +143,4 @@ spec:
       - name: revision
         value: "$(params.GIT_REVISION)"
       runAfter:
-      - helm-argocd-apps-master
+      - helm-argocd-apps-main
