@@ -65,7 +65,7 @@ spec:
     - name: APP_OF_APPS_TEST_KEY
       type: string
   steps:
-    - name: run-git-commit-versions
+    - name: run-git-commit-argo-versions
       image: $(params.IMAGE)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       script: |
