@@ -8,7 +8,7 @@ test_allowed_destinations: &test_allowed_destinations # argocd project
   - namespace: labs-test
     server: https://kubernetes.default.svc
 stage_allowed_destinations: &stage_allowed_destinations # argocd project
-  - namespace: labs-stage
+  - namespace: labs-staging
     server: https://kubernetes.default.svc
 
 ##############
@@ -91,7 +91,7 @@ applications:
     source: https://github.com/eformat/pet-battle-api.git
     source_path: chart
     sync_policy_automated: true
-    destination: labs-stage
+    destination: labs-staging
     source_ref: main
     values:
       fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
@@ -147,14 +147,14 @@ applications:
     source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
-    destination: labs-stage
+    destination: labs-staging
     source_ref: main
     values:
       app_tag: main
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
-      image_namespace: labs-stage
+      image_namespace: labs-staging
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
     project:
       name: pet-battle-stage
@@ -215,13 +215,13 @@ applications:
     source: https://github.com/petbattle/tournamentservice-v1.git
     source_path: chart
     sync_policy_automated: true
-    destination: labs-stage
+    destination: labs-staging
     source_ref: main
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
-      image_namespace: labs-stage
+      image_namespace: labs-staging
       image_version: main
       istag:
         enabled: false
@@ -229,7 +229,7 @@ applications:
         operatorgroup:
           enabled: true
           targetNamespaces: 
-            - labs-stage
+            - labs-staging
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-stage
