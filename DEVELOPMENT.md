@@ -36,7 +36,7 @@ git init
 git add README.md
 git commit -m  "🐪 initial commit 🐪"
 git branch -M main
-git remote add origin git@github.com:eformat/pb-ci-cd.git
+git remote add origin git@github.com:petbattle/pb-ci-cd.git
 git push -u origin main
 ```
 
@@ -74,7 +74,7 @@ Edit this file and set all of these to false (we dont need them for now).
 
 Replace source with new git repo, github now uses main instead of master and fix path:
 ```bash
-sed -i -e 's|rht-labs/ubiquitous-journey|eformat/pb-ci-cd|' ubiquitous-journey/argo-app-of-apps.yaml
+sed -i -e 's|rht-labs/ubiquitous-journey|petbattle/pb-ci-cd|' ubiquitous-journey/argo-app-of-apps.yaml
 sed -i -e 's|source_ref: master|source_ref: main|' ubiquitous-journey/argo-app-of-apps.yaml
 sed -i -e 's|source_path: ubiquitous-journey|source_path: ubiquitous-journey/ubiquitous-journey|' ubiquitous-journey/argo-app-of-apps.yaml
 sed -i -e 's|sync_policy_automated: false|sync_policy_automated: true|' ubiquitous-journey/argo-app-of-apps.yaml
@@ -577,7 +577,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: "https://github.com/eformat/pb-ci-cd.git"
+          value: "https://github.com/petbattle/pb-ci-cd.git"
         - name: revision
           value: "main"
         - name: subdirectory
@@ -941,7 +941,7 @@ We can configure ArgoCD to automatically apply this repo using kustomize by addi
   - name: pb-ci-cd
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/eformat/pb-ci-cd.git
+    source: https://github.com/petbattle/pb-ci-cd.git
     source_path: ""
     source_ref: "main"
     sync_policy: *sync_policy_true
@@ -963,7 +963,7 @@ Also if you wanted to add this repo (without UJ) to another ArgoCD instance, run
 argocd app create pb-ci-cd \
     --dest-namespace labs-ci-cd \
     --dest-server https://kubernetes.default.svc \
-    --repo https://github.com/eformat/pb-ci-cd.git \
+    --repo https://github.com/petbattle/pb-ci-cd.git \
     --revision main \
     --sync-policy automated \
     --path "."

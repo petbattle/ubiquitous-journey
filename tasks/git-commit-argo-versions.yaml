@@ -25,7 +25,7 @@ spec:
     - name: GIT_REPO_URL
       type: string
       description: Git repo url
-      default: "github.com/eformat/pb-ci-cd.git"
+      default: "github.com/petbattle/pb-ci-cd.git"
     - name: GIT_USER_NAME
       type: string
       description: |

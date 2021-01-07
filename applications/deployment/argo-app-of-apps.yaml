@@ -14,7 +14,7 @@ applications:
     name: pet-battle-suite
     enabled: true
     destination: labs-ci-cd
-    source: https://github.com/eformat/pb-ci-cd.git
+    source: https://github.com/petbattle/pb-ci-cd.git
     source_path: applications/deployment
     source_ref: main
     sync_policy_automated: true
