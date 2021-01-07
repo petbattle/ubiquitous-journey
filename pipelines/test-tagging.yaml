@@ -73,23 +73,23 @@ spec:
         - name: deleteExisting
           value: "true"
 
-    - name: git-commit
-      retries: 1
-      taskRef:
-        name: git-commit-argo-versions
-      workspaces:
-        - name: git-auth-secret
-          workspace: git-auth-secret
-        - name: output
-          workspace: shared-workspace
-      params:
-      - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
-      - name: GIT_TAG
-        value: "$(params.GIT_TAG)"
-      - name: APP_OF_APPS_DEV_KEY
-        value: "$(params.APP_OF_APPS_DEV_KEY)"
-      - name: APP_OF_APPS_TEST_KEY
-        value: "$(params.APP_OF_APPS_TEST_KEY)"
-      runAfter:
-      - fetch-cicd-repository
+    # - name: git-commit
+    #   retries: 1
+    #   taskRef:
+    #     name: git-commit-argo-versions
+    #   workspaces:
+    #     - name: git-auth-secret
+    #       workspace: git-auth-secret
+    #     - name: output
+    #       workspace: shared-workspace
+    #   params:
+    #   - name: WORK_DIRECTORY
+    #     value: "$(params.APPLICATION_NAME)/cicd"
+    #   - name: GIT_TAG
+    #     value: "$(params.GIT_TAG)"
+    #   - name: APP_OF_APPS_DEV_KEY
+    #     value: "$(params.APP_OF_APPS_DEV_KEY)"
+    #   - name: APP_OF_APPS_TEST_KEY
+    #     value: "$(params.APP_OF_APPS_TEST_KEY)"
+    #   runAfter:
+    #   - fetch-cicd-repository
