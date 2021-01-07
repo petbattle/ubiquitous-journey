@@ -1,0 +1,98 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: test-tagging-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+    - name: git-auth-secret
+  params:
+    - name: APPLICATION_NAME
+      type: string
+      default: ""
+    - name: IMAGE
+      type: string
+      description: Maven base image
+      default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: GIT_REPO_URL
+      type: string
+      description: Git repo url
+      default: "github.com/eformat/pb-ci-cd.git"
+    - name: GIT_USER_NAME
+      type: string
+      description: |
+        Git user name for performing git operation.
+      default: "tekton"
+    - name: GIT_USER_EMAIL
+      type: string
+      description: |
+        Git user email for performing git operation.
+      default: "tekton@rht-labs.bot.com"
+    - name: GIT_TAG
+      description: The Git Tag (branch,tag,revision) to set in app of apps values
+      type: string
+      default: "master"
+    - name: HTTPPROXY
+      description: git HTTP proxy server for non-SSL requests
+      type: string
+      default: ""
+    - name: HTTPSPROXY
+      description: git HTTPS proxy server for SSL requests
+      type: string
+      default: ""
+    - name: NOPROXY
+      description: git no proxy - opt out of proxying HTTP/HTTPS requests
+      type: string
+      default: ""
+    - name: VERBOSE
+      description: log the commands used during execution
+      type: string
+      default: "true"
+    - name: ARGOCD_CONFIG_REPO_PATH
+      description: The App Of Apps file path
+      type: string
+      default: "applications/deployment/argo-app-of-apps.yaml"
+    - name: APP_OF_APPS_DEV_KEY
+      type: string
+    - name: APP_OF_APPS_TEST_KEY
+      type: string
+  tasks:
+    - name: fetch-cicd-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: "https://github.com/eformat/pb-ci-cd.git"
+        - name: revision
+          value: "main"
+        - name: subdirectory
+          value: "$(params.APPLICATION_NAME)/cicd"
+        - name: deleteExisting
+          value: "true"
+
+    - name: git-commit
+      retries: 1
+      taskRef:
+        name: git-commit-argo-versions
+      workspaces:
+        - name: git-auth-secret
+          workspace: git-auth-secret
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_TAG)"
+      - name: GIT_TAG
+        value: $(params.GIT_TAG)"
+      - name: APP_OF_APPS_DEV_KEY
+        value: "$(params.APP_OF_APPS_DEV_KEY)"
+      - name: APP_OF_APPS_TEST_KEY
+        value: "$(params.APP_OF_APPS_TEST_KEY)"
+      runAfter:
+      - fetch-cicd-repository
