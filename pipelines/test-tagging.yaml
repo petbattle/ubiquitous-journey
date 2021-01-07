@@ -89,7 +89,7 @@ spec:
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/$(params.GIT_TAG)"
       - name: GIT_TAG
-        value: $(params.GIT_TAG)"
+        value: "$(params.GIT_TAG)"
       - name: APP_OF_APPS_DEV_KEY
         value: "$(params.APP_OF_APPS_DEV_KEY)"
       - name: APP_OF_APPS_TEST_KEY
