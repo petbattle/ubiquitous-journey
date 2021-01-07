@@ -80,7 +80,7 @@ spec:
         test -z "$(params.HTTPSPROXY)" || export HTTPS_PROXY=$(params.HTTPSPROXY)
         test -z "$(params.NOPROXY)" || export NO_PROXY=$(params.NOPROXY)
 
-        export GIT_REF=$(params.GIT_TAG)
+        GIT_REF="$(params.GIT_TAG)"
 
         # Setting up the config for the git
         git config --global user.email $(params.GIT_USER_EMAIL)
