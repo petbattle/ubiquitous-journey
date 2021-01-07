@@ -1,6 +1,3 @@
-##############
-# 🛎 Argo App of Apps
-#############
 allowed_destinations: &allowed_destinations
   - namespace: labs-ci-cd
     server: https://kubernetes.default.svc
@@ -8,12 +5,10 @@ allowed_destinations: &allowed_destinations
     server: https://kubernetes.default.svc
   - namespace: labs-test
     server: https://kubernetes.default.svc
-
 argocd_projects:
 - enabled: true
   name: pet-battle-suite
   destinations: *allowed_destinations
-
 applications:
   pet_battle_suite:
     name: pet-battle-suite
