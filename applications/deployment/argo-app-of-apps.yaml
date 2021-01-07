@@ -6,9 +6,9 @@ allowed_destinations: &allowed_destinations
   - namespace: labs-test
     server: https://kubernetes.default.svc
 argocd_projects:
-- enabled: true
-  name: pet-battle-suite
-  destinations: *allowed_destinations
+  - enabled: true
+    name: pet-battle-suite
+    destinations: *allowed_destinations
 applications:
   pet_battle_suite:
     name: pet-battle-suite
@@ -32,12 +32,12 @@ applications:
           image_version: master
         pet_battle_api_dev:
           enabled: true
-          source_ref: main
-          image_version: main
+          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
+          image_version: 144686b
         pet_battle_api_test:
           enabled: true
-          source_ref: main
-          image_version: main
+          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
+          image_version: 144686b
         pet_battle_tournament_dev:
           enabled: true
           source_ref: master
