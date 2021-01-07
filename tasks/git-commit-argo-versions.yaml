@@ -67,6 +67,7 @@ spec:
   steps:
     - name: run-git-commit-argo-versions
       image: $(params.IMAGE)
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       script: |
         #!/usr/bin/bash
         set -e
