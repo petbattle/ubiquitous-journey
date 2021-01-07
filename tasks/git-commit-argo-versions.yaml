@@ -12,58 +12,60 @@ spec:
     This Task can be used to change app-of-apps versions
 
   workspaces:
-    - name: output
-    - name: git-auth-secret
+  - name: output
+  - name: git-auth-secret
   params:
-    - name: IMAGE
-      type: string
-      description: Maven base image
-      default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
-    - name: WORK_DIRECTORY
-      description: Directory to start build in (handle multiple branches)
-      type: string
-    - name: GIT_REPO_URL
-      type: string
-      description: Git repo url
-      default: "github.com/petbattle/pb-ci-cd.git"
-    - name: GIT_USER_NAME
-      type: string
-      description: |
-        Git user name for performing git operation.
-      default: "tekton"
-    - name: GIT_USER_EMAIL
-      type: string
-      description: |
-        Git user email for performing git operation.
-      default: "tekton@rht-labs.bot.com"
-    - name: GIT_TAG
-      description: The Git Tag (branch,tag,revision) to set in app of apps values
-      type: string
-      default: "main"
-    - name: HTTPPROXY
-      description: git HTTP proxy server for non-SSL requests
-      type: string
-      default: ""
-    - name: HTTPSPROXY
-      description: git HTTPS proxy server for SSL requests
-      type: string
-      default: ""
-    - name: NOPROXY
-      description: git no proxy - opt out of proxying HTTP/HTTPS requests
-      type: string
-      default: ""
-    - name: VERBOSE
-      description: log the commands used during execution
-      type: string
-      default: "true"
-    - name: ARGOCD_CONFIG_REPO_PATH
-      description: The App Of Apps file path
-      type: string
-      default: "applications/deployment/argo-app-of-apps.yaml"
-    - name: APP_OF_APPS_DEV_KEY
-      type: string
-    - name: APP_OF_APPS_TEST_KEY
-      type: string
+  - name: IMAGE
+    type: string
+    description: Maven base image
+    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+  - name: WORK_DIRECTORY
+    description: Directory to start build in (handle multiple branches)
+    type: string
+  - name: GIT_REPO_URL
+    type: string
+    description: Git repo url
+    default: "github.com/petbattle/pb-ci-cd.git"
+  - name: GIT_USER_NAME
+    type: string
+    description: |
+      Git user name for performing git operation.
+    default: "tekton"
+  - name: GIT_USER_EMAIL
+    type: string
+    description: |
+      Git user email for performing git operation.
+    default: "tekton@rht-labs.bot.com"
+  - name: GIT_TAG
+    description: The Git Tag (branch,tag,revision) to set in app of apps values
+    type: string
+    default: "main"
+  - name: HTTPPROXY
+    description: git HTTP proxy server for non-SSL requests
+    type: string
+    default: ""
+  - name: HTTPSPROXY
+    description: git HTTPS proxy server for SSL requests
+    type: string
+    default: ""
+  - name: NOPROXY
+    description: git no proxy - opt out of proxying HTTP/HTTPS requests
+    type: string
+    default: ""
+  - name: VERBOSE
+    description: log the commands used during execution
+    type: string
+    default: "true"
+  - name: ARGOCD_CONFIG_REPO_PATH
+    description: The App Of Apps file path
+    type: string
+    default: "applications/deployment/argo-app-of-apps.yaml"
+  - name: APP_OF_APPS_DEV_KEY
+    type: string
+  - name: APP_OF_APPS_TEST_KEY
+    type: string
+  - name: APP_OF_APPS_STAGE_KEY
+    type: string
   steps:
     - name: run-git-commit-argo-versions
       image: $(params.IMAGE)

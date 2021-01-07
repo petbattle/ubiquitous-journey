@@ -7,6 +7,9 @@ dev_allowed_destinations: &dev_allowed_destinations # argocd project
 test_allowed_destinations: &test_allowed_destinations # argocd project
   - namespace: labs-test
     server: https://kubernetes.default.svc
+stage_allowed_destinations: &stage_allowed_destinations # argocd project
+  - namespace: labs-stage
+    server: https://kubernetes.default.svc
 
 ##############
 # Argo Ignore Differences
@@ -37,6 +40,9 @@ argocd_projects:
 - enabled: true
   name: pet-battle-test
   destinations: *test_allowed_destinations
+- enabled: true
+  name: pet-battle-stage
+  destinations: *stage_allowed_destinations
 
 applications:
   pet_battle_api_dev:
@@ -79,6 +85,26 @@ applications:
     project:
       name: pet-battle-test
       enabled: true
+  pet_battle_api_stage:
+    name: pet-battle-api-stage
+    enabled: false # overridden by pipeline
+    source: https://github.com/eformat/pet-battle-api.git
+    source_path: chart
+    sync_policy_automated: true
+    destination: labs-stage
+    source_ref: main
+    values:
+      fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle-api
+      image_version: main
+      istag: # default tag which we dont want
+        enabled: false
+      deploymentConfig: false
+    ignore_differences: *ignore_differences
+    project:
+      name: pet-battle-stage
+      enabled: true
   pet_battle_dev:
     name: pet-battle-dev
     enabled: false # overridden by pipeline
@@ -114,6 +140,24 @@ applications:
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
     project:
       name: pet-battle-test
+      enabled: true
+  pet_battle_stage:
+    name: pet-battle-stage
+    enabled: false # overridden by pipeline
+    source: https://github.com/eformat/pet-battle.git
+    source_path: chart
+    sync_policy_automated: true
+    destination: labs-stage
+    source_ref: main
+    values:
+      app_tag: main
+      fullnameOverride: pet-battle
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle
+      image_namespace: labs-stage
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
+    project:
+      name: pet-battle-stage
       enabled: true
   pet_battle_tournament_dev:
     name: pet-battle-tournament-dev
@@ -164,5 +208,30 @@ applications:
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
+      enabled: true
+  pet_battle_tournament_stage:
+    name: pet-battle-tournament-stage
+    enabled: false # overridden by pipeline
+    source: https://github.com/petbattle/tournamentservice-v1.git
+    source_path: chart
+    sync_policy_automated: true
+    destination: labs-stage
+    source_ref: main
+    values:
+      fullnameOverride: pet-battle-tournament
+      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_name: pet-battle
+      image_namespace: labs-stage
+      image_version: main
+      istag:
+        enabled: false
+      pet-battle-infra:
+        operatorgroup:
+          enabled: true
+          targetNamespaces: 
+            - labs-stage
+    ignore_differences: *ignore_differences
+    project:
+      name: pet-battle-stage
       enabled: true
 

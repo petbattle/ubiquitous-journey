@@ -60,6 +60,8 @@ spec:
             value: $(tt.params.git-app-of-apps-key)_dev
           - name: APP_OF_APPS_TEST_KEY
             value: $(tt.params.git-app-of-apps-key)_test
+          - name: APP_OF_APPS_STAGE_KEY
+            value: $(tt.params.git-app-of-apps-key)_stage
 #          - name: MAVEN_BUILD_OPTS
 #            value:
 #              - -DskipTests

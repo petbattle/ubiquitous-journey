@@ -22,27 +22,27 @@ applications:
       - values-applications.yaml
     values:
       applications:
-        pet_battle_dev:
-          enabled: true
-          source_ref: main
-          image_version: main
         pet_battle_test:
           enabled: true
           source_ref: main
           image_version: main
-        pet_battle_api_dev:
-          enabled: true
-          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
-          image_version: 144686b
         pet_battle_api_test:
-          enabled: true
-          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
-          image_version: 144686b
-        pet_battle_tournament_dev:
           enabled: true
           source_ref: main
           image_version: main
         pet_battle_tournament_test:
+          enabled: true
+          source_ref: main
+          image_version: main
+        pet_battle_stage:
+          enabled: true
+          source_ref: main
+          image_version: main
+        pet_battle_api_stage:
+          enabled: true
+          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
+          image_version: 144686b
+        pet_battle_tournament_stage:
           enabled: true
           source_ref: main
           image_version: main

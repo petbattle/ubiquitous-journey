@@ -40,6 +40,9 @@ spec:
   - name: APP_OF_APPS_TEST_KEY
     type: string
     default: ""
+  - name: APP_OF_APPS_TEST_STAGE
+    type: string
+    default: ""
   tasks:
     - name: fetch-cicd-repository
       taskRef:

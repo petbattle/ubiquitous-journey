@@ -54,6 +54,9 @@ spec:
   - name: APP_OF_APPS_TEST_KEY
     type: string
     default: ""
+  - name: APP_OF_APPS_STAGE_KEY
+    type: string
+    default: ""
   tasks:
     - name: fetch-app-repository
       taskRef:
