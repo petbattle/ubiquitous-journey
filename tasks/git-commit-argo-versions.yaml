@@ -86,7 +86,7 @@ spec:
 
         # Setup app suite values
         YQ_ARG_1='.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref='
-        GIT_REF=$(params.GIT_TAG)
+        GIT_REF="$(params.GIT_TAG)"
         YQ_ARG="$YQ_ARG_1\"${GIT_REF}\""
         yq eval -i  ${YQ_ARG} $(params.ARGOCD_CONFIG_REPO_PATH)
         #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).image_version=\"${GIT_REF::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
