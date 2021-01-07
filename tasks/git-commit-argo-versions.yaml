@@ -70,7 +70,6 @@ spec:
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       script: |
         #!/usr/bin/env bash
-        set -eu -o pipefail
 
         if [[ "$(params.VERBOSE)" == "true" ]] ; then
           set -x
