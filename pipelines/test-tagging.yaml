@@ -57,21 +57,21 @@ spec:
     - name: APP_OF_APPS_TEST_KEY
       type: string
   tasks:
-    - name: fetch-cicd-repository
-      taskRef:
-        name: git-clone
-      workspaces:
-        - name: output
-          workspace: shared-workspace
-      params:
-        - name: url
-          value: "https://github.com/eformat/pb-ci-cd.git"
-        - name: revision
-          value: "main"
-        - name: subdirectory
-          value: "$(params.APPLICATION_NAME)/cicd"
-        - name: deleteExisting
-          value: "true"
+    # - name: fetch-cicd-repository
+    #   taskRef:
+    #     name: git-clone
+    #   workspaces:
+    #     - name: output
+    #       workspace: shared-workspace
+    #   params:
+    #     - name: url
+    #       value: "https://github.com/eformat/pb-ci-cd.git"
+    #     - name: revision
+    #       value: "main"
+    #     - name: subdirectory
+    #       value: "$(params.APPLICATION_NAME)/cicd"
+    #     - name: deleteExisting
+    #       value: "true"
 
     # - name: git-commit
     #   retries: 1
