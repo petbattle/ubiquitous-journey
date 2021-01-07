@@ -72,13 +72,15 @@ spec:
         #!/usr/bin/env bash
         set -eu -o pipefail
 
-        if [[ "$(params.verbose)" == "true" ]] ; then
+        if [[ "$(params.VERBOSE)" == "true" ]] ; then
           set -x
         fi
 
-        test -z "$(params.HTTPROXY)" || export HTTP_PROXY=$(params.httpProxy)
-        test -z "$(params.HTTPSPROXY)" || export HTTPS_PROXY=$(params.httpsProxy)
-        test -z "$(params.NOPROXY)" || export NO_PROXY=$(params.noProxy)
+        test -z "$(params.HTTPPROXY)" || export HTTP_PROXY=$(params.HTTPPROXY)
+        test -z "$(params.HTTPSPROXY)" || export HTTPS_PROXY=$(params.HTTPSPROXY)
+        test -z "$(params.NOPROXY)" || export NO_PROXY=$(params.NOPROXY)
+
+        export GIT_TAG=$(params.GIT_TAG)
 
         # Setting up the config for the git
         git config --global user.email "$(params.GIT_USER_EMAIL)"
@@ -86,15 +88,15 @@ spec:
         git config --global push.default simple
 
         # Setup app suite values
-        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_DEV_KEY}.source_ref=\"${GIT_TAG}\"" ${ARGOCD_CONFIG_REPO_PATH}
-        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_DEV_KEY}.image_version=\"${GIT_TAG::7}\"" ${ARGOCD_CONFIG_REPO_PATH}
-        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_TEST_KEY}.source_ref=\"${GIT_TAG}\"" ${ARGOCD_CONFIG_REPO_PATH}
-        yq eval -i ".applications.pet_battle_suite.values.applications.${APP_OF_APPS_TEST_KEY}.image_version=\"${GIT_TAG::7}\"" ${ARGOCD_CONFIG_REPO_PATH}
+        yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=\"$(params.GIT_TAG)\"" $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).image_version=\"${GIT_TAG::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=\"$(params.GIT_TAG)\"" $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).image_version=\"${GIT_TAG::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
 
         # Auto commit
-        git add ${ARGOCD_CONFIG_REPO_PATH}
-        git commit -m "🚀 AUTOMATED COMMIT - Deployment new app version ${GIT_TAG} 🚀" || rc=$?
-        git remote set-url origin  https://foobar:$(cat $(workspaces.git-auth-secret.path)/password@${GIT_REPO_URL}
+        git add $(params.ARGOCD_CONFIG_REPO_PATH)
+        git commit -m "🚀 AUTOMATED COMMIT - Deployment new app version $(params.GIT_TAG) 🚀" || rc=$?
+        git remote set-url origin  https://foobar:$(cat $(workspaces.git-auth-secret.path)/password@$(params.GIT_REPO_URL)
         git push -u origin $(git branch --show-current)
 
         EXIT_CODE="$?"
