@@ -88,10 +88,10 @@ spec:
         git config --global push.default simple
 
         # Setup app suite values
-        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref=\"${GIT_REF}\"' $(params.ARGOCD_CONFIG_REPO_PATH)
-        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).image_version=\"${GIT_REF::7}\"' $(params.ARGOCD_CONFIG_REPO_PATH)
-        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=\"${GIT_REF}\"' $(params.ARGOCD_CONFIG_REPO_PATH)
-        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).image_version=\"${GIT_REF::7}\"' $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref="${GIT_REF}"' $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).image_version="${GIT_REF::7}"' $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).source_ref="${GIT_REF}"' $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i '.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).image_version="${GIT_REF::7}"' $(params.ARGOCD_CONFIG_REPO_PATH)
 
         # Auto commit
         git add $(params.ARGOCD_CONFIG_REPO_PATH)
