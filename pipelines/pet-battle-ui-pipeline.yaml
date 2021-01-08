@@ -212,7 +212,7 @@ spec:
       runAfter:
         - oc-start-build
 
-    - name: helm-argocd-apps-main # deploy full app suite to dev + test
+    - name: helm-argocd-apps-master # deploy full app suite to dev + test
       conditions:
       - conditionRef: is-equal
         params:
