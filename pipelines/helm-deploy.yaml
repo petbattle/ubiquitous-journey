@@ -85,7 +85,7 @@ spec:
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
-          value: "foo=bar"
+          value: "foo=bar" # these are in git
       runAfter:
         - fetch-cicd-repository
 
@@ -113,6 +113,8 @@ spec:
           value: "$(GIT_BRANCH)"
         - name: release_namespace
           value: "$(params.DEV_NAMESPACE)"
+        - name: overwrite_values
+          value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=$(params.GIT_SHORT_REVISION),image_namespace=$(params.DEV_NAMESPACE)"
       runAfter:
         - fetch-cicd-repository
 

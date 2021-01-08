@@ -30,6 +30,8 @@ objects:
       value: "${release_name}"
     - name: release_namespace
       value: "${release_namespace}"
+    - name: overwrite_values
+      value: "${overwrite_values}"
     timeout: 1h0m0s
     serviceAccountName: pipeline
 parameters:
@@ -56,3 +58,6 @@ parameters:
   displayName: Release Namespacespace
   name: release_namespace
   value: "labs-dev"
+- description: Overwrite Helm Chart Values (Optional) (foo=bar,baz=foo)
+  displayName: Overwrite Helm Chart Values (Optional) (foo=bar,baz=foo)
+  name: overwrite_values
