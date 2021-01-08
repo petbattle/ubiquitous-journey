@@ -33,7 +33,7 @@ spec:
       default: '[\"push\",\"pull_request\"]'
   steps:
     - name: create-webhook
-      image: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+      image: registry.access.redhat.com/ubi8/ubi-minimal:latest
       command: ["/bin/bash", "-c"]
       args:
       - |
