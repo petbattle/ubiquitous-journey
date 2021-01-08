@@ -2,7 +2,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: pet-battle-api-maven-trigger-template
+  name: pet-battle-npm-trigger-template
 spec:
   params:
     - name: git-repo-url
@@ -27,14 +27,14 @@ spec:
       metadata:
         generateName: $(tt.params.git-repo-name)-
         labels:
-          tekton.dev/pipeline: maven-pipeline
+          tekton.dev/pipeline: pet-battle-ui-pipeline
         annotations:
           argocd.argoproj.io/sync-options: Prune=false
           argocd.argoproj.io/compare-options: IgnoreExtraneous
       spec:
         serviceAccountName: pipeline
         pipelineRef:
-          name: maven-pipeline
+          name: pet-battle-ui-pipeline
         params:
           - name: APPLICATION_NAME
             value: $(tt.params.git-repo-name)
@@ -48,8 +48,8 @@ spec:
             value: $(tt.params.git-ref)
           - name: GIT_BRANCH
             value: $(tt.params.git-branch)
-          - name: MAVEN_MIRROR_URL
-            value: http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/maven-public
+          - name: NPM_MIRROR_URL
+            value: "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/labs-npm"
           - name: BUILD_NAMESPACE
             value: "labs-ci-cd"
           - name: DEV_NAMESPACE
@@ -64,19 +64,10 @@ spec:
             value: $(tt.params.git-app-of-apps-key)_test
           - name: APP_OF_APPS_STAGE_KEY
             value: $(tt.params.git-app-of-apps-key)_stage
-#          - name: MAVEN_BUILD_OPTS
-#            value:
-#              - -DskipTests
         workspaces:
         - name: shared-workspace
           persistentVolumeClaim:
             claimName: build-images
-        - name: maven-settings
-          persistentVolumeClaim:
-            claimName: maven-source
         - name: argocd-env-secret
           secret:
             secretName: argocd-token
-        - name: maven-m2
-          persistentVolumeClaim:
-            claimName: maven-m2

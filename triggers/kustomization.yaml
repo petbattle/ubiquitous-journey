@@ -6,3 +6,5 @@ resources:
 - github-trigger-bindings.yaml
 - github-trigger-bindings-pr.yaml
 - pet-battle-api-maven-trigger-template.yaml
+- pet-battle-tournament-maven-trigger-template.yaml
+- pet-battle-npm-trigger-template.yaml

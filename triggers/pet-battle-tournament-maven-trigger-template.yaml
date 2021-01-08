@@ -2,7 +2,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: pet-battle-api-maven-trigger-template
+  name: pet-battle-tournament-maven-trigger-template
 spec:
   params:
     - name: git-repo-url
