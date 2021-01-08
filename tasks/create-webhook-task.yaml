@@ -3,6 +3,12 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: create-webhook
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+    tekton.dev/displayName: "create github webhook"
 spec:
   workspaces:
     - name: git-auth-secret

@@ -12,3 +12,4 @@ resources:
 - nodejs.yaml
 - create-webhook-task.yaml
 - git-commit-argo-versions.yaml
+- helm-upload-chart.yaml

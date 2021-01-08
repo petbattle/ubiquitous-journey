@@ -6,3 +6,4 @@ resources:
 - pet-battle-ui-pipeline.yaml
 - helm-deploy.yaml
 - test-tagging.yaml
+- test-chart-upload.yaml

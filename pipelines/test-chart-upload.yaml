@@ -1,0 +1,40 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: test-chart-upload-pipeline
+spec:
+  workspaces:
+  - name: shared-workspace
+  params:
+  - name: APPLICATION_NAME
+    type: string
+    default: ""
+  tasks:
+    - name: fetch-app-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: "https://github.com/eformat/pet-battle-api.git"
+        - name: revision
+          value: "main"
+        - name: subdirectory
+          value: "$(params.APPLICATION_NAME)/master"
+        - name: deleteExisting
+          value: "true"
+
+    - name: upload-chart
+      retries: 1
+      taskRef:
+        name: helm-upload-chart
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/master"
+      runAfter:
+      - fetch-app-repository
