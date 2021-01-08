@@ -27,6 +27,9 @@ spec:
   - name: GIT_BRANCH
     type: string
     default: "master"
+  - name: HELM_CHART_VERSION
+    type: string
+    default: ""
   - name: BUILD_NAMESPACE
     type: string
     default: "labs-ci-cd"
@@ -110,7 +113,9 @@ spec:
         - name: chart_name
           value: "$(params.APPLICATION_NAME)"
         - name: release_name
-          value: "$(GIT_BRANCH)"
+          value: "$(params.GIT_BRANCH)"
+        - name: helm_version
+          value: "$(params.HELM_VERSION)"
         - name: release_namespace
           value: "$(params.DEV_NAMESPACE)"
         - name: overwrite_values
