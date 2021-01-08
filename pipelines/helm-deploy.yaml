@@ -115,7 +115,7 @@ spec:
         - name: release_name
           value: "$(params.GIT_BRANCH)"
         - name: helm_version
-          value: "$(params.HELM_VERSION)"
+          value: "$(params.HELM_SHART_VERSION)"
         - name: release_namespace
           value: "$(params.DEV_NAMESPACE)"
         - name: overwrite_values
