@@ -16,7 +16,7 @@ applications:
     destination: labs-ci-cd
     source: https://github.com/petbattle/pb-ci-cd.git
     source_path: applications/deployment
-    source_ref: master
+    source_ref: main
     sync_policy_automated: true
     helm_values:
       - values-applications.yaml
