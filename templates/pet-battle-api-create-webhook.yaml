@@ -3,6 +3,8 @@ apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
   name: pet-battle-api-create-webhook
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 objects:
 - apiVersion: tekton.dev/v1beta1
   kind: TaskRun
