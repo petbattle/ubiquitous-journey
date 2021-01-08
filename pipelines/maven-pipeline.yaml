@@ -86,7 +86,7 @@ spec:
         - name: url
           value: "https://github.com/petbattle/pb-ci-cd.git"
         - name: revision
-          value: "master"
+          value: "main"
         - name: subdirectory
           value: "$(params.APPLICATION_NAME)/cicd"
         - name: deleteExisting
