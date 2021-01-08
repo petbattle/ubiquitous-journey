@@ -8,6 +8,9 @@ objects:
   kind: TaskRun
   metadata:
     generateName: pet-battle-api-create-webhook-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:
     workspaces:
       - name: git-auth-secret
