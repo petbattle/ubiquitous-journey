@@ -37,6 +37,9 @@ spec:
   - name: TEST_NAMESPACE
     type: string
     default: "labs-test"
+  - name: STAGE_NAMESPACE
+    type: string
+    default: "labs-staging"
   - name: APP_OF_APPS_DEV_KEY
     type: string
     default: ""
@@ -169,6 +172,19 @@ spec:
       runAfter:
         - npm-run-build
 
+    - name: upload-chart
+      retries: 1
+      taskRef:
+        name: helm-upload-chart
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/master"
+      runAfter:
+        - oc-start-build
+
     - name: oc-tag-image-dev
       taskRef:
         name: openshift-client
@@ -185,7 +201,7 @@ spec:
             - "$(params.BUILD_NAMESPACE)"
             - "$(params.GIT_SHORT_REVISION)"
       runAfter:
-        - oc-start-build
+        - upload-chart
 
     - name: oc-tag-image-test
       conditions:
@@ -210,9 +226,34 @@ spec:
             - "$(params.BUILD_NAMESPACE)"
             - "$(params.GIT_SHORT_REVISION)"
       runAfter:
-        - oc-start-build
+        - upload-chart
 
-    - name: helm-argocd-apps-master # deploy full app suite to dev + test
+    - name: oc-tag-image-stage
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
+      taskRef:
+        name: openshift-client
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: SCRIPT
+          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
+        - name: ARGS
+          value:
+            - "$(params.APPLICATION_NAME)"
+            - "$(params.STAGE_NAMESPACE)"
+            - "$(params.BUILD_NAMESPACE)"
+            - "$(params.GIT_SHORT_REVISION)"
+      runAfter:
+        - upload-chart
+
+    - name: helm-argocd-apps-master # deploy full app suite to test + stage
       conditions:
       - conditionRef: is-equal
         params:
@@ -234,11 +275,11 @@ spec:
           value: my
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
-        - name: overwrite_values # strictly speaking not very gitops
+        - name: overwrite_values
           value: "foo=bar"
       runAfter:
-        - oc-tag-image-dev
         - oc-tag-image-test
+        - oc-tag-image-stage
 
     - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
       conditions:
