@@ -41,10 +41,10 @@ spec:
       script: |
         set -ex
         echo "current installed helm releases"
-        helm list --namespace "$(params.release_namespace)"
+        helm list --namespace "$(inputs.params.release_namespace)"
         echo "adding helm repo..."
-        helm repo add "$(params.helm_repo_name)" "$(params.helm_repo_url)"
+        helm repo add "$(inputs.params.helm_repo_name)" "$(inputs.params.helm_repo_url)"
         echo "adding updating repo..."
         helm repo update
         echo "installing helm chart..."
-        helm upgrade --wait --install --namespace "$(params.release_namespace)" $(params.release_name) $(params.chart_name) --version $(params.version) --debug --set "$(params.overwrite_values)"
+        helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.chart_name) --version $(inputs.params.version) --debug --set "$(inputs.params.overwrite_values)"
