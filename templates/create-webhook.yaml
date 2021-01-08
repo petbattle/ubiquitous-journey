@@ -9,7 +9,7 @@ objects:
 - apiVersion: tekton.dev/v1beta1
   kind: TaskRun
   metadata:
-    generateName: pet-battle-api-create-webhook-
+    generateName: create-webhook-
     annotations:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
