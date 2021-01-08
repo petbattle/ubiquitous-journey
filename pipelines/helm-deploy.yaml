@@ -92,7 +92,7 @@ spec:
       runAfter:
         - fetch-cicd-repository
 
-    - name: helm-argocd-apps-branches # only deploy to dev
+    - name: helm-install-apps-branches # only deploy to dev
       conditions:
       - conditionRef: is-not-equal
         params:
@@ -111,7 +111,7 @@ spec:
           value: "$(params.APPLICATION_NAME)"
         - name: release_name
           value: "$(params.GIT_BRANCH)"
-        - name: helm_version
+        - name: release_version
           value: "$(params.HELM_CHART_VERSION)"
         - name: release_namespace
           value: "$(params.DEV_NAMESPACE)"
