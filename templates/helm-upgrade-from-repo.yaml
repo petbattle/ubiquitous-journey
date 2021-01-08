@@ -39,7 +39,7 @@ parameters:
   value: "nexus"
 - description: Helm Repository URL
   displayName: Helm Repository URL
-  name: helm_repo_uel
+  name: helm_repo_url
   value: "http://sonatype-nexus-service:8081/repository/helm-charts/"
 - description: Helm Chart Name
   displayName: Helm Chart Name
