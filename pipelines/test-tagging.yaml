@@ -31,7 +31,7 @@ spec:
   - name: GIT_TAG
     description: The Git Tag (branch,tag,revision) to set in app of apps values
     type: string
-    default: "main"
+    default: "master"
   - name: HTTPPROXY
     description: git HTTP proxy server for non-SSL requests
     type: string

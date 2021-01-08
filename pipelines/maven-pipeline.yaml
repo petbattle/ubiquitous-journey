@@ -19,16 +19,16 @@ spec:
     default: ""
   - name: GIT_REVISION
     type: string
-    default: "main"
+    default: "master"
   - name: GIT_REF
     type: string
-    default: "refs/heads/main"
+    default: "refs/heads/master"
   - name: GIT_SHORT_REVISION
     type: string
     default: ""
   - name: GIT_BRANCH
     type: string
-    default: "main"
+    default: "master"
   - name: MAVEN_MIRROR_URL
     type: string
     default: "http://repo1.maven.org/maven2"
@@ -86,7 +86,7 @@ spec:
         - name: url
           value: "https://github.com/petbattle/pb-ci-cd.git"
         - name: revision
-          value: "main"
+          value: "master"
         - name: subdirectory
           value: "$(params.APPLICATION_NAME)/cicd"
         - name: deleteExisting
@@ -202,7 +202,7 @@ spec:
       - conditionRef: is-equal
         params:
           - name: left
-            value: "main"
+            value: "master"
           - name: right
             value: "$(params.GIT_BRANCH)"
       taskRef:
@@ -222,12 +222,12 @@ spec:
       runAfter:
         - oc-start-build
 
-    - name: helm-argocd-apps-main # deploy full app suite to dev + test
+    - name: helm-argocd-apps-master # deploy full app suite to dev + test
       conditions:
       - conditionRef: is-equal
         params:
           - name: left
-            value: "main"
+            value: "master"
           - name: right
             value: "$(params.GIT_BRANCH)"
       taskRef:
@@ -255,7 +255,7 @@ spec:
       - conditionRef: is-not-equal
         params:
           - name: left
-            value: "main"
+            value: "master"
           - name: right
             value: "$(params.GIT_BRANCH)"
       taskRef:
@@ -294,7 +294,7 @@ spec:
       runAfter:
       - helm-argocd-apps-branches
 
-    - name: argocd-sync-application-main
+    - name: argocd-sync-application-master
       retries: 3
       taskRef:
         name: argocd-sync-and-wait
@@ -309,4 +309,4 @@ spec:
       - name: revision
         value: "$(params.GIT_REVISION)"
       runAfter:
-      - helm-argocd-apps-main
+      - helm-argocd-apps-master

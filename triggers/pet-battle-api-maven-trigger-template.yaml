@@ -9,10 +9,10 @@ spec:
       description: The git repository url
     - name: git-revision
       description: The git revision
-      default: main
+      default: master
     - name: git-ref
       description: The full git ref
-      default: main
+      default: master
     - name: git-repo-name
       description: The name of the deployment to be created / patched
     - name: git-branch
