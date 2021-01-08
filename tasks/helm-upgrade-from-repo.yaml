@@ -47,7 +47,7 @@ spec:
         echo "adding updating repo..."
         helm repo update
         echo "installing helm chart..."
-        if [ -z $(inputs.params.release_version) ]; then
+        if [ ! -z $(inputs.params.release_version) ]; then
           helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.helm_repo_name)/$(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)" --version $(inputs.params.release_version)
         else
           helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.helm_repo_name)/$(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)"
