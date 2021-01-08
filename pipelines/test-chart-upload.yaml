@@ -2,9 +2,11 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: test-chart-upload-pipeline
+  labels:
+    rht-labs.com/uj: pb-ci-cd
 spec:
   workspaces:
-  - name: shared-workspace
+    - name: shared-workspace
   params:
   - name: APPLICATION_NAME
     type: string
@@ -20,7 +22,7 @@ spec:
         - name: url
           value: "https://github.com/eformat/pet-battle-api.git"
         - name: revision
-          value: "main"
+          value: "master"
         - name: subdirectory
           value: "$(params.APPLICATION_NAME)/master"
         - name: deleteExisting
