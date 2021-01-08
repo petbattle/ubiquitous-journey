@@ -23,9 +23,23 @@ objects:
     params:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"
+    - name: GIT_URL
+      value: "${GIT_URL}"
+    - name: GIT_REF
+      value: "${GIT_REF}"
 parameters:
 - description: Application Name
   displayName: Application Name
   name: APPLICATION_NAME
   required: true
   value: pet-battle-api
+- description: Git URL
+  displayName: Git URL
+  name: GIT_URL
+  required: true
+  value: "https://github.com/eformat/pet-battle-api.git"
+- description: Git Ref (branch/tag/ref)
+  displayName: Git Ref (branch/tag/ref)
+  name: GIT_REF
+  required: true
+  value: "master"
