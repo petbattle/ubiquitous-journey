@@ -102,9 +102,6 @@ spec:
             value: "$(params.GIT_BRANCH)"
       taskRef:
         name: helm-upgrade-from-repo
-      workspaces:
-        - name: source
-          workspace: shared-workspace
       params:
         - name: helm_repo_name
           value: "nexus"
