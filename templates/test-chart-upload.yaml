@@ -1,0 +1,31 @@
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: test-chart-upload
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+objects:
+- apiVersion: tekton.dev/v1beta1
+  kind: PipelineRun
+  metadata:
+    generateName: test-chart-upload-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+  spec:
+    pipelineRef:
+      name: test-chart-upload-pipeline
+    workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: build-images
+    params:
+    - name: APPLICATION_NAME
+      value: "${APPLICATION_NAME}"
+parameters:
+- description: Application Name
+  displayName: Application Name
+  name: APPLICATION_NAME
+  required: true
+  value: pet-battle-api

@@ -9,5 +9,6 @@ resources:
 - pet-battle-api-deploy.yaml
 - pet-battle-tournament-deploy.yaml
 - pet-battle-api-create-webhook.yaml
+- test-chart-upload.yaml
 
 namespace: labs-ci-cd
