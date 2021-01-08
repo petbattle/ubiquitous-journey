@@ -37,6 +37,7 @@ spec:
       - |
         set -ex
         echo "package chart"
+        pwd
 
         # Successfully packaged chart and saved it to: /home/mike/git/pet-battle-api/pet-battle-api-1.0.6.tgz
         RET=`helm package chart/ 2>/dev/null`
