@@ -27,7 +27,7 @@ objects:
       value: password
     - name: GitHubSecretStringKey
       value: webhook
-    - name: ExternalDomaster
+    - name: ExternalDomain
       value: http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com
     timeout: 1h0m0s
     serviceAccountName: pipeline
