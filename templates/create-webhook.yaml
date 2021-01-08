@@ -1,0 +1,69 @@
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: create-webhook
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+objects:
+- apiVersion: tekton.dev/v1beta1
+  kind: TaskRun
+  metadata:
+    generateName: pet-battle-api-create-webhook-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+  spec:
+    workspaces:
+      - name: git-auth-secret
+        secret:
+          secretName: git-auth
+    taskRef:
+      kind: Task
+      name: create-webhook
+    params:
+    - name: GitHubOrg
+      value: "${GITHUB_ORG}"
+    - name: GitHubUser
+      value: "${GITHUB_USER}"
+    - name: GitHubRepo
+      value: "${GITHUB_REPO}"
+    - name: GitHubAccessTokenKey
+      value: "${GITHUB_TOKEN_KEY}"
+    - name: GitHubSecretStringKey
+      value: "${GITHUB_WEBHOOK_SECRET_KEY}"
+    - name: ExternalDomain
+      value: "${WEBHOOK_URL}"
+    timeout: 1h0m0s
+    serviceAccountName: pipeline
+parameters:
+- description: Github Organisation
+  displayName: Github Organisation
+  name: GITHUB_ORG
+  required: true
+  value: "eformat"
+- description: Github User
+  displayName: Github User
+  name: GITHUB_USER
+  required: true
+  value: "tekton"
+- description: Github Repo
+  displayName: Github Repo
+  name: GITHUB_REPO
+  required: true
+  value: "pet-battle-api"
+- description: Github Token Key (key in secret)
+  displayName: Github Token Key (key in secret)
+  name: GITHUB_TOKEN_KEY
+  required: true
+  value: "password"
+- description: Github Webhook Secret Key (key in secret)
+  displayName: Github Webhook Secret Key (key in secret)
+  name: GITHUB_WEBHOOK_SECRET_KEY
+  required: true
+  value: "webhook"
+- description: Tekton Webhook URL
+  displayName: Tekton Webhook URL
+  name: WEBHOOK_URL
+  required: true
+  value: "http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com"
