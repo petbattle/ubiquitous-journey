@@ -45,10 +45,9 @@ parameters:
   displayName: Helm Chart Name
   name: chart_name
   value: "pet-battle-api"
-- description: Release Version
-  displayName: Release Version
+- description: Release Version (Optional)
+  displayName: Release Version (Optional)
   name: release_version
-  value: "1.0.6"
 - description: Release Name
   displayName: Release Name
   name: release_name
