@@ -9,7 +9,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 2Gi
+      storage: 10Gi
   storageClassName: gp2
   volumeMode: Filesystem
   accessModes:
