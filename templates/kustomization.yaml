@@ -10,5 +10,6 @@ resources:
 - pet-battle-tournament-deploy.yaml
 - pet-battle-api-create-webhook.yaml
 - test-chart-upload.yaml
+- helm-upgrade-from-repo.yaml
 
 namespace: labs-ci-cd

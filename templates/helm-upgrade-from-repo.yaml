@@ -1,0 +1,59 @@
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: helm-upgrade-from-repo
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+objects:
+- apiVersion: tekton.dev/v1beta1
+  kind: TaskRun
+  metadata:
+    generateName: helm-upgrade-from-repo-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+  spec:
+    taskRef:
+      kind: Task
+      name: helm-upgrade-from-repo
+    params:
+    - name: helm_repo_name
+      value: "${helm_repo_name}"
+    - name: helm_repo_url
+      value: "${helm_repo_url}"
+    - name: chart_name
+      value: "${chart_name}"
+    - name: release_version
+      value: "${release_version}"
+    - name: release_name
+      value: "${release_name}"
+    - name: release_namespace
+      value: "${release_namespace}"
+    timeout: 1h0m0s
+    serviceAccountName: pipeline
+parameters:
+- description: Helm Repository Name
+  displayName: Helm Repository Name
+  name: helm_repo_name
+  value: "nexus"
+- description: Helm Repository URL
+  displayName: Helm Repository URL
+  name: helm_repo_uel
+  value: "http://sonatype-nexus-service:8081/repository/helm-charts/"
+- description: Helm Chart Name
+  displayName: Helm Chart Name
+  name: chart_name
+  value: "pet-battle-api"
+- description: Release Version
+  displayName: Release Version
+  name: release_version
+  value: "1.0.6"
+- description: Release Name
+  displayName: Release Name
+  name: release_name
+  value: "my"
+- description: Release Namespace
+  displayName: Release Namespacespace
+  name: release_namespace
+  value: "labs-dev"

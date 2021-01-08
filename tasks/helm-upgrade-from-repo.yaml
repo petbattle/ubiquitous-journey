@@ -14,13 +14,15 @@ spec:
     OpenShift Cluster using Helm
 
   params:
-    - name: helm_repo
-      description: "Specify a specific helm repo"
+    - name: helm_repo_name
+      description: "Specify a specific helm repo name"
+    - name: helm_repo_url
+      description: "Specify a specific helm repo url"
     - name: chart_name
       description: "Specify chart name that will be deployed"
     - name: release_version
       description: The helm release version in semantic versioning format
-      default: "v1.0.0"
+      default: "1.0.0"
     - name: release_name
       description: The helm release name
       default: "helm-release"
@@ -29,7 +31,7 @@ spec:
       default: ""
     - name: overwrite_values
       description: "Specify the values you want to overwrite, comma separated: autoscaling.enabled=true,replicas=1"
-      default: ""
+      default: "foo=bar"
     - name: helm_version
       description: "Specify a specific helm version"
       default: "latest"
@@ -37,13 +39,12 @@ spec:
     - name: upgrade-from-repo
       image: quay.io/eformat/openshift-helm:$(inputs.params.helm_version)
       script: |
-        echo current installed helm releases
+        set -ex
+        echo "current installed helm releases"
         helm list --namespace "$(inputs.params.release_namespace)"
-        echo parsing helms repo name...
-        REPO=`echo "$(inputs.params.chart_name)" | cut -d "/" -f 1`
-        echo adding helm repo...
-        helm repo add $REPO "$(inputs.params.helm_repo)"
-        echo adding updating repo...
+        echo "adding helm repo..."
+        helm repo add "$(inputs.params.helm_repo_name)" "$(inputs.params.helm_repo_url)"
+        echo "adding updating repo..."
         helm repo update
-        echo installing helm chart...
-        helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)"```
+        echo "installing helm chart..."
+        helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.chart_name) --version $(inputs.params.version) --debug --set "$(inputs.params.overwrite_values)"
