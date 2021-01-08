@@ -35,7 +35,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
       - |
-        set -e
+        set -ex
         echo "package chart"
 
         # Successfully packaged chart and saved it to: /home/mike/git/pet-battle-api/pet-battle-api-1.0.6.tgz
@@ -46,5 +46,5 @@ spec:
         FILE=$(basename ${RET2})
 
         echo "upload chart"
-        curl -k -vvv -u $(params.CHART_REPO_USERNAME):$(params.CHART_REPO_PASSWORD) --upload-file ${FILE} ${CHART_REPO}
+        curl -k -vvv -u $(params.CHART_REPO_USERNAME):$(params.CHART_REPO_PASSWORD) --upload-file ${FILE} $(params.CHART_REPO)
 
