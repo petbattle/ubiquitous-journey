@@ -13,10 +13,10 @@ The argo app of apps are created when running the Tekton piplelines. You can man
 
 Create dev+test
 ```bash
-helm template -f argo-app-of-apps-test.yaml .
+helm template -f argo-app-of-apps-test.yaml . | oc apply -n labs-ci-cd -f-
 ```
 
 Create stage
 ```bash
-helm template -f argo-app-of-apps-stage.yaml .
+helm template -f argo-app-of-apps-stage.yaml . | oc apply -n labs-ci-cd -f-
 ```
