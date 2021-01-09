@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
 - admin-0.yaml
 - edit-0.yaml
-- og-0.yaml
+
