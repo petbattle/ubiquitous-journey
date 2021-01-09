@@ -1,0 +1,72 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: og-scoped
+  namespace: labs-dev
+rules:
+- apiGroups: ["operators.coreos.com"]
+  resources: ["operatorgroups"]
+  verbs: ["get", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: oc-scoped
+  namespace: labs-dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: og-scoped
+subjects:
+- kind: ServiceAccount
+  name: pipeline
+  namespace: labs-ci-cd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: og-scoped
+  namespace: labs-test
+rules:
+- apiGroups: ["operators.coreos.com"]
+  resources: ["operatorgroups"]
+  verbs: ["get", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: oc-scoped
+  namespace: labs-test
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: og-scoped
+subjects:
+- kind: ServiceAccount
+  name: pipeline
+  namespace: labs-ci-cd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: og-scoped
+  namespace: labs-staging
+rules:
+- apiGroups: ["operators.coreos.com"]
+  resources: ["operatorgroups"]
+  verbs: ["get", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: oc-scoped
+  namespace: labs-staging
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: og-scoped
+subjects:
+- kind: ServiceAccount
+  name: pipeline
+  namespace: labs-ci-cd
