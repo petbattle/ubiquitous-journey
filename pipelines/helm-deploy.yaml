@@ -5,6 +5,9 @@ metadata:
   labels:
     rht-labs.com/uj: pb-ci-cd
 spec:
+  serviceAccountNames:
+    - taskName: helm-upgrade-from-repo
+      serviceAccountName: argocd-application-controller
   workspaces:
     - name: shared-workspace
     - name: argocd-env-secret

@@ -14,9 +14,6 @@ objects:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:
-    serviceAccountNames:
-    - taskName: helm-upgrade-from-repo
-      serviceAccountName: argocd-application-controller
     pipelineRef:
       name: helm-deploy-pipeline
     workspaces:
