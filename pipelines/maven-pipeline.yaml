@@ -269,7 +269,7 @@ spec:
       runAfter:
         - upload-chart
 
-    - name: helm-argocd-apps-master # deploy full app suite to test + stage
+    - name: helm-argocd-apps-test
       conditions:
       - conditionRef: is-equal
         params:
@@ -286,7 +286,7 @@ spec:
         - name: charts_dir
           value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
-          value: argo-app-of-apps.yaml
+          value: argo-app-of-apps-test.yaml
         - name: release_name
           value: my
         - name: target_namespace
@@ -295,9 +295,35 @@ spec:
           value: "foo=bar"
       runAfter:
         - oc-tag-image-test
+
+    - name: helm-argocd-apps-stage
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: argo-app-of-apps-stage.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values
+          value: "foo=bar"
+      runAfter:
         - oc-tag-image-stage
 
-    - name: helm-install-apps-branches # only deploy to dev
+    - name: helm-install-apps-dev # branches only deploy to dev
       conditions:
       - conditionRef: is-not-equal
         params:
@@ -340,4 +366,5 @@ spec:
       - name: revision
         value: "$(params.GIT_REVISION)"
       runAfter:
-      - helm-argocd-apps-master
+      - helm-argocd-apps-test
+      - helm-argocd-apps-stage

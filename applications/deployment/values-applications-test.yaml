@@ -43,7 +43,7 @@ argocd_projects:
 applications:
   pet_battle_api_dev:
     name: pet-battle-api-dev
-    enabled: true
+    enabled: false
     source: https://github.com/eformat/pet-battle-api.git
     source_path: chart
     sync_policy_automated: true
@@ -82,7 +82,7 @@ applications:
       enabled: true
   pet_battle_dev:
     name: pet-battle-dev
-    enabled: true
+    enabled: false
     source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
@@ -117,7 +117,7 @@ applications:
       enabled: true
   pet_battle_tournament_dev:
     name: pet-battle-tournament-dev
-    enabled: true
+    enabled: false
     source: https://github.com/petbattle/tournamentservice-v1.git
     source_path: chart
     sync_policy_automated: true
