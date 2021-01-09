@@ -102,7 +102,7 @@ spec:
         git checkout main
         git add $(params.ARGOCD_CONFIG_REPO_PATH)
         git commit -m "🚀 AUTOMATED COMMIT - Deployment new app version $(params.GIT_TAG) 🚀" || rc=$?
-        git remote set-url origin  https://foobar:\"$(cat $(workspaces.git-auth-secret.path)/password)@$(params.GIT_REPO_URL)\"
+        git remote set-url origin  https://foobar:$(cat $(workspaces.git-auth-secret.path)/password)@$(params.GIT_REPO_URL)
         git push
 
         EXIT_CODE="$?"
