@@ -187,7 +187,7 @@ spec:
           workspace: shared-workspace
       params:
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/master"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
       runAfter:
         - oc-start-build
 

@@ -11,6 +11,8 @@ stage_allowed_destinations: &stage_allowed_destinations # argocd project
   - namespace: labs-staging
     server: https://kubernetes.default.svc
 
+helm_repository: &helm_repo "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
+
 ##############
 # Argo Ignore Differences
 #############
@@ -47,7 +49,7 @@ argocd_projects:
 applications:
   pet_battle_api_dev:
     name: pet-battle-api-dev
-    enabled: false  # overridden by pipeline
+    enabled: true
     source: https://github.com/eformat/pet-battle-api.git
     source_path: chart
     sync_policy_automated: true
@@ -67,12 +69,11 @@ applications:
       enabled: true
   pet_battle_api_test:
     name: pet-battle-api-test
-    enabled: false # overridden by pipeline
-    source: https://github.com/eformat/pet-battle-api.git
-    source_path: chart
+    enabled: true
+    source: *helm_repo
     sync_policy_automated: true
     destination: labs-test
-    source_ref: master
+    source_ref: 1.0.6
     values:
       fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
       image_repository: image-registry.openshift-image-registry.svc:5000
@@ -85,29 +86,9 @@ applications:
     project:
       name: pet-battle-test
       enabled: true
-  pet_battle_api_stage:
-    name: pet-battle-api-stage
-    enabled: false # overridden by pipeline
-    source: https://github.com/eformat/pet-battle-api.git
-    source_path: chart
-    sync_policy_automated: true
-    destination: labs-staging
-    source_ref: master
-    values:
-      fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
-      image_repository: image-registry.openshift-image-registry.svc:5000
-      image_name: pet-battle-api
-      image_version: master
-      istag: # default tag which we dont want
-        enabled: false
-      deploymentConfig: false
-    ignore_differences: *ignore_differences
-    project:
-      name: pet-battle-stage
-      enabled: true
   pet_battle_dev:
     name: pet-battle-dev
-    enabled: false # overridden by pipeline
+    enabled: true
     source: https://github.com/eformat/pet-battle.git
     source_path: chart
     sync_policy_automated: true
@@ -125,12 +106,11 @@ applications:
       enabled: true
   pet_battle_test:
     name: pet-battle-test
-    enabled: false # overridden by pipeline
-    source: https://github.com/eformat/pet-battle.git
-    source_path: chart
+    enabled: true
+    source: *helm_repo
     sync_policy_automated: true
     destination: labs-test
-    source_ref: master
+    source_ref: 1.0.3
     values:
       app_tag: main
       fullnameOverride: pet-battle
@@ -141,27 +121,9 @@ applications:
     project:
       name: pet-battle-test
       enabled: true
-  pet_battle_stage:
-    name: pet-battle-stage
-    enabled: false # overridden by pipeline
-    source: https://github.com/eformat/pet-battle.git
-    source_path: chart
-    sync_policy_automated: true
-    destination: labs-staging
-    source_ref: master
-    values:
-      app_tag: master
-      fullnameOverride: pet-battle
-      image_repository: image-registry.openshift-image-registry.svc:5000
-      image_name: pet-battle
-      image_namespace: labs-staging
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
-    project:
-      name: pet-battle-stage
-      enabled: true
   pet_battle_tournament_dev:
     name: pet-battle-tournament-dev
-    enabled: false # overridden by pipeline
+    enabled: true
     source: https://github.com/petbattle/tournamentservice-v1.git
     source_path: chart
     sync_policy_automated: true
@@ -186,9 +148,8 @@ applications:
       enabled: true
   pet_battle_tournament_test:
     name: pet-battle-tournament-test
-    enabled: false # overridden by pipeline
-    source: https://github.com/petbattle/tournamentservice-v1.git
-    source_path: chart
+    enabled: true
+    source: *helm_repo
     sync_policy_automated: true
     destination: labs-test
     source_ref: master
@@ -209,29 +170,3 @@ applications:
     project:
       name: pet-battle-test
       enabled: true
-  pet_battle_tournament_stage:
-    name: pet-battle-tournament-stage
-    enabled: false # overridden by pipeline
-    source: https://github.com/petbattle/tournamentservice-v1.git
-    source_path: chart
-    sync_policy_automated: true
-    destination: labs-staging
-    source_ref: master
-    values:
-      fullnameOverride: pet-battle-tournament
-      image_repository: image-registry.openshift-image-registry.svc:5000
-      image_name: pet-battle
-      image_namespace: labs-staging
-      image_version: master
-      istag:
-        enabled: false
-      pet-battle-infra:
-        operatorgroup:
-          enabled: true
-          targetNamespaces: 
-            - labs-staging
-    ignore_differences: *ignore_differences
-    project:
-      name: pet-battle-stage
-      enabled: true
-

@@ -1,0 +1,23 @@
+allowed_destinations: &allowed_destinations
+  - namespace: labs-ci-cd
+    server: https://kubernetes.default.svc
+  - namespace: labs-stage
+    server: https://kubernetes.default.svc
+argocd_projects:
+  - enabled: true
+    name: pet-battle-suite-stage
+    destinations: *allowed_destinations
+applications:
+  pet_battle_suite:
+    name: pet-battle-suite-stage
+    enabled: true
+    destination: labs-ci-cd
+    source: https://github.com/petbattle/pb-ci-cd.git
+    source_path: applications/deployment
+    source_ref: main
+    sync_policy_automated: true
+    helm_values:
+      - values-applications-stage.yaml
+    project:
+      name: pet-battle-suite-stage
+      enabled: true
