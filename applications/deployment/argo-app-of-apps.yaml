@@ -46,6 +46,8 @@ applications:
           enabled: true
           source_ref: master
           image_version: master
+        pet_battle_tournament_dev:
+          source_ref: 9092aec
     project:
       name: pet-battle-suite
       enabled: true
