@@ -89,10 +89,11 @@ spec:
         git config --global push.default simple
 
         # Setup app suite values
-        YQ_ARG=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).source_ref
+        YQ_ARG_1=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_STAGE_KEY).image_version
+        YQ_ARG_2=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_STAGE_KEY).source_ref
         GIT_REF=$(params.GIT_TAG)
-        yq eval -i ${YQ_ARG}=\"${GIT_REF}\" $(params.ARGOCD_CONFIG_REPO_PATH)
-        yq eval -i ${YQ_ARG}=\"${GIT_REF::7}\" $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i ${YQ_ARG_1}=\"${GIT_REF}\" $(params.ARGOCD_CONFIG_REPO_PATH)
+        yq eval -i ${YQ_ARG_2}=\"${GIT_REF::7}\" $(params.ARGOCD_CONFIG_REPO_PATH)
         #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).image_version=\"${GIT_REF::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
         #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=\"${GIT_REF}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
         #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).image_version=\"${GIT_REF::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
