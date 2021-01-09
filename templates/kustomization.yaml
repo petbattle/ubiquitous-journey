@@ -11,5 +11,6 @@ resources:
 - create-webhook.yaml
 - helm-upgrade-from-repo.yaml
 - test-chart-upload.yaml
+- test-tagging.yaml
 
 namespace: labs-ci-cd
