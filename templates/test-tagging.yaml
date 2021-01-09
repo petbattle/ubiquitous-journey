@@ -1,0 +1,62 @@
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: test-tagging
+  labels:
+    rht-labs.com/uj: pb-ci-cd
+objects:
+- apiVersion: tekton.dev/v1beta1
+  kind: PipelineRun
+  metadata:
+    generateName: test-tagging-pipeline-
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=false
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+  spec:
+    pipelineRef:
+      name: test-tagging-pipeline
+    workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: build-images
+    - name: git-auth-secret
+      secret:
+        secretName: git-auth
+    params:
+    - name: APPLICATION_NAME
+      value: "${APPLICATION_NAME}"
+    - name: GIT_TAG
+      value: "${GIT_TAG}"
+    - name: APP_OF_APPS_DEV_KEY
+      value: "${APP_OF_APPS_DEV_KEY}"
+    - name: APP_OF_APPS_TEST_KEY
+      value: "${APP_OF_APPS_TEST_KEY}"
+    - name: APP_OF_APPS_STAGE_KEY
+      value: "${APP_OF_APPS_STAGE_KEY}"
+parameters:
+- description: Application Name
+  displayName: Application Name
+  name: APPLICATION_NAME
+  required: true
+  value: pet-battle-api
+- description: Git Tag (branch/tag/ref)
+  displayName: Git Tag (branch/tag/ref)
+  name: GIT_TAG
+  required: true
+  value: "master"
+- description: Argo dev app of app key name (use underscores only)
+  displayName: Argo dev app of app key name (use underscores only)
+  name: APP_OF_APPS_DEV_KEY
+  required: true
+  value: "pet_battle_tournament_dev"
+- description: Argo test app of app key name (use underscores only)
+  displayName: Argo test app of app key name (use underscores only)
+  name: APP_OF_APPS_TEST_KEY
+  required: true
+  value: "pet_battle_tournament_test"
+- description: Argo stage app of app key name (use underscores only)
+  displayName: Argo stage app of app key name (use underscores only)
+  name: APP_OF_APPS_STAGE_KEY
+  required: true
+  value: "pet_battle_api_stage"

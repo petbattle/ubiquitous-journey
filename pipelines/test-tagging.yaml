@@ -72,7 +72,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: "https://github.com/petbattle/pb-ci-cd.git"
+          value: "$(params.GIT_REPO_URL)"
         - name: revision
           value: "main"
         - name: subdirectory
