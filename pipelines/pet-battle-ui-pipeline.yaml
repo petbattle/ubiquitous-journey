@@ -28,6 +28,9 @@ spec:
   - name: HELM_CHART_VERSION
     type: string
     default: ""
+  - name: HELM_OVERWRITE_VALUES
+    type: string
+    default: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=$(params.GIT_SHORT_REVISION),image_namespace=$(params.DEV_NAMESPACE)"
   - name: NPM_MIRROR_URL
     type: string
     default: "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/labs-npm"

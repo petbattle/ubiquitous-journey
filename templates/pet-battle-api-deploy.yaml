@@ -38,6 +38,8 @@ objects:
       value: "${GIT_BRANCH}"
     - name: HELM_CHART_VERSION
       value: "${HELM_CHART_VERSION}"
+    - name: HELM_OVERWRITE_VALUES
+      value: "${HELM_OVERWRITE_VALUES}"
     - name: BUILD_NAMESPACE
       value: "labs-ci-cd"
     - name: DEV_NAMESPACE
@@ -80,6 +82,9 @@ parameters:
 - description: Helm Chart Version (Optional)
   displayName: Helm Chart Version (Optional)
   name: HELM_CHART_VERSION
+- description: Helm Chart Overwrite Values (Optional)
+  displayName: Helm Chart Overwrite Values (Optional)
+  name: HELM_OVERWRITE_VALUES
 - description: Argo dev app of app key name (use underscores only)
   displayName: Argo dev app of app key name (use underscores only)
   name: APP_OF_APPS_DEV_KEY
