@@ -32,13 +32,13 @@ spec:
     - name: target_namespace
       description: "Specify a target namespace"
       default: ""
-  serviceAccountName: argocd-application-controller
   workspaces:
     - name: source
   steps:
     - name: template
       image: quay.io/eformat/openshift-helm:$(inputs.params.helm_version)
       workingDir: /workspace/source
+      serviceAccountName: argocd-application-controller
       script: |
         echo current installed helm releases
         helm list --namespace "$(inputs.params.target_namespace)"
