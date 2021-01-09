@@ -32,6 +32,7 @@ spec:
     - name: target_namespace
       description: "Specify a target namespace"
       default: ""
+  serviceAccountName: argocd-application-controller
   workspaces:
     - name: source
   steps:

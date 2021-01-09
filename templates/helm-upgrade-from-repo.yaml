@@ -33,7 +33,7 @@ objects:
     - name: overwrite_values
       value: "${overwrite_values}"
     timeout: 1h0m0s
-    serviceAccountName: argocd-application-controller
+    serviceAccountName: pipeline
 parameters:
 - description: Helm Repository Name
   displayName: Helm Repository Name
