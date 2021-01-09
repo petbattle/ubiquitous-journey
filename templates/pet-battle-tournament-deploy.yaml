@@ -89,7 +89,7 @@ parameters:
 - description: Helm Chart Overwrite Values (Optional)
   displayName: Helm Chart Overwrite Values (Optional)
   name: HELM_OVERWRITE_VALUES
-  value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=latest,image_namespace=labs-dev,pet-battle-infra.operatorgroup.enabled=true,pet-battle-infra.operatorgroup.targetNamespaces={'labs-dev'}"
+  value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=latest,image_namespace=labs-dev,pet-battle-infra.operatorgroup.enabled=true,pet-battle-infra.operatorgroup.targetNamespaces={labs-dev}"
 - description: Argo dev app of app key name (use underscores only)
   displayName: Argo dev app of app key name (use underscores only)
   name: APP_OF_APPS_DEV_KEY
