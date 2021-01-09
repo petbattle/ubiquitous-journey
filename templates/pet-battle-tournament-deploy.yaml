@@ -14,6 +14,10 @@ objects:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:
+    serviceAccountName: pipeline
+    serviceAccountNames:
+      - taskName: helm-install-apps-branches
+        serviceAccountName: argocd-application-controller
     pipelineRef:
       name: helm-deploy-pipeline
     workspaces:
