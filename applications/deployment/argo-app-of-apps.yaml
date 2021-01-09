@@ -40,8 +40,8 @@ applications:
           image_version: master
         pet_battle_api_stage:
           enabled: true
-          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
-          image_version: 144686b
+          source_ref: ee57178
+          image_version: ee571788028a593a52faecafc97dc57f212976c6
         pet_battle_tournament_stage:
           enabled: true
           source_ref: master
