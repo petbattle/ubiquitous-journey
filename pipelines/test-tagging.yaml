@@ -98,5 +98,7 @@ spec:
         value: "$(params.APP_OF_APPS_DEV_KEY)"
       - name: APP_OF_APPS_TEST_KEY
         value: "$(params.APP_OF_APPS_TEST_KEY)"
+      - name: APP_OF_APPS_STAGE_KEY
+        value: "$(params.APP_OF_APPS_STAGE_KEY)"
       runAfter:
       - fetch-cicd-repository
