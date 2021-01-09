@@ -39,6 +39,7 @@ applications:
     name: pet-battle-api-stage
     enabled: true
     source: *helm_repo
+    chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-staging
     source_ref: 1.0.6
@@ -58,6 +59,7 @@ applications:
     name: pet-battle-stage
     enabled: true
     source: *helm_repo
+    chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-staging
     source_ref: 1.0.1
@@ -75,6 +77,7 @@ applications:
     name: pet-battle-tournament-stage
     enabled: true
     source: *helm_repo
+    chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-staging
     source_ref: 1.0.1

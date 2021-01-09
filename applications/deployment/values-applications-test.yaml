@@ -65,6 +65,7 @@ applications:
     name: pet-battle-api-test
     enabled: true
     source: *helm_repo
+    chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-test
     source_ref: 1.0.6
@@ -102,6 +103,7 @@ applications:
     name: pet-battle-test
     enabled: true
     source: *helm_repo
+    chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-test
     source_ref: 1.0.3
@@ -144,6 +146,7 @@ applications:
     name: pet-battle-tournament-test
     enabled: true
     source: *helm_repo
+    chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
     source_ref: master
