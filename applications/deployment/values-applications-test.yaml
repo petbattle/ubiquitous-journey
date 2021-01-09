@@ -7,9 +7,6 @@ dev_allowed_destinations: &dev_allowed_destinations # argocd project
 test_allowed_destinations: &test_allowed_destinations # argocd project
   - namespace: labs-test
     server: https://kubernetes.default.svc
-stage_allowed_destinations: &stage_allowed_destinations # argocd project
-  - namespace: labs-staging
-    server: https://kubernetes.default.svc
 
 helm_repository: &helm_repo "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
 
@@ -42,9 +39,6 @@ argocd_projects:
 - enabled: true
   name: pet-battle-test
   destinations: *test_allowed_destinations
-- enabled: true
-  name: pet-battle-stage
-  destinations: *stage_allowed_destinations
 
 applications:
   pet_battle_api_dev:
