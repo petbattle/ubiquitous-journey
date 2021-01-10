@@ -259,60 +259,6 @@ spec:
       runAfter:
         - upload-chart
 
-    - name: helm-argocd-apps-test
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
-      taskRef:
-        name: helm-template-from-source
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-      params:
-        - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
-        - name: values_file
-          value: argo-app-of-apps-test.yaml
-        - name: release_name
-          value: my
-        - name: target_namespace
-          value: "$(params.BUILD_NAMESPACE)"
-        - name: overwrite_values
-          value: "foo=bar"
-      runAfter:
-        - oc-tag-image-test
-
-    - name: helm-argocd-apps-stage
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
-      taskRef:
-        name: helm-template-from-source
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-      params:
-        - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
-        - name: values_file
-          value: argo-app-of-apps-stage.yaml
-        - name: release_name
-          value: my
-        - name: target_namespace
-          value: "$(params.BUILD_NAMESPACE)"
-        - name: overwrite_values
-          value: "foo=bar"
-      runAfter:
-        - oc-tag-image-stage
-
     - name: helm-install-apps-dev # branches only deploy to dev
       conditions:
       - conditionRef: is-not-equal
@@ -340,6 +286,106 @@ spec:
           value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=$(params.GIT_SHORT_REVISION),image_namespace=$(params.DEV_NAMESPACE)"
       runAfter:
         - oc-tag-image-dev
+
+    - name: git-commit-test
+      retries: 1
+      taskRef:
+        name: git-commit-argo-versions
+      workspaces:
+        - name: git-auth-secret
+          workspace: git-auth-secret
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: APPLICATION_NAME
+        value: "$(params.APPLICATION_NAME)"
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/cicd"
+      - name: GIT_TAG
+        value: "$(params.GIT_TAG)"
+      - name: APP_OF_APPS_KEY
+        value: "$(params.APP_OF_APPS_TEST_KEY)"
+      - name: ARGOCD_CONFIG_REPO_PATH
+        value: "applications/deployment/values-applications-test.yaml"
+      runAfter:
+      - oc-tag-image-test
+
+    - name: helm-argocd-apps-test
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: argo-app-of-apps-test.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values
+          value: "foo=bar"
+      runAfter:
+        - git-commit-test
+
+    - name: git-commit-stage
+      retries: 1
+      taskRef:
+        name: git-commit-argo-versions
+      workspaces:
+        - name: git-auth-secret
+          workspace: git-auth-secret
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: APPLICATION_NAME
+        value: "$(params.APPLICATION_NAME)"
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/cicd"
+      - name: GIT_TAG
+        value: "$(params.GIT_TAG)"
+      - name: APP_OF_APPS_KEY
+        value: "$(params.APP_OF_APPS_STAGE_KEY)"
+      - name: ARGOCD_CONFIG_REPO_PATH
+        value: "applications/deployment/values-applications-stage.yaml"
+      runAfter:
+      - oc-tag-image-stage
+
+    - name: helm-argocd-apps-stage
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: argo-app-of-apps-stage.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values
+          value: "foo=bar"
+      runAfter:
+        - git-commit-stage
 
     - name: argocd-sync-application-master
       retries: 3
