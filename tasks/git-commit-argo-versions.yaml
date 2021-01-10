@@ -102,7 +102,7 @@ spec:
         yq eval -i ${YQ_ARG_2}=\"${GIT_REF::7}\" $(params.ARGOCD_CONFIG_REPO_PATH)
 
         # Auto commit, we are on detached HEAD, Trunk based development we are on master/main
-        git branch origin/main || rc=$?
+        # git branch origin/main || rc=$?
         git checkout main
         git add $(params.ARGOCD_CONFIG_REPO_PATH)
         git commit -m "🚀 AUTOMATED COMMIT - Deployment $(params.APPLICATION_NAME) $(params.GIT_TAG) 🚀" || rc=$?
