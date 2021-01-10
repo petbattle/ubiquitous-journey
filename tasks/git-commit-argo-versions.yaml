@@ -43,6 +43,7 @@ spec:
     default: "master"
   - name: HELM_CHART_VERSION
     type: string
+    default: ""
   - name: HTTPPROXY
     description: git HTTP proxy server for non-SSL requests
     type: string
