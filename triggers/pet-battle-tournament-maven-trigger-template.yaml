@@ -82,3 +82,6 @@ spec:
         - name: maven-m2
           persistentVolumeClaim:
             claimName: maven-m2
+        - name: git-auth-secret
+          secret:
+            secretName: git-auth

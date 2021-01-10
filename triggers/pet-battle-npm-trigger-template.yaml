@@ -71,3 +71,6 @@ spec:
         - name: argocd-env-secret
           secret:
             secretName: argocd-token
+        - name: git-auth-secret
+          secret:
+            secretName: git-auth
