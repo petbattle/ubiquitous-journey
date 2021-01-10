@@ -361,7 +361,7 @@ spec:
       - name: flags
         value: --insecure
       - name: revision
-        value: "$(params.GIT_REVISION)"
+        value: "$(params.HELM_CHART_VERSION)"
       runAfter:
       - helm-argocd-apps-test
 
@@ -428,6 +428,6 @@ spec:
       - name: flags
         value: --insecure
       - name: revision
-        value: "$(params.GIT_REVISION)"
+        value: "$(params.HELM_CHART_VERSION)"
       runAfter:
       - helm-argocd-apps-stage
