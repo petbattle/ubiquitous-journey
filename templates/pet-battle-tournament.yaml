@@ -96,3 +96,8 @@ parameters:
   name: APP_OF_APPS_TEST_KEY
   required: true
   value: "pet_battle_tournament_test"
+- description: Argo stage app of app key name (use underscores only)
+  displayName: Argo stage app of app key name (use underscores only)
+  name: APP_OF_APPS_STAGE_KEY
+  required: true
+  value: "pet_battle_tournament_stage"

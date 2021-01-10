@@ -347,7 +347,7 @@ spec:
         workspace: argocd-env-secret
       params:
       - name: application-name
-        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME) -p pet-battle-suite-test"
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)"
       - name: flags
         value: --insecure
       - name: revision
@@ -414,7 +414,7 @@ spec:
         workspace: argocd-env-secret
       params:
       - name: application-name
-        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME) -p pet-battle-suite-stage" 
+        value: "l app.kubernetes.io/instance=$(params.APPLICATION_NAME)"
       - name: flags
         value: --insecure
       - name: revision
