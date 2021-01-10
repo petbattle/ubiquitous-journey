@@ -10,26 +10,26 @@ helm_repository: &helm_repo "http://sonatype-nexus-service.labs-ci-cd.svc.cluste
 #############
 ignore_differences: &ignore_differences
   ignoreDifferences:
-  - group: apps.openshift.io
-    kind: DeploymentConfig
-    jsonPointers:
-      - /spec/replicas
-      - /spec/template/spec/containers/0/image
-      - /spec/triggers/0/imageChangeParams/lastTriggeredImage
-      - /spec/triggers/1/imageChangeParams/lastTriggeredImage
-  - group: apps
-    kind: Deployment
-    jsonPointers:
-      - /spec/replicas
-      - /spec/template/spec/containers/0/image
-      - /spec/template/spec/containers/1/image
+    - group: apps.openshift.io
+      kind: DeploymentConfig
+      jsonPointers:
+        - /spec/replicas
+        - /spec/template/spec/containers/0/image
+        - /spec/triggers/0/imageChangeParams/lastTriggeredImage
+        - /spec/triggers/1/imageChangeParams/lastTriggeredImage
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+        - /spec/template/spec/containers/0/image
+        - /spec/template/spec/containers/1/image
 ##############
 # Argo App of Apps declaration
 #############
 argocd_projects:
-- enabled: true
-  name: pet-battle-stage
-  destinations: *stage_allowed_destinations
+  - enabled: true
+    name: pet-battle-stage
+    destinations: *stage_allowed_destinations
 applications:
   pet_battle_api_stage:
     name: pet-battle-api-stage
@@ -88,7 +88,7 @@ applications:
       pet-battle-infra:
         operatorgroup:
           enabled: true
-          targetNamespaces: 
+          targetNamespaces:
             - labs-staging
     ignore_differences: *ignore_differences
     project:
