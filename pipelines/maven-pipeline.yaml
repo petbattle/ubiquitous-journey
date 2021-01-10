@@ -430,4 +430,4 @@ spec:
       - name: revision
         value: "$(params.GIT_REVISION)"
       runAfter:
-      - helm-argocd-apps-test
+      - helm-argocd-apps-stage

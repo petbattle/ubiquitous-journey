@@ -354,7 +354,7 @@ spec:
         value: "$(params.GIT_REVISION)"
       runAfter:
       - helm-argocd-apps-test
-      
+
     - name: git-commit-stage
       retries: 1
       taskRef:
@@ -420,4 +420,4 @@ spec:
       - name: revision
         value: "$(params.GIT_REVISION)"
       runAfter:
-      - helm-argocd-apps-test
+      - helm-argocd-apps-stage
