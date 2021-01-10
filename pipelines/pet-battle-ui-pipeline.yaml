@@ -6,6 +6,7 @@ spec:
   workspaces:
     - name: shared-workspace
     - name: argocd-env-secret
+    - name: git-auth-secret
   params:
   - name: APPLICATION_NAME
     type: string
@@ -302,7 +303,7 @@ spec:
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/cicd"
       - name: GIT_TAG
-        value: "$(params.GIT_TAG)"
+        value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_TEST_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
@@ -352,7 +353,7 @@ spec:
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/cicd"
       - name: GIT_TAG
-        value: "$(params.GIT_TAG)"
+        value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_STAGE_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
