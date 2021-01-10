@@ -28,6 +28,8 @@ objects:
       value: "${APPLICATION_NAME}"
     - name: GIT_TAG
       value: "${GIT_TAG}"
+    - name: HELM_CHART_VERSION
+      value: "${HELM_CHART_VERSION}"
     - name: APP_OF_APPS_KEY
       value: "${APP_OF_APPS_KEY}"
     - name: ARGOCD_CONFIG_REPO_PATH
@@ -38,11 +40,14 @@ parameters:
   name: APPLICATION_NAME
   required: true
   value: pet-battle-api
-- description: Git Tag (branch/tag/ref)
-  displayName: Git Tag (branch/tag/ref)
+- description: Git Tag (branch/tag/ref) of image
+  displayName: Git Tag (branch/tag/ref) of image
   name: GIT_TAG
   required: true
   value: "master"
+- description: Helm Chart Version (Optional)
+  displayName: Helm Chart Version (Optional)
+  name: HELM_CHART_VERSION
 - description: Argo app of app key name (use underscores only)
   displayName: Argo app of app key name (use underscores only)
   name: APP_OF_APPS_KEY
