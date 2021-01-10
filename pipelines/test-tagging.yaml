@@ -12,55 +12,19 @@ spec:
   - name: APPLICATION_NAME
     type: string
     default: ""
-  - name: IMAGE
-    type: string
-    description: Maven base image
-    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
   - name: GIT_REPO_URL
     type: string
-    description: Git repo url
+    description: Git cicd repo url
     default: "https://github.com/petbattle/pb-ci-cd.git"
-  - name: GIT_USER_NAME
-    type: string
-    description: |
-      Git user name for performing git operation.
-    default: "tekton"
-  - name: GIT_USER_EMAIL
-    type: string
-    description: |
-      Git user email for performing git operation.
-    default: "tekton@rht-labs.bot.com"
   - name: GIT_TAG
-    description: The Git Tag (branch,tag,revision) to set in app of apps values
+    description: The Git Tag (branch,tag,revision) to set for the app
     type: string
     default: "master"
-  - name: HTTPPROXY
-    description: git HTTP proxy server for non-SSL requests
-    type: string
-    default: ""
-  - name: HTTPSPROXY
-    description: git HTTPS proxy server for SSL requests
-    type: string
-    default: ""
-  - name: NOPROXY
-    description: git no proxy - opt out of proxying HTTP/HTTPS requests
-    type: string
-    default: ""
-  - name: VERBOSE
-    description: log the commands used during execution
-    type: string
-    default: "true"
   - name: ARGOCD_CONFIG_REPO_PATH
-    description: The App Of Apps file path
-    type: string
-    default: "applications/deployment/argo-app-of-apps.yaml"
-  - name: APP_OF_APPS_DEV_KEY
+    description: The App Values file
     type: string
     default: ""
-  - name: APP_OF_APPS_TEST_KEY
-    type: string
-    default: ""
-  - name: APP_OF_APPS_STAGE_KEY
+  - name: APP_OF_APPS_KEY
     type: string
     default: ""
   tasks:
@@ -94,11 +58,9 @@ spec:
         value: "$(params.APPLICATION_NAME)/cicd"
       - name: GIT_TAG
         value: "$(params.GIT_TAG)"
-      - name: APP_OF_APPS_DEV_KEY
-        value: "$(params.APP_OF_APPS_DEV_KEY)"
-      - name: APP_OF_APPS_TEST_KEY
-        value: "$(params.APP_OF_APPS_TEST_KEY)"
-      - name: APP_OF_APPS_STAGE_KEY
-        value: "$(params.APP_OF_APPS_STAGE_KEY)"
+      - name: APP_OF_APPS_KEY
+        value: "$(params.APP_OF_APPS_KEY)"
+      - name: ARGOCD_CONFIG_REPO_PATH
+        value: "$(params.ARGOCD_CONFIG_REPO_PATH)"
       runAfter:
       - fetch-cicd-repository

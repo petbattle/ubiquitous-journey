@@ -28,12 +28,10 @@ objects:
       value: "${APPLICATION_NAME}"
     - name: GIT_TAG
       value: "${GIT_TAG}"
-    - name: APP_OF_APPS_DEV_KEY
-      value: "${APP_OF_APPS_DEV_KEY}"
-    - name: APP_OF_APPS_TEST_KEY
-      value: "${APP_OF_APPS_TEST_KEY}"
-    - name: APP_OF_APPS_STAGE_KEY
-      value: "${APP_OF_APPS_STAGE_KEY}"
+    - name: APP_OF_APPS_KEY
+      value: "${APP_OF_APPS_KEY}"
+    - name: ARGOCD_CONFIG_REPO_PATH
+      value: "${ARGOCD_CONFIG_REPO_PATH}"
 parameters:
 - description: Application Name
   displayName: Application Name
@@ -45,18 +43,13 @@ parameters:
   name: GIT_TAG
   required: true
   value: "master"
-- description: Argo dev app of app key name (use underscores only)
-  displayName: Argo dev app of app key name (use underscores only)
+- description: Argo app of app key name (use underscores only)
+  displayName: Argo app of app key name (use underscores only)
   name: APP_OF_APPS_DEV_KEY
   required: true
-  value: "pet_battle_tournament_dev"
-- description: Argo test app of app key name (use underscores only)
-  displayName: Argo test app of app key name (use underscores only)
-  name: APP_OF_APPS_TEST_KEY
+  value: "pet_battle_api_test"
+- description: The application values file to update
+  displayName: The application values file to update
+  name: ARGOCD_CONFIG_REPO_PATH
   required: true
-  value: "pet_battle_tournament_test"
-- description: Argo stage app of app key name (use underscores only)
-  displayName: Argo stage app of app key name (use underscores only)
-  name: APP_OF_APPS_STAGE_KEY
-  required: true
-  value: "pet_battle_api_stage"
+  value: "applications/deployment/values-applications-test.yaml"
