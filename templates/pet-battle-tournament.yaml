@@ -29,6 +29,9 @@ objects:
     - name: maven-m2
       persistentVolumeClaim:
         claimName: maven-m2
+    - name: git-auth-secret
+      secret:
+        secretName: git-auth
     params:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"

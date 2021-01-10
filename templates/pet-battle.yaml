@@ -23,6 +23,9 @@ objects:
     - name: argocd-env-secret
       secret:
         secretName: argocd-token
+    - name: git-auth-secret
+      secret:
+        secretName: git-auth
     params:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"

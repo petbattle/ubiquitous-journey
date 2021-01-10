@@ -68,33 +68,6 @@ spec:
         - name: deleteExisting
           value: "true"
 
-    - name: helm-argocd-apps-master # deploy to test + stage
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
-      taskRef:
-        name: helm-template-from-source
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-      params:
-        - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
-        - name: values_file
-          value: argo-app-of-apps.yaml
-        - name: release_name
-          value: my
-        - name: target_namespace
-          value: "$(params.BUILD_NAMESPACE)"
-        - name: overwrite_values
-          value: "foo=bar" # these are in git
-      runAfter:
-        - fetch-cicd-repository
-
     - name: helm-install-apps-branches # only deploy to dev
       conditions:
       - conditionRef: is-not-equal
@@ -120,6 +93,33 @@ spec:
           value: "$(params.DEV_NAMESPACE)"
         - name: overwrite_values
           value: "$(params.HELM_OVERWRITE_VALUES)"
+      runAfter:
+        - fetch-cicd-repository
+
+    - name: helm-argocd-apps-master # deploy to test + stage
+      conditions:
+      - conditionRef: is-equal
+        params:
+          - name: left
+            value: "master"
+          - name: right
+            value: "$(params.GIT_BRANCH)"
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: argo-app-of-apps.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values
+          value: "foo=bar" # these are in git
       runAfter:
         - fetch-cicd-repository
 
