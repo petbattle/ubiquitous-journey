@@ -19,6 +19,10 @@ spec:
   - name: APPLICATION_NAME
     type: string
     description: Application Name
+  - name: IMAGE
+    type: string
+    description: Maven base image
+    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
   - name: WORK_DIRECTORY
     description: Directory to start build in (handle multiple branches)
     type: string
