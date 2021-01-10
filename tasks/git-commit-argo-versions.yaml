@@ -61,11 +61,7 @@ spec:
     description: The App Of Apps file path
     type: string
     default: "applications/deployment/argo-app-of-apps.yaml"
-  - name: APP_OF_APPS_DEV_KEY
-    type: string
-  - name: APP_OF_APPS_TEST_KEY
-    type: string
-  - name: APP_OF_APPS_STAGE_KEY
+  - name: APP_OF_APPS_KEY
     type: string
   steps:
     - name: run-git-commit-argo-versions
@@ -88,15 +84,14 @@ spec:
         git config --global user.name $(params.GIT_USER_NAME)
         git config --global push.default simple
 
-        # Setup app suite values
-        YQ_ARG_1=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_STAGE_KEY).source_ref
-        YQ_ARG_2=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_STAGE_KEY).image_version
+        # Setup app suite values overrides in app-of-apps file
+        YQ_ARG_0=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_KEY).enabled
+        YQ_ARG_1=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_KEY).source_ref
+        YQ_ARG_2=.applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_KEY).image_version
         GIT_REF=$(params.GIT_TAG)
+        yq eval -i ${YQ_ARG_1}=true $(params.ARGOCD_CONFIG_REPO_PATH)
         yq eval -i ${YQ_ARG_1}=\"${GIT_REF}\" $(params.ARGOCD_CONFIG_REPO_PATH)
         yq eval -i ${YQ_ARG_2}=\"${GIT_REF::7}\" $(params.ARGOCD_CONFIG_REPO_PATH)
-        #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_DEV_KEY).image_version=\"${GIT_REF::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
-        #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).source_ref=\"${GIT_REF}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
-        #yq eval -i ".applications.pet_battle_suite.values.applications.$(params.APP_OF_APPS_TEST_KEY).image_version=\"${GIT_REF::7}\"" $(params.ARGOCD_CONFIG_REPO_PATH)
 
         # Auto commit, we are on detached HEAD, Trunk based development we are on master/main
         git branch origin/main

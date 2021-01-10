@@ -20,6 +20,12 @@ applications:
     sync_policy_automated: true
     helm_values:
       - values-applications-test.yaml
+    values:
+      applications:
+        pet_battle_api_test:
+          enabled: true
+          source_ref: 144686bfaf613143dacf662f5f56459ce866a117
+          image_version: 144686b
     project:
       name: pet-battle-suite-test
       enabled: true
