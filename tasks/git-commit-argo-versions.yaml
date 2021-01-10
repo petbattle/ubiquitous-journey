@@ -87,7 +87,7 @@ spec:
         # Set app suite values overrides in app-of-apps file to Git SHA's
         YQ_ARG_0=.applications.$(params.APP_OF_APPS_KEY).enabled
         YQ_ARG_1=.applications.$(params.APP_OF_APPS_KEY).source_ref
-        YQ_ARG_2=.applications.$(params.APP_OF_APPS_KEY).image_version
+        YQ_ARG_2=.applications.$(params.APP_OF_APPS_KEY).values.image_version
         GIT_REF=$(params.GIT_TAG)
         yq eval -i ${YQ_ARG_1}=true $(params.ARGOCD_CONFIG_REPO_PATH)
         yq eval -i ${YQ_ARG_1}=\"${GIT_REF}\" $(params.ARGOCD_CONFIG_REPO_PATH)
