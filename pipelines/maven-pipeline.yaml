@@ -348,6 +348,23 @@ spec:
       runAfter:
         - git-commit-test
 
+    - name: argocd-sync-application-test
+      retries: 3
+      taskRef:
+        name: argocd-sync-and-wait
+      workspaces:
+      - name: argocd-env-secret
+        workspace: argocd-env-secret
+      params:
+      - name: application-name
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME) -p pet-battle-suite-test"
+      - name: flags
+        value: --insecure
+      - name: revision
+        value: "$(params.GIT_REVISION)"
+      runAfter:
+      - helm-argocd-apps-test
+
     - name: git-commit-stage
       retries: 1
       taskRef:
@@ -398,7 +415,7 @@ spec:
       runAfter:
         - git-commit-stage
 
-    - name: argocd-sync-application-master
+    - name: argocd-sync-application-stage
       retries: 3
       taskRef:
         name: argocd-sync-and-wait
@@ -407,11 +424,10 @@ spec:
         workspace: argocd-env-secret
       params:
       - name: application-name
-        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)" # sync by label, multiple apps different namespaces synced good thing
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME) -p pet-battle-suite-stage" 
       - name: flags
         value: --insecure
       - name: revision
         value: "$(params.GIT_REVISION)"
       runAfter:
       - helm-argocd-apps-test
-      - helm-argocd-apps-stage
