@@ -1,45 +1,41 @@
 ##############
 # Application Custom Values
 #############
-dev_allowed_destinations: &dev_allowed_destinations # argocd project
+dev_allowed_destinations: &dev_allowed_destinations
   - namespace: labs-dev
     server: https://kubernetes.default.svc
-test_allowed_destinations: &test_allowed_destinations # argocd project
+test_allowed_destinations: &test_allowed_destinations
   - namespace: labs-test
     server: https://kubernetes.default.svc
-
 helm_repository: &helm_repo "http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
-
 ##############
 # Argo Ignore Differences
 #############
 ignore_differences: &ignore_differences
   ignoreDifferences:
-  - group: apps.openshift.io
-    kind: DeploymentConfig
-    jsonPointers:
-      - /spec/replicas
-      - /spec/template/spec/containers/0/image
-      - /spec/triggers/0/imageChangeParams/lastTriggeredImage
-      - /spec/triggers/1/imageChangeParams/lastTriggeredImage
-  - group: apps
-    kind: Deployment
-    jsonPointers:
-      - /spec/replicas
-      - /spec/template/spec/containers/0/image
-      - /spec/template/spec/containers/1/image
-
+    - group: apps.openshift.io
+      kind: DeploymentConfig
+      jsonPointers:
+        - /spec/replicas
+        - /spec/template/spec/containers/0/image
+        - /spec/triggers/0/imageChangeParams/lastTriggeredImage
+        - /spec/triggers/1/imageChangeParams/lastTriggeredImage
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+        - /spec/template/spec/containers/0/image
+        - /spec/template/spec/containers/1/image
 ##############
 # Argo App of Apps declaration
 #############
 argocd_projects:
-- enabled: true
-  name: pet-battle-dev
-  destinations: *dev_allowed_destinations
-- enabled: true
-  name: pet-battle-test
-  destinations: *test_allowed_destinations
-
+  - enabled: true
+    name: pet-battle-dev
+    destinations: *dev_allowed_destinations
+  - enabled: true
+    name: pet-battle-test
+    destinations: *test_allowed_destinations
 applications:
   pet_battle_api_dev:
     name: pet-battle-api-dev
@@ -50,11 +46,11 @@ applications:
     destination: labs-dev
     source_ref: master
     values:
-      fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
+      fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
       image_version: master
-      istag: # default tag which we dont want
+      istag:
         enabled: false
       deploymentConfig: false
     ignore_differences: *ignore_differences
@@ -70,11 +66,11 @@ applications:
     destination: labs-test
     source_ref: 1.0.6
     values:
-      fullnameOverride: pet-battle-api # important to use this if want same app name in multiple ns, else release.name used in chart
+      fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
       image_version: master
-      istag: # default tag which we dont want
+      istag:
         enabled: false
       deploymentConfig: false
     ignore_differences: *ignore_differences
@@ -136,7 +132,7 @@ applications:
       pet-battle-infra:
         operatorgroup:
           enabled: true
-          targetNamespaces: 
+          targetNamespaces:
             - labs-dev
     ignore_differences: *ignore_differences
     project:
@@ -161,7 +157,7 @@ applications:
       pet-battle-infra:
         operatorgroup:
           enabled: true
-          targetNamespaces: 
+          targetNamespaces:
             - labs-test
     ignore_differences: *ignore_differences
     project:
