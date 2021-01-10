@@ -45,7 +45,7 @@ parameters:
   value: "master"
 - description: Argo app of app key name (use underscores only)
   displayName: Argo app of app key name (use underscores only)
-  name: APP_OF_APPS_DEV_KEY
+  name: APP_OF_APPS_KEY
   required: true
   value: "pet_battle_api_test"
 - description: The application values file to update
