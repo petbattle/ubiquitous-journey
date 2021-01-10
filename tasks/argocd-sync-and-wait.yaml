@@ -29,9 +29,9 @@ spec:
       image: argoproj/argocd:$(params.argocd-version)
       command: ["/bin/bash", "-c"]
       args:
-        - argocd app sync $(params.application-name) --server $(params.argocd-server) --revision $(params.revision) $(params.flags) --timeout 60 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        - argocd app sync $(params.application-name) --insecure --server $(params.argocd-server) --revision $(params.revision) $(params.flags) --timeout 60 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
     - name: wait
       image: argoproj/argocd:$(params.argocd-version)
       command: ["/bin/bash", "-c"]
       args:
-        - argocd app wait $(params.application-name) --server $(params.argocd-server) --health $(params.flags) --timeout 60 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        - argocd app wait $(params.application-name) --insecure --server $(params.argocd-server) --health $(params.flags) --timeout 60 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
