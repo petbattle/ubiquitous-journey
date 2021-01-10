@@ -16,10 +16,9 @@ spec:
   - name: output
   - name: git-auth-secret
   params:
-  - name: IMAGE
+  - name: APPLICATION_NAME
     type: string
-    description: Maven base image
-    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+    description: Application Name
   - name: WORK_DIRECTORY
     description: Directory to start build in (handle multiple branches)
     type: string
