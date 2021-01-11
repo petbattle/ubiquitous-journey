@@ -34,7 +34,7 @@ oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.
 If you are on a branch, you can test a development deployment (helm update --install) using:
 ```bash
 # GIT_BRANCH=release_name, GIT_SHORT_REVISION=image_version, HELM_CHART_VERSION is Optional (it will pull latest chart from nexus helm chart repo if not specified)
-oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=latest -p GIT_BRANCH=my -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=latest -p GIT_BRANCH=develop -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=latest -p GIT_BRANCH=develop | oc -n labs-ci-cd create -f-
 ```
 
