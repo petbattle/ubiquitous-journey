@@ -40,9 +40,9 @@ oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=latest -p G
 
 To create webhooks in github repos run these (TaskRuns) once manually
 ```bash
-oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=eformat -p GITHUB_REPO=pet-battle-api -p WEBHOOK_URL=http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=eformat -p GITHUB_REPO=pet-battle -p WEBHOOK_URL=http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=tournamentservice-v1 -p WEBHOOK_URL=http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=eformat -p GITHUB_REPO=pet-battle-api -p WEBHOOK_URL=$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=eformat -p GITHUB_REPO=pet-battle -p WEBHOOK_URL=$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=tournamentservice-v1 -p WEBHOOK_URL=$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
 ```
 
 ## To Be Done
