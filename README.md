@@ -61,22 +61,7 @@ sed -i -e "s|  password:.*|  password: ${TOKEN}|" ~/tmp/argocd-token.yaml
 oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 ```
 
-- [ ] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
-
-```yaml
-    - name: oc-tag-image-test
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: in
-          values: ["main"]
-
-    - name: helm-argocd-apps-branches # only deploy to dev, fullname includes branch
-      when:
-        - input: "$(params.GIT_BRANCH)"
-          operator: notin
-          values: ["main"]
-```
-
+- [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
 - [X] Operator split into charts requiring privilege
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus ubi build image with tools, check base now we have new images (using custom one)

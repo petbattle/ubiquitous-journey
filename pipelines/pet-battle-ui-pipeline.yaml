@@ -226,13 +226,10 @@ spec:
         - upload-chart
 
     - name: oc-tag-image-test
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: in
+          Values: ["master"]
       taskRef:
         name: openshift-client
       workspaces:
@@ -251,13 +248,10 @@ spec:
         - upload-chart
 
     - name: oc-tag-image-stage
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: in
+          Values: ["master"]
       taskRef:
         name: openshift-client
       workspaces:
@@ -276,13 +270,10 @@ spec:
         - upload-chart
 
     - name: helm-install-apps-dev # branches only deploy to dev
-      conditions:
-      - conditionRef: is-not-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: notin
+          Values: ["master"]
       taskRef:
         name: helm-upgrade-from-repo
       params:
@@ -327,13 +318,10 @@ spec:
       - oc-tag-image-test
 
     - name: helm-argocd-apps-test
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: in
+          Values: ["master"]
       taskRef:
         name: helm-template-from-source
       workspaces:
@@ -394,13 +382,10 @@ spec:
       - oc-tag-image-stage
 
     - name: helm-argocd-apps-stage
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: in
+          Values: ["master"]
       taskRef:
         name: helm-template-from-source
       workspaces:
