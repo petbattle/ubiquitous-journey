@@ -28,7 +28,7 @@ spec:
     - name: sync
       image: argoproj/argocd:$(params.argocd-version)
       script: |
-        set -ex
+        #set -ex
         if [ ! -z $(params.revision) ]; then
           argocd app sync $(params.application-name) --server $(params.argocd-server) --revision $(params.revision) $(params.flags) --timeout 60 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
         else
