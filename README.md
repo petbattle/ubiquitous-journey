@@ -72,6 +72,7 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
 - [ ] code quality gates - configure pipeline args to fail on quality gates
+- [ ] code quality check should include the branch name generated for sonarqube
 - [X] document webhook triggers create them using tekton task
 - [ ] dev-ex-dashboard configure - REPLACE this with Console Links Chart when ready!! https://github.com/redhat-cop/helm-charts/pull/109
 - [ ] add nsfw apps to this guide
