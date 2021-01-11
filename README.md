@@ -15,7 +15,7 @@ Just run this code as a cluster admin user:
 cd ubiquitous-journey
 # bootstrap to install argocd and create projects
 helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
-# create the argocd token secret in labs-ci-cd namespace see TBD below
+# FIXME - Secrets - create the argocd token secret in labs-ci-cd namespace see TBD below
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
@@ -31,14 +31,20 @@ oc -n labs-ci-cd process pet-battle-deploy -p HELM_CHART_VERSION=1.0.1 | oc -n l
 oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.4 | oc -n labs-ci-cd create -f-
 ```
 
-If you are on a branch, you can test a development deployment (helm update --install) using:
+If you are on a branch called `develop`, you can test a deployment (the same as a helm update --install) using:
 ```bash
-# GIT_BRANCH=release_name, GIT_SHORT_REVISION=image_version, HELM_CHART_VERSION is Optional (it will pull latest chart from nexus helm chart repo if not specified)
-oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=latest -p GIT_BRANCH=develop -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=latest -p GIT_BRANCH=develop | oc -n labs-ci-cd create -f-
+# HELM_CHART_VERSION is Optional (it will pull latest chart from nexus helm chart repo if not specified)
+oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=develop -p GIT_BRANCH=develop -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
+# OR
+oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=develop -p GIT_BRANCH=develop | oc -n labs-ci-cd create -f-
 ```
 
-To create webhooks in github repos run these (TaskRuns) once manually
+Or you can do a full build and deployment pipeline of a branch called `develop` using
+```bash
+oc -n labs-ci-cd process pet-battle-api -p GIT_REVISION=develop -p GIT_SHORT_REVISION=develop -p GIT_BRANCH=develop | oc -n labs-ci-cd create -f-
+```
+
+To create webhooks that trigger a full pipeline build and deployment in your github repos run these (TaskRuns) once manually:
 ```bash
 oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=eformat -p GITHUB_REPO=pet-battle-api -p WEBHOOK_URL=http://$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=eformat -p GITHUB_REPO=pet-battle -p WEBHOOK_URL=http://$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
