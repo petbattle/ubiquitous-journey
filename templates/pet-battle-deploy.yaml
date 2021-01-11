@@ -31,7 +31,7 @@ objects:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"
     - name: GIT_URL
-      value: https://github.com/eformat/pet-battle
+      value: "${GIT_URL}"
     - name: GIT_REVISION
       value: "${GIT_REVISION}"
     - name: GIT_REF
@@ -62,6 +62,11 @@ parameters:
   name: APPLICATION_NAME
   required: true
   value: pet-battle
+- description: Git URL
+  displayName: Git URL
+  name: GIT_URL
+  required: true
+  value: "https://github.com/eformat/pet-battle"
 - description: Git tag or revision
   displayName: Git tag or revision
   name: GIT_REVISION
