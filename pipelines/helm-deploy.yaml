@@ -54,7 +54,7 @@ spec:
       when:
         - input: "$(params.GIT_BRANCH)"
           operator: notin
-          values: ["main"]
+          values: ["master"]
       taskRef:
         name: helm-upgrade-from-repo
       params:
@@ -79,7 +79,7 @@ spec:
       when:
         - input: "$(params.GIT_BRANCH)"
           operator: in
-          values: ["main"]
+          values: ["master"]
       taskRef:
         name: helm-template-from-source
       workspaces:
@@ -117,13 +117,10 @@ spec:
       - helm-argocd-apps-test
 
     - name: helm-argocd-apps-stage
-      conditions:
-      - conditionRef: is-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: in
+          values: ["master"]
       taskRef:
         name: helm-template-from-source
       workspaces:
