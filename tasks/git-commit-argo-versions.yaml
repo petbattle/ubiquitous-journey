@@ -108,6 +108,7 @@ spec:
         git pull
         git add $(params.ARGOCD_CONFIG_REPO_PATH)
         git commit -m "🚀 AUTOMATED COMMIT - Deployment $(params.APPLICATION_NAME) $(params.GIT_TAG) 🚀" || rc=$?
+        set +x
         git remote set-url origin  https://foobar:$(cat $(workspaces.git-auth-secret.path)/password)@$(params.GIT_REPO_URL)
         git push
 
