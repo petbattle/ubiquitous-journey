@@ -110,7 +110,7 @@ applications:
       image_name: pet-battle
       image_namespace: labs-test
       config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox309.opentlc.com'"
-      image_version: "3901031"
+      image_version: "f5e7ffb"
     project:
       name: pet-battle-test
       enabled: true
