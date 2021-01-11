@@ -73,3 +73,4 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 - [X] split test, stage deploys - app of apps
 - [ ] add HelmChartRepository to pb-ci-cd - need this to merge for nexus support https://github.com/openshift/console/pull/7711 
 - [ ] add E2E tests between test -> stage promotion
+- [ ] get Helm Release Notes working for pb apps
