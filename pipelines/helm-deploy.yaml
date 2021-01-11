@@ -12,15 +12,6 @@ spec:
   - name: APPLICATION_NAME
     type: string
     default: ""
-  - name: GIT_URL
-    type: string
-    default: ""
-  - name: GIT_REVISION
-    type: string
-    default: "master"
-  - name: GIT_REF
-    type: string
-    default: "refs/heads/master"
   - name: GIT_SHORT_REVISION
     type: string
     default: ""
@@ -42,15 +33,6 @@ spec:
   - name: TEST_NAMESPACE
     type: string
     default: "labs-test"
-  - name: APP_OF_APPS_DEV_KEY
-    type: string
-    default: ""
-  - name: APP_OF_APPS_TEST_KEY
-    type: string
-    default: ""
-  - name: APP_OF_APPS_TEST_STAGE
-    type: string
-    default: ""
   tasks:
     - name: fetch-cicd-repository
       taskRef:
@@ -69,13 +51,10 @@ spec:
           value: "true"
 
     - name: helm-install-apps-branches # only deploy to dev
-      conditions:
-      - conditionRef: is-not-equal
-        params:
-          - name: left
-            value: "master"
-          - name: right
-            value: "$(params.GIT_BRANCH)"
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: notin
+          values: ["main"]
       taskRef:
         name: helm-upgrade-from-repo
       params:
@@ -96,7 +75,48 @@ spec:
       runAfter:
         - fetch-cicd-repository
 
-    - name: helm-argocd-apps-master # deploy to test + stage
+    - name: helm-argocd-apps-test
+      when:
+        - input: "$(params.GIT_BRANCH)"
+          operator: in
+          values: ["main"]
+      taskRef:
+        name: helm-template-from-source
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: charts_dir
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+        - name: values_file
+          value: argo-app-of-apps-test.yaml
+        - name: release_name
+          value: my
+        - name: target_namespace
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: overwrite_values
+          value: "foo=bar"
+      runAfter:
+        - git-commit-test
+
+    - name: argocd-sync-application-test
+      retries: 3
+      taskRef:
+        name: argocd-sync-and-wait
+      workspaces:
+      - name: argocd-env-secret
+        workspace: argocd-env-secret
+      params:
+      - name: application-name
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)"
+      - name: flags
+        value: --insecure
+      - name: revision
+        value: "$(params.HELM_CHART_VERSION)"
+      runAfter:
+      - helm-argocd-apps-test
+
+    - name: helm-argocd-apps-stage
       conditions:
       - conditionRef: is-equal
         params:
@@ -113,29 +133,29 @@ spec:
         - name: charts_dir
           value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
-          value: argo-app-of-apps.yaml
+          value: argo-app-of-apps-stage.yaml
         - name: release_name
           value: my
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
-          value: "foo=bar" # these are in git
+          value: "foo=bar"
       runAfter:
-        - fetch-cicd-repository
+        - git-commit-stage
 
-    - name: argocd-sync-application-master
+    - name: argocd-sync-application-stage
       retries: 3
       taskRef:
         name: argocd-sync-and-wait
       workspaces:
-        - name: argocd-env-secret
-          workspace: argocd-env-secret
+      - name: argocd-env-secret
+        workspace: argocd-env-secret
       params:
-        - name: application-name
-          value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)" # sync by label, multiple apps different namespaces maybe synced
-        - name: flags
-          value: --insecure
-        - name: revision
-          value: "$(params.GIT_REVISION)"
+      - name: application-name
+        value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)" 
+      - name: flags
+        value: --insecure
+      - name: revision
+        value: "$(params.HELM_CHART_VERSION)"
       runAfter:
-        - helm-argocd-apps-master
+      - helm-argocd-apps-stage
