@@ -26,9 +26,9 @@ oc -n labs-ci-cd process pet-battle-tournament | oc -n labs-ci-cd create -f-
 
 If you have already built and tagged images, you can redeploy the argocd application suite (helm template) using:
 ```bash
-oc -n labs-ci-cd process pet-battle-api-deploy | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-deploy | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-tournament-deploy | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-api-deploy -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-deploy -p HELM_CHART_VERSION=1.0.1 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.4 | oc -n labs-ci-cd create -f-
 ```
 
 If you are on a branch, you can test a development deployment (helm update --install) using:
