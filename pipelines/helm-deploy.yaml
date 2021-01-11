@@ -97,7 +97,7 @@ spec:
         - name: overwrite_values
           value: "foo=bar"
       runAfter:
-        - git-commit-test
+        - fetch-cicd-repository
 
     - name: argocd-sync-application-test
       retries: 3
@@ -141,7 +141,7 @@ spec:
         - name: overwrite_values
           value: "foo=bar"
       runAfter:
-        - git-commit-stage
+        - fetch-cicd-repository
 
     - name: argocd-sync-application-stage
       retries: 3
