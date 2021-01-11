@@ -94,3 +94,7 @@ applications:
     project:
       name: pet-battle-stage
       enabled: true
+  tournamentservice_v1_stage:
+    enabled: true
+    values:
+      image_version: 06e5754
