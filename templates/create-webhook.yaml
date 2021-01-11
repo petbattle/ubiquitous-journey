@@ -66,4 +66,4 @@ parameters:
   displayName: Tekton Webhook URL
   name: WEBHOOK_URL
   required: true
-  value: "http://webhook-labs-ci-cd.apps.hivec.sandbox1438.opentlc.com"
+  value: "http://webhook-labs-ci-cd.apps.hivec.sandbox309.opentlc.com"

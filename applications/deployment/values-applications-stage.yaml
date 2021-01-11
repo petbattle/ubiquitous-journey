@@ -65,7 +65,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-staging
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1438.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox309.opentlc.com'"
     project:
       name: pet-battle-stage
       enabled: true
