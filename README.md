@@ -64,10 +64,12 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 - [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
 - [X] Operator split into charts requiring privilege
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
-- [ ] ubi quarkus ubi build image with tools, check base now we have new images (using custom one)
+- [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
 - [ ] code quality gates - configure pipeline args to fail on quality gates
 - [X] document webhook triggers create them using tekton task
 - [ ] dev-ex-dashboard configure - REPLACE this with Console Links Chart when ready!! https://github.com/redhat-cop/helm-charts/pull/109
 - [ ] add nsfw apps to this guide
 - [X] add github triggers work
 - [X] split test, stage deploys - app of apps
+- [ ] add HelmChartRepository to pb-ci-cd - need this to merge for nexus support https://github.com/openshift/console/pull/7711 
+- [ ] add E2E tests between test -> stage promotion
