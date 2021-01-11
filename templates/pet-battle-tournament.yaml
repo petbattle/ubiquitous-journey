@@ -11,7 +11,7 @@ objects:
   metadata:
     generateName: pet-battle-tournament-
     labels:
-      git.url: "${GIT_URL}/tree/${GIT_BRANCH}"
+      git.branch: "${GIT_BRANCH}"
       git.revision: "${GIT_REVISION}"
       git.short.revision: "${GIT_SHORT_REVISION}"
     annotations:
