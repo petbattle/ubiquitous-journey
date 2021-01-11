@@ -290,7 +290,7 @@ spec:
         - oc-tag-image-dev
 
     - name: git-commit-test
-      retries: 1
+      retries: 3
       taskRef:
         name: git-commit-argo-versions
       workspaces:
@@ -354,7 +354,7 @@ spec:
       - helm-argocd-apps-test
 
     - name: git-commit-stage
-      retries: 1
+      retries: 3
       taskRef:
         name: git-commit-argo-versions
       workspaces:
