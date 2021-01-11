@@ -10,6 +10,8 @@ objects:
   kind: PipelineRun
   metadata:
     generateName: test-tagging-pipeline-
+    labels:
+      git.tag: "${GIT_TAG}"
     annotations:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous

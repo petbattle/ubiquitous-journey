@@ -10,6 +10,10 @@ objects:
   kind: PipelineRun
   metadata:
     generateName: pet-battle-api-
+    labels:
+      git.url: "${GIT_URL}/tree/${GIT_BRANCH}"
+      git.revision: "${GIT_REVISION}"
+      git.short.revision: "${GIT_SHORT_REVISION}"
     annotations:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
@@ -36,7 +40,7 @@ objects:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"
     - name: GIT_URL
-      value: https://github.com/eformat/pet-battle-api.git
+      value: https://github.com/eformat/pet-battle-api
     - name: GIT_REVISION
       value: "${GIT_REVISION}"
     - name: GIT_REF

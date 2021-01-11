@@ -28,6 +28,8 @@ spec:
         generateName: $(tt.params.git-repo-name)-
         labels:
           tekton.dev/pipeline: maven-pipeline
+          git.url: $(tt.params.git-repo-url)/tree/$(tt.params.git-branch)
+          git.revision: $(tt.params.git-revision)
         annotations:
           argocd.argoproj.io/sync-options: Prune=false
           argocd.argoproj.io/compare-options: IgnoreExtraneous
