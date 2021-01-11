@@ -20,7 +20,7 @@ spec:
     default: --
   - name: argocd-version
     type: string
-    default: v1.6.2
+    default: v1.8.2
   - name: argocd-server
     type: string
     default: argocd-server
