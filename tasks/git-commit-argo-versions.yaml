@@ -89,6 +89,7 @@ spec:
         git config --global user.email $(params.GIT_USER_EMAIL)
         git config --global user.name $(params.GIT_USER_NAME)
         git config --global push.default simple
+        git config --global pull.rebase false
 
         # Set app suite values overrides in app-of-apps file to Git SHA's
         YQ_ARG_0=.applications.$(params.APP_OF_APPS_KEY).enabled

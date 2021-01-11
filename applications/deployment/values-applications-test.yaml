@@ -104,7 +104,7 @@ applications:
     destination: labs-test
     source_ref: 1.0.1
     values:
-      app_tag: main
+      app_tag: master
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
