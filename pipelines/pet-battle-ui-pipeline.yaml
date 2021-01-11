@@ -164,6 +164,21 @@ spec:
         - name: output
           workspace: shared-workspace
 
+    - name: kustomize-build-config
+      taskRef:
+        name: openshift-kustomize
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: SCRIPT
+          value: "kustomize build $1 | oc apply -f-"
+        - name: ARGS
+          value:
+            - "$(params.APPLICATION_NAME)/cicd/applications/build"
+      runAfter:
+        - npm-run-build
+
     - name: oc-start-build
       taskRef:
         name: openshift-client
@@ -177,7 +192,7 @@ spec:
           value:
             - "$(params.APPLICATION_NAME)"
       runAfter:
-        - npm-run-build
+        - kustomize-build-config
 
     - name: upload-chart
       retries: 1
