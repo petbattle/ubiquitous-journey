@@ -164,3 +164,7 @@ applications:
     project:
       name: pet-battle-test
       enabled: true
+  tournamentservice_v1_test:
+    enabled: true
+    values:
+      image_version: 06e5754
