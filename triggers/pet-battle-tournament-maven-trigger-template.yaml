@@ -61,11 +61,11 @@ spec:
           - name: STAGE_NAMESPACE
             value: "labs-staging"
           - name: APP_OF_APPS_DEV_KEY
-            value: $(tt.params.git-app-of-apps-key)_dev
+            value: "pet_battle_tournament_dev" #$(tt.params.git-app-of-apps-key)_dev
           - name: APP_OF_APPS_TEST_KEY
-            value: $(tt.params.git-app-of-apps-key)_test
+            value: "pet_battle_tournament_test" # $(tt.params.git-app-of-apps-key)_test
           - name: APP_OF_APPS_STAGE_KEY
-            value: $(tt.params.git-app-of-apps-key)_stage
+            value: "pet_battle_tournament_stage" # $(tt.params.git-app-of-apps-key)_stage
 #          - name: MAVEN_BUILD_OPTS
 #            value:
 #              - -DskipTests
