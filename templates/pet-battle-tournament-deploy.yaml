@@ -83,11 +83,9 @@ parameters:
   name: GIT_BRANCH
   required: true
   value: master
-- description: Helm Chart Version
-  displayName: Helm Chart Version
+- description: Helm Chart Version (Optional)
+  displayName: Helm Chart Version (Optional)
   name: HELM_CHART_VERSION
-  required: true
-  value: 1.0.0
 - description: Helm Chart Overwrite Values (Optional)
   displayName: Helm Chart Overwrite Values (Optional)
   name: HELM_OVERWRITE_VALUES
