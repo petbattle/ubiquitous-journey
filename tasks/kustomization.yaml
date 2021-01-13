@@ -13,3 +13,4 @@ resources:
 - create-webhook-task.yaml
 - git-commit-argo-versions.yaml
 - helm-upload-chart.yaml
+- sonarqube-quality-gate-check.yaml
