@@ -21,7 +21,7 @@ spec:
 
   steps:
   - name: check
-    image: registry.access.redhat.com/ubi8/ubi:8.3
+    image: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
     script: |
       #!/bin/bash
       cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
