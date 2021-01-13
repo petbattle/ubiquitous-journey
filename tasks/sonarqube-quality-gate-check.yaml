@@ -21,7 +21,7 @@ spec:
 
   steps:
   - name: check
-    image: docker.io/mikefarah/yq:4
+    image: quay.io/eformat/openshift-helm:latest
     script: |
       #!/bin/sh
       cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
