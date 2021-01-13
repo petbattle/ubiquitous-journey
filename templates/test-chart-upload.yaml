@@ -40,7 +40,7 @@ parameters:
   displayName: Git URL
   name: GIT_URL
   required: true
-  value: "https://github.com/eformat/pet-battle-api"
+  value: "https://github.com/petbattle/pet-battle-api"
 - description: Git Ref (branch/tag/ref)
   displayName: Git Ref (branch/tag/ref)
   name: GIT_REF

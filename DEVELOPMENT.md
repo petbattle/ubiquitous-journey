@@ -288,7 +288,7 @@ EOF
 
 ### Applications
 
-We are going to deploy out application using the Helm chart that is part of the [application](https://github.com/eformat/pet-battle-api/tree/master/chart)
+We are going to deploy out application using the Helm chart that is part of the [application](https://github.com/petbattle/pet-battle-api/tree/master/chart)
 
 This chart does not contain a kubernetes `BuildConfig`, so we need to create that here. Our pipeline will create this resource for us.
 
@@ -441,7 +441,7 @@ applications:
   pet_battle_api_dev:
     name: pet-battle-api-dev
     enabled: false # overridden by pipeline
-    source: https://github.com/eformat/pet-battle-api.git
+    source: https://github.com/petbattle/pet-battle-api.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
@@ -454,7 +454,7 @@ applications:
   pet_battle_api_test:
     name: pet-battle-api-test
     enabled: false # overridden by pipeline
-    source: https://github.com/eformat/pet-battle-api.git
+    source: https://github.com/petbattle/pet-battle-api.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-test
@@ -848,7 +848,7 @@ objects:
     - name: APPLICATION_NAME
       value: pet-battle-api
     - name: GIT_URL
-      value: https://github.com/eformat/pet-battle-api.git
+      value: https://github.com/petbattle/pet-battle-api.git
     - name: GIT_REVISION
       value: master # or git tag, revision
     - name: GIT_REF

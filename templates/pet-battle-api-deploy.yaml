@@ -69,7 +69,7 @@ parameters:
   displayName: Git URL
   name: GIT_URL
   required: true
-  value: "https://github.com/eformat/pet-battle-api"
+  value: "https://github.com/petbattle/pet-battle-api"
 - description: Git tag or revision
   displayName: Git tag or revision
   name: GIT_REVISION
