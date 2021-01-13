@@ -133,6 +133,19 @@ spec:
         - name: output
           workspace: shared-workspace
 
+    - name: quality-gate-check
+      retries: 1
+      taskRef:
+        name: sonarqube-quality-gate-check
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+      runAfter:
+      - code-analysis
+
     - name: maven-run
       taskRef:
         name: maven
@@ -149,8 +162,6 @@ spec:
         - name: MAVEN_BUILD_OPTS
           value:
             - "$(params.MAVEN_BUILD_OPTS)"
-      runAfter:
-        - code-analysis
       workspaces:
         - name: maven-settings
           workspace: maven-settings
@@ -158,6 +169,8 @@ spec:
           workspace: maven-m2
         - name: output
           workspace: shared-workspace
+      runAfter:
+        - quality-gate-check
 
     - name: kustomize-build-config
       taskRef:

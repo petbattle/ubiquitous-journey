@@ -1,0 +1,65 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: sonarqube-quality-gate-check
+  labels:
+    app.kubernetes.io/version: "0.1"
+    rht-labs.com/uj: pb-ci-cd
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+spec:
+  description: >-
+    This Task can be used to check sonarqube quality gate
+
+  workspaces:
+    - name: output
+  params:
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+
+  steps:
+    image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
+    script: |
+      #!/bin/bash
+      cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+
+      TASKFILE=$(find . -type f -name report-task.txt)
+      if [ -z ${TASKFILE} ]; then
+        echo "Task File not found"
+        exit 1
+      fi
+      echo ${TASKFILE}
+
+      TASKURL=$(cat ${TASKFILE} | grep ceTaskUrl)
+      TURL=${TASKURL##ceTaskUrl=}
+      if [ -z ${TURL} ]; then
+        echo "Task URL not found"
+        exit 1
+      fi
+      echo ${TURL}
+
+      AID=$(curl -s $TURL | jq -r .task.analysisId)
+      if [ -z ${AID} ]; then
+        echo "Analysis ID not found"
+        exit 1
+      fi  
+      echo ${AID}
+
+      SERVERURL=$(cat ${TASKFILE} | grep serverUrl)
+      SURL=${SERVERURL##serverUrl=}
+      if [ -z ${SURL} ]; then
+        echo "Server URL not found"
+        exit 1
+      fi 
+      echo ${SURL}
+
+      BUILDSTATUS=$(curl -s $SURL/api/qualitygates/project_status?analysisId=${AID} | jq -r .projectStatus.status)
+      if [ "${BUILDSTATUS}" != "OK" ]; then
+        echo "Failed Quality Gate - please check - $SURL/api/qualitygates/project_status?analysisId=${AID}"
+        exit 1
+      fi
+
+      echo "Quality Gate Passed OK - $SURL/api/qualitygates/project_status?analysisId=${AID}"
+      exit 0
