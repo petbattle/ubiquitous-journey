@@ -21,9 +21,9 @@ spec:
 
   steps:
   - name: check
-    image: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+    image: docker.io/mikefarah/yq:4
     script: |
-      #!/bin/bash
+      #!/bin/sh
       cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
 
       TASKFILE=$(find . -type f -name report-task.txt)
