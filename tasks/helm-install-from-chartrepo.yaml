@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: helm-upgrade-from-repo
+  name: helm-install-from-chartrepo
   labels:
     app.kubernetes.io/version: "0.1"
   annotations:
@@ -10,7 +10,7 @@ metadata:
     tekton.dev/tags: helm
 spec:
   description: >-
-    These tasks will install / upgrade a helm chart into your Kubernetes /
+    This task will upgrade/install a helm chart from a chartrepo into your Kubernetes /
     OpenShift Cluster using Helm
 
   params:

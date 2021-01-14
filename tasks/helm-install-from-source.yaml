@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: helm-template-from-source
+  name: helm-install-from-source
   labels:
     app.kubernetes.io/version: "0.1"
     rht-labs.com/uj: pb-ci-cd
@@ -11,7 +11,7 @@ metadata:
     tekton.dev/displayName: "helm"
 spec:
   description: >-
-    These tasks will call helm template on a chart into your Kubernetes /
+    This task will call helm upgrade/install on a chart from source code into your Kubernetes /
     OpenShift Cluster using Helm
 
   params:
@@ -35,7 +35,7 @@ spec:
   workspaces:
     - name: source
   steps:
-    - name: template
+    - name: install
       image: quay.io/eformat/openshift-helm:$(inputs.params.helm_version)
       workingDir: /workspace/source
       script: |
@@ -43,4 +43,4 @@ spec:
         helm list --namespace "$(inputs.params.target_namespace)"
 
         echo installing helm chart...
-        helm template $(inputs.params.release_name) -f $(inputs.params.charts_dir)/$(inputs.params.values_file) $(inputs.params.charts_dir) --set $(inputs.params.overwrite_values) | oc apply -n $(inputs.params.target_namespace) -f-
+        helm upgrade --install $(inputs.params.release_name) -f $(inputs.params.charts_dir)/$(inputs.params.values_file) $(inputs.params.charts_dir) --set $(inputs.params.overwrite_values) --namespace "$(inputs.params.target_namespace)"  --skip-crds

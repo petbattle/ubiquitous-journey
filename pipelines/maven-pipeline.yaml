@@ -283,7 +283,7 @@ spec:
           Operator: notin
           Values: ["master"]
       taskRef:
-        name: helm-upgrade-from-repo
+        name: helm-install-from-chartrepo
       params:
         - name: helm_repo_name
           value: "nexus"
@@ -331,7 +331,7 @@ spec:
           Operator: in
           Values: ["master"]
       taskRef:
-        name: helm-template-from-source
+        name: helm-install-from-source
       workspaces:
         - name: source
           workspace: shared-workspace
@@ -395,7 +395,7 @@ spec:
           Operator: in
           Values: ["master"]
       taskRef:
-        name: helm-template-from-source
+        name: helm-install-from-source
       workspaces:
         - name: source
           workspace: shared-workspace

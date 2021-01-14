@@ -6,8 +6,8 @@ resources:
 - maven.yaml
 - openshift-client.yaml
 - openshift-kustomize.yaml
-- helm-template-from-source.yaml
-- helm-upgrade-from-repo.yaml
+- helm-install-from-source.yaml
+- helm-install-from-chartrepo.yaml
 - argocd-sync-and-wait.yaml
 - nodejs.yaml
 - create-webhook-task.yaml
