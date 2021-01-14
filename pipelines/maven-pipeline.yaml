@@ -341,7 +341,7 @@ spec:
         - name: values_file
           value: argo-app-of-apps-test.yaml
         - name: release_name
-          value: my
+          value: "pet-battle-suite-test"
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
@@ -405,7 +405,7 @@ spec:
         - name: values_file
           value: argo-app-of-apps-stage.yaml
         - name: release_name
-          value: my
+          value: "pet-battle-suite-stage"
         - name: target_namespace
           value: "$(params.BUILD_NAMESPACE)"
         - name: overwrite_values
