@@ -306,7 +306,8 @@ spec:
         - name: overwrite_values
           value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=$(params.GIT_SHORT_REVISION),image_namespace=$(params.DEV_NAMESPACE)"
       runAfter:
-        - oc-tag-image-dev
+#        - oc-tag-image-dev
+        - upload-chart
 
     - name: git-commit-test
       retries: 3
