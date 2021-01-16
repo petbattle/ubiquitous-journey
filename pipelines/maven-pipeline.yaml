@@ -215,23 +215,23 @@ spec:
       runAfter:
         - oc-start-build
 
-    - name: oc-tag-image-dev
-      taskRef:
-        name: openshift-client
-      workspaces:
-        - name: output
-          workspace: shared-workspace
-      params:
-        - name: SCRIPT
-          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)"
-            - "$(params.DEV_NAMESPACE)"
-            - "$(params.BUILD_NAMESPACE)"
-            - "$(params.GIT_SHORT_REVISION)"
-      runAfter:
-        - upload-chart
+    # - name: oc-tag-image-dev
+    #   taskRef:
+    #     name: openshift-client
+    #   workspaces:
+    #     - name: output
+    #       workspace: shared-workspace
+    #   params:
+    #     - name: SCRIPT
+    #       value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
+    #     - name: ARGS
+    #       value:
+    #         - "$(params.APPLICATION_NAME)"
+    #         - "$(params.DEV_NAMESPACE)"
+    #         - "$(params.BUILD_NAMESPACE)"
+    #         - "$(params.GIT_SHORT_REVISION)"
+    #   runAfter:
+    #     - upload-chart
 
     - name: oc-tag-image-test
       when:
