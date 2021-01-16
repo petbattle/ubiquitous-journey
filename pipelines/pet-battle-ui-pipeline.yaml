@@ -175,7 +175,8 @@ spec:
         - name: output
           workspace: shared-workspace
       runAfter:
-        - quality-gate-check
+#        - quality-gate-check
+        - npm-install
 
     - name: kustomize-build-config
       taskRef:
@@ -190,8 +191,7 @@ spec:
           value:
             - "$(params.APPLICATION_NAME)/cicd/applications/build"
       runAfter:
-        - npm-install
-#        - npm-run-build
+        - npm-run-build
 
     - name: oc-start-build
       taskRef:
