@@ -11,7 +11,7 @@ argocd_projects:
     destinations: *allowed_destinations
 applications:
   pet_battle_suite:
-    name: pet-battle-suite-test    
+    name: pet-battle-suite-test
     enabled: true
     destination: labs-ci-cd
     source: https://github.com/petbattle/pb-ci-cd.git
