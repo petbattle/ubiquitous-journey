@@ -91,7 +91,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-dev
-      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox309.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-dev.apps.hivec.sandbox1862.opentlc.com'"
     project:
       name: pet-battle-dev
       enabled: true
@@ -109,7 +109,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox309.opentlc.com'"
+      config_map: "'http://pet-battle-api-labs-test.apps.hivec.sandbox1862.opentlc.com'"
       image_version: "master"
     project:
       name: pet-battle-test
