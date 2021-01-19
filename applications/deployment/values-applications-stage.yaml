@@ -58,7 +58,7 @@ applications:
     chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: 1.0.2
+    source_ref: 1.0.1
     values:
       app_tag: master
       fullnameOverride: pet-battle
