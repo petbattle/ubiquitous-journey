@@ -81,7 +81,7 @@ spec:
           Operator: in
           Values: ["master"]
       taskRef:
-        name: helm-template-from-source
+        name: helm-install-from-source
       workspaces:
         - name: source
           workspace: shared-workspace
@@ -122,7 +122,7 @@ spec:
           Operator: in
           Values: ["master"]
       taskRef:
-        name: helm-template-from-source
+        name: helm-install-from-source
       workspaces:
         - name: source
           workspace: shared-workspace
