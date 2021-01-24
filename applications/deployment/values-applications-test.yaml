@@ -132,7 +132,6 @@ applications:
         enabled: false
       pet-battle-infra:
         operatorgroup:
-          enabled: true
           targetNamespaces:
             - labs-dev
     ignore_differences: *ignore_differences
@@ -157,7 +156,6 @@ applications:
         enabled: false
       pet-battle-infra:
         operatorgroup:
-          enabled: true
           targetNamespaces:
             - labs-test
     ignore_differences: *ignore_differences

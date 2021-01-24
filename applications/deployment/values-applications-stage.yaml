@@ -88,7 +88,6 @@ applications:
         enabled: false
       pet-battle-infra:
         operatorgroup:
-          enabled: true
           targetNamespaces:
             - labs-staging
     ignore_differences: *ignore_differences

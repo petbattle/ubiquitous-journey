@@ -52,7 +52,7 @@ spec:
           - name: GIT_BRANCH
             value: $(tt.params.git-branch)
           - name: HELM_OVERWRITE_VALUES
-            value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=latest,image_namespace=labs-dev,pet-battle-infra.operatorgroup.enabled=true,pet-battle-infra.operatorgroup.targetNamespaces={labs-dev}"
+            value: "image_repository=image-registry.openshift-image-registry.svc:5000,image_version=latest,image_namespace=labs-dev,pet-battle-infra.operatorgroup.targetNamespaces={labs-dev}"
           - name: MAVEN_MIRROR_URL
             value: http://sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/maven-public
           - name: BUILD_NAMESPACE
