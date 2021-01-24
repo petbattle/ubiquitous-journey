@@ -84,8 +84,7 @@ applications:
       image_name: pet-battle-tournament
       image_namespace: labs-staging
       image_version: "master"
-      config_map: |-
-        {
+      config_map: '{
           "catUrl": "http://pet-battle-api-labs-test.apps.hivec.sandbox1254.opentlc.com",
           "apiUrl": "http://pet-battle-tournament-labs-test.apps.hivec.sandbox1254.opentlc.com",
           "keycloak": {
@@ -98,7 +97,7 @@ applications:
             "showDebugInformation": true,
             "disableAtHashCheck": true
           }
-        }
+        }'
       istag:
         enabled: false
       pet-battle-infra:
