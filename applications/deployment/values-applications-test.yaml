@@ -102,7 +102,7 @@ applications:
     chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.2
+    source_ref: 1.0.3
     values:
       app_tag: master
       fullnameOverride: pet-battle
