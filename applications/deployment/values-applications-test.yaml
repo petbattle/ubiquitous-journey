@@ -110,20 +110,7 @@ applications:
       image_name: pet-battle
       image_namespace: labs-test
       image_version: "master"
-      config_map: '{
-          "catUrl": "http://pet-battle-api-labs-test.apps.hivec.sandbox1254.opentlc.com",
-          "apiUrl": "http://pet-battle-tournament-labs-test.apps.hivec.sandbox1254.opentlc.com",
-          "keycloak": {
-            "issuer": "https://keycloak-labs-test.apps.hivec.sandbox1254.opentlc.com/auth/auth/realms/pbrealm",
-            "redirectUri": "http://pet-battle-labs-test.apps.hivec.sandbox1254.opentlc.com/*",
-            "clientId": "pbclient",
-            "responseType": "code",
-            "scope": "openid profile email",
-            "requireHttps": false,
-            "showDebugInformation": true,
-            "disableAtHashCheck": true
-          }
-        }'
+      config_map: '{ "catUrl": "http://pet-battle-api-labs-test.apps.hivec.sandbox1254.opentlc.com", "apiUrl": "http://pet-battle-tournament-labs-test.apps.hivec.sandbox1254.opentlc.com", "keycloak": { "issuer": "https://keycloak-labs-test.apps.hivec.sandbox1254.opentlc.com/auth/auth/realms/pbrealm", "redirectUri": "http://pet-battle-labs-test.apps.hivec.sandbox1254.opentlc.com/*", "clientId": "pbclient", "responseType": "code", "scope": "openid profile email", "requireHttps": false, "showDebugInformation": true, "disableAtHashCheck": true } }'
     project:
       name: pet-battle-test
       enabled: true
