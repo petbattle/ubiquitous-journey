@@ -74,6 +74,7 @@ oc get crd keycloakrealms.keycloak.org grafanadashboards.integreatly.org infinis
 # to install these CRD's for the first time in a cluster as a cluster-admin user, which we can uninstall once done.
 helm upgrade --install pet-battle-infra-subs petbattle/pet-battle-infra-subs --namespace petbattle --create-namespace
 helm uninstall pet-battle-infra-subs --namespace petbattle
+oc delete project petbattle
 ```
 
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
