@@ -75,17 +75,17 @@ helm upgrade --install pet-battle-infra-subs petbattle/pet-battle-infra-subs --n
 helm uninstall pet-battle-infra-subs --namespace petbattle
 ```
 
-- [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
-- [X] Operator split into charts requiring privilege
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
 - [ ] code quality gates - configure pipeline args to fail on quality gates
 - [ ] code quality check should include the branch name generated for sonarqube
-- [X] document webhook triggers create them using tekton task
 - [ ] dev-ex-dashboard configure - REPLACE this with Console Links Chart when ready!! https://github.com/redhat-cop/helm-charts/pull/109
 - [ ] add nsfw apps to this guide
-- [X] add github triggers work
-- [X] split test, stage deploys - app of apps
-- [ ] add HelmChartRepository to pb-ci-cd - need this to merge for nexus support https://github.com/openshift/console/pull/7711 
+- [ ] add HelmChartRepository to pb-ci-cd - need this to merge for nexus support https://github.com/openshift/console/pull/7711,https://github.com/openshift/console/pull/7841
 - [ ] add E2E tests between test -> stage promotion
 - [ ] get Helm Release Notes working for pb apps
+- [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
+- [X] Operator split into charts requiring privilege
+- [X] document webhook triggers create them using tekton task
+- [X] add github triggers work
+- [X] split test, stage deploys - app of apps
