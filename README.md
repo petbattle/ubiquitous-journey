@@ -55,9 +55,8 @@ oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=t
 - [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 
 ```bash
-# manually mount secrets for now
+# manually mount secrets for now (see secrets folder for templates)
 oc -n labs-ci-cd apply -f ~/tmp/git-auth.yaml
-
 # generate argocd cd token
 oc -n labs-ci-cd patch cm argocd-cm --type='json' -p='[{"op": "add", "path": "/data", "value": {"accounts.admin": "apiKey"}}]'
 HOST=$(oc -n labs-ci-cd get route argocd-server --template='{{ .spec.host }}')
@@ -65,6 +64,15 @@ argocd login $HOST:443 --sso --insecure --username admin
 TOKEN=$(argocd account generate-token --account admin | base64 -w0)
 sed -i -e "s|  password:.*|  password: ${TOKEN}|" ~/tmp/argocd-token.yaml
 oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
+```
+
+- [ ] boostrap crd's is two step process on an empty cluster. need this in a pipeline somewhere
+```bash
+# pet-battle-infra-subs is intended for individual installation in a new cluster that does not contain the CRD's
+oc get crd keycloakrealms.keycloak.org grafanadashboards.integreatly.org infinispans.infinispan.org
+# to install these CRD's for the first time in a cluster as a cluster-admin user, which we can uninstall once done.
+helm upgrade --install pet-battle-infra-subs petbattle/pet-battle-infra-subs --namespace petbattle --create-namespace
+helm uninstall pet-battle-infra-subs --namespace petbattle
 ```
 
 - [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
