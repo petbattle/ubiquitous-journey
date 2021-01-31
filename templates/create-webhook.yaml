@@ -41,7 +41,7 @@ parameters:
   displayName: Github Organisation
   name: GITHUB_ORG
   required: true
-  value: "eformat"
+  value: "petbattle"
 - description: Github User
   displayName: Github User
   name: GITHUB_USER

@@ -80,7 +80,7 @@ applications:
   pet_battle_dev:
     name: pet-battle-dev
     enabled: false
-    source: https://github.com/eformat/pet-battle.git
+    source: https://github.com/petbattle/pet-battle.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
