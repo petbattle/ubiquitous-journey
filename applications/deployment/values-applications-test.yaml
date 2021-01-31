@@ -141,7 +141,7 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.9
+    source_ref: 1.0.10
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
@@ -150,6 +150,8 @@ applications:
       image_version: "master"
       istag:
         enabled: false
+      pet-battle-infra:
+        app_domain: apps.hivec.sandbox1254.opentlc.com
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
