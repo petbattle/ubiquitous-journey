@@ -16,7 +16,6 @@ cd ubiquitous-journey
 # bootstrap to install argocd and create projects
 helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
 # FIXME - Secrets - create the argocd token secret in labs-ci-cd namespace see TBD below
-# FIXME - crd's - new clusters, see pet-battle-infra-subs TBD below
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
