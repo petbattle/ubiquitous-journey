@@ -67,16 +67,6 @@ sed -i -e "s|  password:.*|  password: ${TOKEN}|" ~/tmp/argocd-token.yaml
 oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 ```
 
-- [ ] boostrap crd's is two step process on an empty cluster. need this in a pipeline somewhere
-```bash
-# pet-battle-infra-subs is intended for individual installation in a new cluster that does not contain the CRD's
-oc get crd keycloakrealms.keycloak.org grafanadashboards.integreatly.org infinispans.infinispan.org
-# to install these CRD's for the first time in a cluster as a cluster-admin user, which we can uninstall once done.
-helm upgrade --install pet-battle-infra-subs petbattle/pet-battle-infra-subs --namespace petbattle --create-namespace
-helm uninstall pet-battle-infra-subs --namespace petbattle
-oc delete project petbattle
-```
-
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
 - [ ] code quality gates - configure pipeline args to fail on quality gates
@@ -91,3 +81,4 @@ oc delete project petbattle
 - [X] document webhook triggers create them using tekton task
 - [X] add github triggers work
 - [X] split test, stage deploys - app of apps
+- [X] boostrap crd's is two step process on an empty cluster. need this in a pipeline somewhere
