@@ -66,7 +66,7 @@ applications:
       image_name: pet-battle
       image_namespace: labs-staging
       config_map: '{ "catsUrl": "http://pet-battle-api-labs-staging.apps.hivec.sandbox1459.opentlc.com", "tournamentsUrl": "http://pet-battle-tournament-labs-staging.apps.hivec.sandbox1459.opentlc.com", "keycloak": { "issuer": "https://keycloak-labs-staging.apps.hivec.sandbox1459.opentlc.com/auth/realms/pbrealm", "redirectUri": "http://pet-battle-labs-staging.apps.hivec.sandbox1459.opentlc.com/*", "clientId": "pbclient", "responseType": "code", "scope": "openid profile email", "requireHttps": false, "showDebugInformation": true, "disableAtHashCheck": true } }'
-      image_version: "ad4c6fe"
+      image_version: "b4bdb9a"
     project:
       name: pet-battle-stage
       enabled: true
