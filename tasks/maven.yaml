@@ -20,7 +20,7 @@ spec:
     - name: MAVEN_IMAGE
       type: string
       description: Maven base image
-      default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+      default: quay.io/eformat/jenkins-agent-graalvm:latest
     - name: GOALS
       description: maven goals to run
       type: array
