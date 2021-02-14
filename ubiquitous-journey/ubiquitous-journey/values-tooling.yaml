@@ -190,7 +190,7 @@ applications:
   - name: cert-utils
     enabled: true
     destination: openshift-operators
-    source: https://github.com/eformat/refactored-adventure
+    source: https://github.com/rht-labs/refactored-adventure
     source_path: cert-utils/base
     source_ref: master
     sync_policy: *sync_policy_true
