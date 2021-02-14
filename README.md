@@ -14,7 +14,7 @@ Just run this code as a cluster admin user:
 # clone this repo and
 cd ubiquitous-journey
 # bootstrap to install argocd and create projects
-helm template bootstrap --dependency-update -f bootstrap/values-bootstrap.yaml bootstrap | oc apply -f-
+helm upgrade --install bootstrap -f bootstrap/values-bootstrap.yaml bootstrap --create-namespace --namespace labs-bootstrap
 # FIXME - Secrets - create the argocd token secret in labs-ci-cd namespace see TBD below
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
