@@ -147,7 +147,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: "98ce5f7"
+      image_version: "master"
       istag:
         enabled: false
       pet-battle-infra:
