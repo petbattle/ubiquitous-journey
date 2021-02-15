@@ -317,6 +317,8 @@ spec:
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/cicd"
+      - name: WORK_DIRECTORY_APP
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
       - name: GIT_TAG
         value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
@@ -381,6 +383,8 @@ spec:
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/cicd"
+      - name: WORK_DIRECTORY_APP
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
       - name: GIT_TAG
         value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
