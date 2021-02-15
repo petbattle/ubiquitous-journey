@@ -105,7 +105,7 @@ spec:
           yq eval -i ${YQ_ARG_1}=\"${HELM_CHART_VERSION}\" "$(params.ARGOCD_CONFIG_REPO_PATH)"
         else
           # set from application code
-          yq eval -i ${YQ_ARG_1}=\"${HELM_CHART_VERSION}\" "$(yq eval '.version' $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)/chart/Chart.yaml)"
+          yq eval -i ${YQ_ARG_1}=\"$(yq eval '.version' $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)/chart/Chart.yaml)\" "$(params.ARGOCD_CONFIG_REPO_PATH)"
         fi
         yq eval -i ${YQ_ARG_2}=\"${GIT_REF::7}\" $(params.ARGOCD_CONFIG_REPO_PATH)
 
