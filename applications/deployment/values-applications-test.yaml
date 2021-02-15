@@ -64,12 +64,12 @@ applications:
     chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.6
+    source_ref: 1.0.7
     values:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: master
+      image_version: 19c8871
       istag:
         enabled: false
       deploymentConfig: false
@@ -141,13 +141,13 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.16
+    source_ref: 1.0.17
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: "master"
+      image_version: "ca64f99"
       istag:
         enabled: false
       pet-battle-infra:
