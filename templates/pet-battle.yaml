@@ -100,4 +100,4 @@ parameters:
   displayName: Argo stage app of app key name (use underscores only)
   name: APP_OF_APPS_STAGE_KEY
   required: true
-  value: "pet_battle_api_stage"
+  value: "pet_battle_stage"
