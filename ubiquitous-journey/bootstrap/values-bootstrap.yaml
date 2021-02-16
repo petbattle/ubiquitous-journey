@@ -34,10 +34,6 @@ bootstrap-project:
     - name: *stage
       bindings: *binds
 
-  serviceaccounts:
-    - name: jenkins
-      namespace: *ci_cd
-
 argocd-operator:
   enabled: true
   name: argocd
