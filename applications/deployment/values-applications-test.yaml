@@ -69,7 +69,7 @@ applications:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: 19c8871
+      image_version: master
       istag:
         enabled: false
       deploymentConfig: false
@@ -109,7 +109,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: "master"
+      image_version: "85ce4ed"
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox1284.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox1284.opentlc.com", "keycloak": { "issuer": "https://keycloak-labs-test.apps.hivec.sandbox1284.opentlc.com/auth/realms/pbrealm", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox1284.opentlc.com/*", "clientId": "pbclient", "responseType": "code", "scope": "openid profile email", "requireHttps": false, "showDebugInformation": true, "disableAtHashCheck": true } }'
     project:
       name: pet-battle-test
@@ -141,13 +141,13 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.17
+    source_ref: 1.0.18
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: "ca64f99"
+      image_version: "646e159"
       istag:
         enabled: false
       pet-battle-infra:
