@@ -201,7 +201,7 @@ applications:
     source: https://github.com/petbattle/pb-ci-cd.git
     source_path: ubiquitous-journey/bootstrap
     destination: labs-bootstrap
-    source_ref: "master"
+    source_ref: "main"
     sync_policy: *sync_policy_true
     values:
       argocd-operator:
