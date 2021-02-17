@@ -152,6 +152,7 @@ applications:
         enabled: false
       pet-battle-infra:
         app_domain: apps.hivec.sandbox1284.opentlc.com
+        ignoreHelmHooks: true
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-test
