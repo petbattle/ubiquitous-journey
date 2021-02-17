@@ -206,6 +206,8 @@ applications:
     values:
       argocd-operator:
         ignoreHelmHooks: true
+    helm_values:
+      - values-bootstrap.yaml
   # PB-CI-CD
   - name: pb-ci-cd
     destination: labs-ci-cd
