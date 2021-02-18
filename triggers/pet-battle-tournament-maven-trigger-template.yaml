@@ -36,9 +36,9 @@ spec:
           argocd.argoproj.io/compare-options: IgnoreExtraneous
       spec:
         serviceAccountName: pipeline
-        taskRunSpecs:
+        serviceAccountNames:
           - taskName: helm-install-apps-branches
-            taskServiceAccountName: argocd-application-controller
+            serviceAccountName: argocd-application-controller
         pipelineRef:
           name: maven-pipeline
         params:
