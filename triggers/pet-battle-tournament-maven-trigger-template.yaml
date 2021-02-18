@@ -37,7 +37,7 @@ spec:
       spec:
         serviceAccountName: pipeline
         serviceAccountNames:
-          - taskName: helm-install-apps-branches
+          - taskName: helm-install-apps-dev
             serviceAccountName: argocd-application-controller
         pipelineRef:
           name: maven-pipeline
