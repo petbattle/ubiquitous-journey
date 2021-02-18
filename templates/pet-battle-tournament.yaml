@@ -18,6 +18,10 @@ objects:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
   spec:
+    serviceAccountName: pipeline
+    serviceAccountNames:
+      - taskName: helm-install-apps-dev
+        serviceAccountName: argocd-application-controller
     pipelineRef:
       name: maven-pipeline
     workspaces:
