@@ -195,6 +195,15 @@ applications:
     source_ref: master
     sync_policy: *sync_policy_true
     no_helm: true
+  # Knative
+  - name: knative
+    enabled: true
+    destination: openshift-serverless
+    source: https://github.com/rht-labs/refactored-adventure
+    source_path: knative/base
+    source_ref: master
+    sync_policy: *sync_policy_true
+    no_helm: true
   # Bootstrap Journey
   - name: bootstrap-journey
     enabled: true
