@@ -43,3 +43,5 @@ spec:
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       name: npm-goals
       resources: {}
+      securityContext:
+        fsGroup: 0

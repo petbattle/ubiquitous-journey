@@ -81,9 +81,6 @@ spec:
   steps:
     - name: clone
       image: $(params.gitInitImage)
-      securityContext:
-        runAsUser: 1001
-        allowPrivilegeEscalation: false
       script: |
         #!/bin/sh
         set -eu -o pipefail

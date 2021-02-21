@@ -132,3 +132,5 @@ spec:
         - $(workspaces.maven-settings.path)/settings.xml
         - "$(params.GOALS)"
         - "$(params.MAVEN_BUILD_OPTS)"
+      securityContext:
+        fsGroup: 0
