@@ -132,8 +132,4 @@ spec:
         - $(workspaces.maven-settings.path)/settings.xml
         - "$(params.GOALS)"
         - "$(params.MAVEN_BUILD_OPTS)"
-      securityContext:
-        allowPrivilegeEscalation: false
-        runAsUser: 1001
-        fsGroup: 0
 
