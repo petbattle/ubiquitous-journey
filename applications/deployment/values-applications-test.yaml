@@ -64,7 +64,7 @@ applications:
     chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.7
+    source_ref: 1.0.8
     values:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
