@@ -43,4 +43,8 @@ spec:
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       name: npm-goals
       resources: {}
+      securityContext:
+        runAsUser: 1001
+        allowPrivilegeEscalation: false
+        fsGroup: 0
 
