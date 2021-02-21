@@ -38,7 +38,7 @@ applications:
     chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: 1.0.7
+    source_ref: 1.0.8
     values:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
@@ -83,7 +83,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-staging
-      image_version: "9d4d0b8"
+      image_version: "master"
       istag:
         enabled: false
       pet-battle-infra:
