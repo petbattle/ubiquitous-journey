@@ -133,4 +133,6 @@ spec:
         - "$(params.GOALS)"
         - "$(params.MAVEN_BUILD_OPTS)"
       securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
         fsGroup: 0
