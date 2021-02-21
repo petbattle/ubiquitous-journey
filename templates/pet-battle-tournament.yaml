@@ -22,6 +22,9 @@ objects:
     serviceAccountNames:
       - taskName: helm-install-apps-dev
         serviceAccountName: argocd-application-controller
+    podTemplate:
+      securityContext:
+        fsGroup: 0
     pipelineRef:
       name: maven-pipeline
     workspaces:

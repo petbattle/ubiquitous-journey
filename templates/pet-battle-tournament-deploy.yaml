@@ -24,6 +24,9 @@ objects:
         serviceAccountName: argocd-application-controller
     pipelineRef:
       name: helm-deploy-pipeline
+    podTemplate:
+      securityContext:
+        fsGroup: 0
     workspaces:
     - name: shared-workspace
       persistentVolumeClaim:

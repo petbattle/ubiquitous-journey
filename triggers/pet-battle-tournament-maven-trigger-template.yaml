@@ -41,6 +41,9 @@ spec:
             serviceAccountName: argocd-application-controller
         pipelineRef:
           name: maven-pipeline
+        podTemplate:
+          securityContext:
+            fsGroup: 0
         params:
           - name: APPLICATION_NAME
             value: "pet-battle-tournament" #$(tt.params.git-repo-name)

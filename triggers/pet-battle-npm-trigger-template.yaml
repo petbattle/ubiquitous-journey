@@ -38,6 +38,9 @@ spec:
         serviceAccountName: pipeline
         pipelineRef:
           name: pet-battle-ui-pipeline
+        podTemplate:
+          securityContext:
+            fsGroup: 0
         params:
           - name: APPLICATION_NAME
             value: $(tt.params.git-repo-name)
