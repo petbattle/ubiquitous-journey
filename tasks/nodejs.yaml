@@ -42,8 +42,3 @@ spec:
       image: quay.io/eformat/jenkins-agent-npm:$(params.VERSION)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       name: npm-goals
-      securityContext:
-        runAsUser: 1001
-        runAsGroup: 1001
-        fsGroup: 0
-
