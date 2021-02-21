@@ -44,6 +44,6 @@ spec:
       name: npm-goals
       resources: {}
       securityContext:
-        runAsNonRoot: true
+        allowPrivilegeEscalation: false
         runAsUser: 1001
         fsGroup: 0
