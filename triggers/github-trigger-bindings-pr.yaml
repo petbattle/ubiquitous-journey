@@ -16,6 +16,6 @@ spec:
     - name: git-branch
       value: "$(body.extensions.branch_name)-pr-$(body.extensions.pr)"
     - name: git-short-revision
-      value: $(body.extensions.truncated_sha)
+      value: $(extensions.truncated_sha)
     - name: git-app-of-apps-key
-      value: $(body.extensions.app_of_apps_key)
+      value: $(extensions.app_of_apps_key)
