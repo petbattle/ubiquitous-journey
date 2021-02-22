@@ -15,11 +15,11 @@ spec:
               (header.match('X-GitHub-Event', 'push') &&
                 body.repository.full_name == 'petbattle/pet-battle-api')
             overlays:
-            - key: extensions.truncated_sha
+            - key: truncated_sha
               expression: "body.head_commit.id.truncate(7)"
-            - key: extensions.branch_name
+            - key: branch_name
               expression: "body.ref.split('/')[2]"
-            - key: extensions.app_of_apps_key
+            - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - ref: github-trigger-binding
@@ -33,13 +33,13 @@ spec:
                 body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
                 body.pull_request.head.repo.full_name == 'petbattle/pet-battle-api'
             overlays:
-            - key: extensions.truncated_sha
+            - key: truncated_sha
               expression: "body.pull_request.head.sha.truncate(7)"
-            - key: extensions.branch_name
+            - key: branch_name
               expression: body.pull_request.head.ref
-            - key: extensions.pr
+            - key: pr
               expression: body.pull_request.number
-            - key: extensions.app_of_apps_key
+            - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - ref: github-trigger-binding-pr
@@ -53,11 +53,11 @@ spec:
               (header.match('X-GitHub-Event', 'push') &&
                 body.repository.full_name == 'petbattle/tournamentservice-v1')
             overlays:
-            - key: extensions.truncated_sha
+            - key: truncated_sha
               expression: "body.head_commit.id.truncate(7)"
-            - key: extensions.branch_name
+            - key: branch_name
               expression: "body.ref.split('/')[2]"
-            - key: extensions.app_of_apps_key
+            - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - ref: github-trigger-binding
@@ -71,13 +71,13 @@ spec:
                 body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
                 body.pull_request.head.repo.full_name == 'petbattle/tournamentservice-v1'
             overlays:
-            - key: extensions.truncated_sha
+            - key: truncated_sha
               expression: "body.pull_request.head.sha.truncate(7)"
-            - key: extensions.branch_name
+            - key: branch_name
               expression: body.pull_request.head.ref
-            - key: extensions.pr
+            - key: pr
               expression: body.pull_request.number
-            - key: extensions.app_of_apps_key
+            - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - ref: github-trigger-binding-pr
@@ -91,11 +91,11 @@ spec:
               (header.match('X-GitHub-Event', 'push') &&
                 body.repository.full_name == 'petbattle/pet-battle')
             overlays:
-            - key: extensions.truncated_sha
+            - key: truncated_sha
               expression: "body.head_commit.id.truncate(7)"
-            - key: extensions.branch_name
+            - key: branch_name
               expression: "body.ref.split('/')[2]"
-            - key: extensions.app_of_apps_key
+            - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - ref: github-trigger-binding
@@ -109,13 +109,13 @@ spec:
                 body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
                 body.pull_request.head.repo.full_name == 'petbattle/pet-battle'
             overlays:
-            - key: extensions.truncated_sha
+            - key: truncated_sha
               expression: "body.pull_request.head.sha.truncate(7)"
-            - key: extensions.branch_name
+            - key: branch_name
               expression: body.pull_request.head.ref
-            - key: extensions.pr
+            - key: pr
               expression: body.pull_request.number
-            - key: extensions.app_of_apps_key
+            - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - ref: github-trigger-binding-pr
