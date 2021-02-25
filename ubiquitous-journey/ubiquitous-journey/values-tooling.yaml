@@ -189,6 +189,15 @@ applications:
         kind: Deployment
         jsonPointers:
           - /spec/replicas
+  # Container Security
+  - name: container-security-operator
+    enabled: true
+    destination: openshift-operators
+    source: https://github.com/rht-labs/refactored-adventure
+    source_path: container-security-operator/base
+    source_ref: master
+    sync_policy: *sync_policy_true
+    no_helm: true
   # Tekton
   - name: tekton
     enabled: true
