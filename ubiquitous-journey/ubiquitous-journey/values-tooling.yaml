@@ -41,7 +41,7 @@ applications:
           - /status/ingress
   # Jenkins
   - name: jenkins
-    enabled: false
+    enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/jenkins
     source_ref: "jenkins-0.0.23"
@@ -50,15 +50,9 @@ applications:
     values:
       persistence: false
       source_secrets:
-        - name: git-auth
-          username: idm-sa
-          password: thisisdefinitelynotmypassword🦆🦆🦆
         - name: nexus-password
           username: admin
           password: admin123
-        - name: argocd-token
-          username: token
-          password: aaa.bbb.ccc
     ignore_differences:
       - group: apps.openshift.io
         kind: DeploymentConfig
