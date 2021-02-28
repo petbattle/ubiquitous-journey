@@ -183,7 +183,7 @@ spec:
           value: "kustomize build $1 | oc apply -f-"
         - name: ARGS
           value:
-            - "$(params.APPLICATION_NAME)/cicd/applications/build"
+            - "$(params.APPLICATION_NAME)/cicd/tekton/applications/build"
       runAfter:
         - maven-run
 
