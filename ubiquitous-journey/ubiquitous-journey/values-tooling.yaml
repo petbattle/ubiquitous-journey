@@ -312,8 +312,8 @@ applications:
         ignoreHelmHooks: true
     helm_values:
       - values-bootstrap.yaml
-  # Pet Battle Ubiquitous Journey
-  - name: pet-battle-ubiquitous-journey
+  # Pet Battle Tekton objects
+  - name: tekton-pipelines
     destination: labs-ci-cd
     enabled: true
     source: https://github.com/petbattle/ubiquitous-journey.git
