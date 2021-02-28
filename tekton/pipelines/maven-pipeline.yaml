@@ -324,7 +324,7 @@ spec:
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_TEST_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
-        value: "applications/deployment/values-applications-test.yaml"
+        value: "tekton/applications/deployment/values-applications-test.yaml"
       runAfter:
       - oc-tag-image-test
 
@@ -340,7 +340,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/cicd/tekton/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-test.yaml
         - name: release_name
@@ -390,7 +390,7 @@ spec:
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_STAGE_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
-        value: "applications/deployment/values-applications-stage.yaml"
+        value: "tekton/applications/deployment/values-applications-stage.yaml"
       runAfter:
       - oc-tag-image-stage
 

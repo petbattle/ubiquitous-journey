@@ -62,4 +62,4 @@ parameters:
   displayName: The application values file to update
   name: ARGOCD_CONFIG_REPO_PATH
   required: true
-  value: "applications/deployment/values-applications-test.yaml"
+  value: "tekton/applications/deployment/values-applications-test.yaml"
