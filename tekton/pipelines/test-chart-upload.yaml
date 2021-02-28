@@ -3,7 +3,7 @@ kind: Pipeline
 metadata:
   name: test-chart-upload-pipeline
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
 spec:
   workspaces:
     - name: shared-workspace

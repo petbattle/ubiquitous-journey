@@ -17,7 +17,7 @@ applications:
   - name: ubiquitous-journey
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/petbattle/pb-ci-cd.git
+    source: https://github.com/petbattle/ubiquitous-journey.git
     source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
     sync_policy: *sync_policy_true
@@ -26,7 +26,7 @@ applications:
   - name: uj-extras
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/petbattle/pb-ci-cd.git
+    source: https://github.com/petbattle/ubiquitous-journey.git
     source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
     sync_policy: *sync_policy_true
@@ -35,7 +35,7 @@ applications:
   - name: uj-day2ops
     destination: labs-ci-cd
     enabled: true
-    source: https://github.com/petbattle/pb-ci-cd.git
+    source: https://github.com/petbattle/ubiquitous-journey.git
     source_path: ubiquitous-journey/ubiquitous-journey/
     source_ref: main
     sync_policy: *sync_policy_true

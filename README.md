@@ -1,4 +1,4 @@
-## ☘️ pb-ci-cd ☘️
+## ☘️ pet battl ubquitous journey ☘️
 
 Tekton pipelines for the Pet Battle suite of applications.
 
@@ -73,7 +73,7 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 - [ ] code quality check should include the branch name generated for sonarqube
 - [ ] dev-ex-dashboard configure - REPLACE this with Console Links Chart when ready!! https://github.com/redhat-cop/helm-charts/pull/109
 - [ ] add nsfw apps to this guide
-- [ ] add HelmChartRepository to pb-ci-cd - need this to merge for nexus support https://github.com/openshift/console/pull/7711,https://github.com/openshift/console/pull/7841
+- [ ] add HelmChartRepository to UJ - need this to merge for nexus support https://github.com/openshift/console/pull/7711,https://github.com/openshift/console/pull/7841
 - [ ] add E2E tests written between test -> stage promotion
 - [ ] get Helm Release Notes working for pb apps in openshift
 - [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax

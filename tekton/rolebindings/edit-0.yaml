@@ -4,7 +4,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-01
   namespace: labs-ci-cd
 roleRef:
@@ -21,7 +21,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-01
   namespace: labs-dev
 roleRef:
@@ -38,7 +38,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-01
   namespace: labs-test
 roleRef:
@@ -55,7 +55,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-1
   namespace: labs-ci-cd
 roleRef:
@@ -72,7 +72,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-1
   namespace: labs-dev
 roleRef:
@@ -89,7 +89,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-1
   namespace: labs-test
 roleRef:
@@ -106,7 +106,7 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
   name: edit-1
   namespace: labs-staging
 roleRef:

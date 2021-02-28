@@ -5,7 +5,7 @@ metadata:
   annotations:
     volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/aws-ebs
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
 spec:
   resources:
     requests:

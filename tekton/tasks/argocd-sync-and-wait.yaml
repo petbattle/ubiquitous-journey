@@ -3,7 +3,7 @@ kind: Task
 metadata:
   name: argocd-sync-and-wait
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
 spec:
   workspaces:
   - name: argocd-env-secret
@@ -20,7 +20,7 @@ spec:
     default: --
   - name: argocd-version
     type: string
-    default: v1.8.2
+    default: v1.8.6
   - name: argocd-server
     type: string
     default: argocd-server

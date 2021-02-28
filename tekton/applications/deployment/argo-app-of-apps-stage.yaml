@@ -12,8 +12,8 @@ applications:
     name: pet-battle-suite-stage
     enabled: true
     destination: labs-ci-cd
-    source: https://github.com/petbattle/pb-ci-cd.git
-    source_path: applications/deployment
+    source: https://github.com/petbattle/ubiquitous-journey.git
+    source_path: tekton/applications/deployment
     source_ref: main
     sync_policy_automated: true
     helm_values:

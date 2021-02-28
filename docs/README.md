@@ -1,1 +1,1 @@
-# petbattle.github.io/pb-ci-cd
+# petbattle.github.io/ubiquitous-journy

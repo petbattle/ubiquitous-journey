@@ -32,7 +32,7 @@ spec:
   - name: GIT_REPO_URL
     type: string
     description: Git cicd repo url
-    default: "github.com/petbattle/pb-ci-cd.git"
+    default: "github.com/petbattle/ubiquitous-journey.git"
   - name: GIT_USER_NAME
     type: string
     description: |

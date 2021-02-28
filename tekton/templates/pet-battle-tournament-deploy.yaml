@@ -4,7 +4,7 @@ kind: Template
 metadata:
   name: pet-battle-tournament-deploy
   labels:
-    rht-labs.com/uj: pb-ci-cd
+    rht-labs.com/uj: ubiquitous-journey
 objects:
 - apiVersion: tekton.dev/v1beta1
   kind: PipelineRun
