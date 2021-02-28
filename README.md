@@ -1,4 +1,4 @@
-## ☘️ pet battl ubquitous journey ☘️
+## ☘️ pet battle ubquitous journey ☘️
 
 Tekton pipelines for the Pet Battle suite of applications.
 
