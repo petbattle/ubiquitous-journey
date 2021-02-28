@@ -26,9 +26,9 @@ oc -n labs-ci-cd process pet-battle-tournament | oc -n labs-ci-cd create -f-
 
 If you have already built and tagged images, you can redeploy the argocd application suite (helm template) using:
 ```bash
-oc -n labs-ci-cd process pet-battle-api-deploy -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-deploy -p HELM_CHART_VERSION=1.0.3 | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.13 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-api-deploy -p HELM_CHART_VERSION=1.0.8 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-deploy -p HELM_CHART_VERSION=1.0.4 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.20 | oc -n labs-ci-cd create -f-
 ```
 
 If you are on a branch called `develop`, you can test a deployment (the same as a helm update --install) using:
@@ -54,6 +54,8 @@ oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=t
 ## To Be Done
 - [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 
+- [ ] Automate These Secrets:
+
 ```bash
 # manually mount secrets for now (see secrets folder for templates)
 oc -n labs-ci-cd apply -f ~/tmp/git-auth.yaml
@@ -68,16 +70,16 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
-- [ ] code quality gates - configure pipeline args to fail on quality gates
 - [ ] code quality check should include the branch name generated for sonarqube
 - [ ] dev-ex-dashboard configure - REPLACE this with Console Links Chart when ready!! https://github.com/redhat-cop/helm-charts/pull/109
 - [ ] add nsfw apps to this guide
 - [ ] add HelmChartRepository to pb-ci-cd - need this to merge for nexus support https://github.com/openshift/console/pull/7711,https://github.com/openshift/console/pull/7841
-- [ ] add E2E tests between test -> stage promotion
-- [ ] get Helm Release Notes working for pb apps
+- [ ] add E2E tests written between test -> stage promotion
+- [ ] get Helm Release Notes working for pb apps in openshift
 - [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
 - [X] Operator split into charts requiring privilege
 - [X] document webhook triggers create them using tekton task
 - [X] add github triggers work
 - [X] split test, stage deploys - app of apps
 - [X] boostrap crd's is two step process on an empty cluster. need this in a pipeline somewhere
+- [X] code quality gates - configure pipeline args to fail on quality gates

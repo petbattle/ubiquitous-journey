@@ -3,8 +3,6 @@ kind: Kustomization
 
 bases:
 - persistent-volume-claims
-#- configmaps
-#- secrets
 - rolebindings
 - tasks
 - pipelines
