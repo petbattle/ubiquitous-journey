@@ -52,3 +52,21 @@ applications:
     values:
       namespace: *ops_ns
       prune_type: deployments
+  # Container Security
+  - name: container-security-operator
+    enabled: true
+    destination: openshift-operators
+    source: https://github.com/rht-labs/refactored-adventure
+    source_path: container-security-operator/base
+    source_ref: master
+    sync_policy: *sync_policy_true
+    no_helm: true
+  # User Workload Monitoring
+  - name: user-workload-monitoring
+    enabled: true
+    destination: openshift-monitoring
+    source: https://github.com/rht-labs/refactored-adventure
+    source_path: user-workload-monitoring/base
+    source_ref: master
+    sync_policy: *sync_policy_true
+    no_helm: true
