@@ -64,12 +64,12 @@ applications:
     chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.8
+    source_ref: 1.0.9
     values:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: 296f21c
+      image_version: acde759
       istag:
         enabled: false
       deploymentConfig: false
