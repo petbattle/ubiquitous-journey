@@ -56,7 +56,7 @@ applications:
   - name: container-security-operator
     enabled: true
     destination: openshift-operators
-    source: https://github.com/rht-labs/refactored-adventure
+    source: https://github.com/rht-labs/refactored-adventure.git
     source_path: container-security-operator/base
     source_ref: master
     sync_policy: *sync_policy_true
@@ -65,8 +65,42 @@ applications:
   - name: user-workload-monitoring
     enabled: true
     destination: openshift-monitoring
-    source: https://github.com/rht-labs/refactored-adventure
+    source: https://github.com/rht-labs/refactored-adventure.git
     source_path: user-workload-monitoring/base
     source_ref: master
     sync_policy: *sync_policy_true
     no_helm: true
+  # Pet Battle Alerting
+  - name: petbattle-alerts
+    destination: labs-dev
+    enabled: true
+    source: https://github.com/petbattle/ubiquitous-journey.git
+    source_path: tekton/applications/alerting
+    sync_policy: *sync_policy_true
+    source_ref: main
+    values:
+      petbattle:
+        rules:
+          severity: info
+  - name: petbattle-alerts
+    destination: labs-test
+    enabled: true
+    source: https://github.com/petbattle/ubiquitous-journey.git
+    source_path: tekton/applications/alerting
+    sync_policy: *sync_policy_true
+    source_ref: main
+    values:
+      petbattle:
+        rules:
+          severity: warning
+  - name: petbattle-alerts
+    destination: labs-staging
+    enabled: true
+    source: https://github.com/petbattle/ubiquitous-journey.git
+    source_path: tekton/applications/alerting
+    sync_policy: *sync_policy_true
+    source_ref: main
+    values:
+      petbattle:
+        rules:
+          severity: warning
