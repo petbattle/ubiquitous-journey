@@ -71,7 +71,7 @@ applications:
     sync_policy: *sync_policy_true
     no_helm: true
   # Pet Battle Alerting
-  - name: petbattle-alerts
+  - name: petbattle-alerts-dev
     destination: labs-dev
     enabled: true
     source: https://github.com/petbattle/ubiquitous-journey.git
@@ -82,7 +82,7 @@ applications:
       petbattle:
         rules:
           severity: info
-  - name: petbattle-alerts
+  - name: petbattle-alerts-test
     destination: labs-test
     enabled: true
     source: https://github.com/petbattle/ubiquitous-journey.git
@@ -93,7 +93,7 @@ applications:
       petbattle:
         rules:
           severity: warning
-  - name: petbattle-alerts
+  - name: petbattle-alerts-staging
     destination: labs-staging
     enabled: true
     source: https://github.com/petbattle/ubiquitous-journey.git
