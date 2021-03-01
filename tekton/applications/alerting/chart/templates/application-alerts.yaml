@@ -13,7 +13,7 @@ spec:
         namespace: {{ .Release.Namespace }}
       annotations:
         message:  {{ printf "'Pet Battle Api in namespace {{ $labels.namespace }} is not available for the last 1 minutes.'" }}
-      expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * on(pod) group_left(label_component) kube_pod_labels{label_component="pet-battle-api",namespace="{{ .Release.Namespace }}"})) == 0
+      expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * on(pod) group_left(label_app_kubernetes_io_component) kube_pod_labels{label_app_kubernetes_io_component="pet-battle-api",namespace="{{ .Release.Namespace }}"})) == 0
       for: 1m
       labels:
         severity: {{ .Values.petbattle.rules.severity }}
@@ -22,7 +22,7 @@ spec:
         namespace: {{ .Release.Namespace }}
       annotations:
         message: {{ printf "'Pet Battle in namespace {{ $labels.namespace }} is not available for the last 1 minutes.'" }}
-      expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * on(pod) group_left(label_component) kube_pod_labels{label_component="pet-battle",namespace="{{ .Release.Namespace }}"})) == 0
+      expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * on(pod) group_left(label_app_kubernetes_io_component) kube_pod_labels{label_app_kubernetes_io_component="pet-battle",namespace="{{ .Release.Namespace }}"})) == 0
       for: 1m
       labels:
         severity: {{ .Values.petbattle.rules.severity }}
@@ -31,7 +31,7 @@ spec:
         namespace: {{ .Release.Namespace }}
       annotations:
         message: {{ printf "'Pet Battle Tournament in namespace {{ $labels.namespace }} is not available for the last 1 minutes.'" }}
-      expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * on(pod) group_left(label_component) kube_pod_labels{label_component="pet-battle-tournament",namespace="{{ .Release.Namespace }}"})) == 0
+      expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * on(pod) group_left(label_app_kubernetes_io_component) kube_pod_labels{label_app_kubernetes_io_component="pet-battle-tournament",namespace="{{ .Release.Namespace }}"})) == 0
       for: 1m
       labels:
         severity: {{ .Values.petbattle.rules.severity }}
