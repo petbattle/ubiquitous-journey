@@ -38,6 +38,6 @@ spec:
     - alert: PetBattleTournamentMaxHttpRequestTime
       annotations:
         message: 'Pet Battle Tournament max http request time over last 5 min in namespace {{ .Release.Namespace }} exceeds 1.5 sec.'
-      expr: max_over_time(http_server_requests_seconds_max{service="pet-battle-api",namespace="{{ .Release.Namespace }}"}[5m]) > 1.5
+      expr: max_over_time(http_server_requests_seconds_max{service="pet-battle-tournament",namespace="{{ .Release.Namespace }}"}[5m]) > 1.5
       labels:
         severity: {{ .Values.petbattle.rules.severity }}
