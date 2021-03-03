@@ -15,7 +15,8 @@ Just run this code as a cluster admin user:
 cd ubiquitous-journey
 # bootstrap to install argocd and create projects
 helm upgrade --install bootstrap -f bootstrap/values-bootstrap.yaml bootstrap --create-namespace --namespace labs-bootstrap
-# FIXME - Secrets - create the argocd token secret in labs-ci-cd namespace see TBD below
+# Create GitHub and ArgoCD secrets
+../tekton/secrets/create-petbattle-secrets.sh -t <GITHUB_TOKEN> -s <WEBHOOK_SECRET> -a <ARGOCD_USERNAME>
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
@@ -53,21 +54,6 @@ oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=t
 
 ## To Be Done
 - [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
-
-- [ ] Automate These Secrets:
-
-```bash
-# manually mount secrets for now (see secrets folder for templates)
-oc -n labs-ci-cd apply -f ~/tmp/git-auth.yaml
-# generate argocd cd token
-oc -n labs-ci-cd patch cm argocd-cm --type='json' -p='[{"op": "add", "path": "/data", "value": {"accounts.admin": "apiKey"}}]'
-HOST=$(oc -n labs-ci-cd get route argocd-server --template='{{ .spec.host }}')
-argocd login $HOST:443 --sso --insecure --username admin
-TOKEN=$(argocd account generate-token --account admin | base64 -w0)
-sed -i -e "s|  password:.*|  password: ${TOKEN}|" ~/tmp/argocd-token.yaml
-oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
-```
-
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
 - [ ] code quality check should include the branch name generated for sonarqube
@@ -83,3 +69,4 @@ oc -n labs-ci-cd apply -f ~/tmp/argocd-token.yaml
 - [X] split test, stage deploys - app of apps
 - [X] boostrap crd's is two step process on an empty cluster. need this in a pipeline somewhere
 - [X] code quality gates - configure pipeline args to fail on quality gates
+- [X] Automate These Secrets:
