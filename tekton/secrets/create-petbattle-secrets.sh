@@ -75,5 +75,5 @@ if [ -z ${GITHUB_TOKEN} ] || [ -z ${WEBHOOK_SECRET} ] || [ -z ${ARGOCD_USERNAME}
     usage
 fi
 
-#generate_git_secret
+generate_git_secret
 generate_argocd_secret
