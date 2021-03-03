@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 #set -x
 
 function generate_git_secret() {
