@@ -22,8 +22,8 @@ EOF
 
 function generate_argocd_secret() {
     HOST=$(oc -n labs-ci-cd get route argocd-server --template='{{ .spec.host }}')
-    argocd login --insecure --sso --username admin $HOST:443
-    TOKEN=$(argocd account generate-token --account admin | base64 -w0)
+    argocd login --insecure --sso --username ${ARGOCD_USERNAME} $HOST:443
+    TOKEN=$(argocd account generate-token --account ${ARGOCD_USERNAME} | base64 -w0)
     cat <<EOF | oc apply -f -
 apiVersion: v1
 data:
