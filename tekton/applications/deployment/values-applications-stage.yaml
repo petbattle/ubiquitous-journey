@@ -43,7 +43,7 @@ applications:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: 0dd4251
+      image_version: "8256400"
       istag:
         enabled: false
       deploymentConfig: false
