@@ -110,54 +110,54 @@ spec:
         - name: output
           workspace: shared-workspace
 
-    # - name: npm-test
-    #   taskRef:
-    #     name: nodejs
-    #   params:
-    #     - name: NPM_MIRROR_URL
-    #       value: "$(params.NPM_MIRROR_URL)"
-    #     - name: GOALS
-    #       value:
-    #         - "run"
-    #         - "test:ci"
-    #     - name: WORK_DIRECTORY
-    #       value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
-    #   runAfter:
-    #     - npm-install
-    #   workspaces:
-    #     - name: output
-    #       workspace: shared-workspace
+    - name: npm-test
+      taskRef:
+        name: nodejs
+      params:
+        - name: NPM_MIRROR_URL
+          value: "$(params.NPM_MIRROR_URL)"
+        - name: GOALS
+          value:
+            - "run"
+            - "test:ci"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+      runAfter:
+        - npm-install
+      workspaces:
+        - name: output
+          workspace: shared-workspace
 
-    # - name: code-analysis
-    #   taskRef:
-    #     name: nodejs
-    #   params:
-    #     - name: NPM_MIRROR_URL
-    #       value: "$(params.NPM_MIRROR_URL)"
-    #     - name: GOALS
-    #       value:
-    #         - "run"
-    #         - "sonar"
-    #     - name: WORK_DIRECTORY
-    #       value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
-    #   workspaces:
-    #     - name: output
-    #       workspace: shared-workspace
-    #   runAfter:
-    #     - npm-test
+    - name: code-analysis
+      taskRef:
+        name: nodejs
+      params:
+        - name: NPM_MIRROR_URL
+          value: "$(params.NPM_MIRROR_URL)"
+        - name: GOALS
+          value:
+            - "run"
+            - "sonar"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      runAfter:
+        - npm-test
 
-    # - name: quality-gate-check
-    #   retries: 1
-    #   taskRef:
-    #     name: sonarqube-quality-gate-check
-    #   workspaces:
-    #     - name: output
-    #       workspace: shared-workspace
-    #   params:
-    #   - name: WORK_DIRECTORY
-    #     value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
-    #   runAfter:
-    #   - code-analysis
+    - name: quality-gate-check
+      retries: 1
+      taskRef:
+        name: sonarqube-quality-gate-check
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+      - name: WORK_DIRECTORY
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+      runAfter:
+      - code-analysis
 
     - name: npm-run-build
       taskRef:
@@ -175,8 +175,7 @@ spec:
         - name: output
           workspace: shared-workspace
       runAfter:
-#        - quality-gate-check
-        - npm-install
+        - quality-gate-check
 
     - name: kustomize-build-config
       taskRef:
