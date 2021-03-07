@@ -69,7 +69,7 @@ applications:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: "8256400"
+      image_version: "master"
       istag:
         enabled: false
       deploymentConfig: false
@@ -109,7 +109,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: "781b604"
+      image_version: "master"
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox210.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox210.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox210.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox210.opentlc.com/*", "enableLogging": true } }'
     project:
       name: pet-battle-test
