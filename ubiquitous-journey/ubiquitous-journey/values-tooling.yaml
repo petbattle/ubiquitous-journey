@@ -48,6 +48,22 @@ applications:
     sync_policy: *sync_policy_true
     destination: *ci_cd_ns
     values:
+      deployment:
+        env_vars:
+          - name: JVM_ARCH
+            value: 'x86_64'
+          - name: DISABLE_ADMINISTRATIVE_MONITORS
+            value: 'false'
+          - name: ENABLE_FATAL_ERROR_LOG_FILE
+            value: 'false'
+          - name: JENKINS_OPTS
+            value: '--sessionTimeout=180'
+          - name: GITHUB_ACCOUNT
+            value: 'petbattle'
+          - name: GITHUB_ORG
+            value: 'true'
+          - name: GITHUB_TOKEN
+            value: "a90f48ed8fdcc9189153341daa7199109f5d4929"
       persistence: false
       source_secrets:
         - name: nexus-password
