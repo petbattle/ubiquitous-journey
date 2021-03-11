@@ -44,7 +44,7 @@ applications:
     enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/jenkins
-    source_ref: "jenkins-0.0.23"
+    source_ref: "jenkins-0.0.24"
     sync_policy: *sync_policy_true
     destination: *ci_cd_ns
     values:
@@ -62,8 +62,6 @@ applications:
             value: 'petbattle'
           - name: GITHUB_ORG
             value: 'true'
-          - name: GITHUB_TOKEN
-            value: "fca4eb5638c04c913f4c611e98305e6e961cda2b"
       persistence: false
       source_secrets:
         - name: nexus-password
