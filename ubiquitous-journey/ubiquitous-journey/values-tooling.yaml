@@ -63,7 +63,7 @@ applications:
           - name: GITHUB_ORG
             value: 'true'
           - name: GITHUB_TOKEN
-            value: "a90f48ed8fdcc9189153341daa7199109f5d4929"
+            value: "fca4eb5638c04c913f4c611e98305e6e961cda2b"
       persistence: false
       source_secrets:
         - name: nexus-password
