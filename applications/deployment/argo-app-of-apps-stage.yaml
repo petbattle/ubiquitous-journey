@@ -1,25 +1,23 @@
 allowed_destinations: &allowed_destinations
   - namespace: labs-ci-cd
     server: https://kubernetes.default.svc
-  - namespace: labs-dev
-    server: https://kubernetes.default.svc
-  - namespace: labs-test
+  - namespace: labs-stage
     server: https://kubernetes.default.svc
 argocd_projects:
   - enabled: true
-    name: pet-battle-suite-test
+    name: pet-battle-suite-stage
     destinations: *allowed_destinations
 applications:
   pet_battle_suite:
-    name: pet-battle-suite-test
+    name: pet-battle-suite-stage
     enabled: true
     destination: labs-ci-cd
     source: https://github.com/petbattle/ubiquitous-journey.git
-    source_path: tekton/applications/deployment
+    source_path: applications/deployment
     source_ref: main
     sync_policy_automated: true
     helm_values:
-      - values-applications-test.yaml
+      - values-applications-stage.yaml
     project:
-      name: pet-battle-suite-test
+      name: pet-battle-suite-stage
       enabled: true

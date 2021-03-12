@@ -77,13 +77,13 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: 1.0.28
+    source_ref: 1.0.29
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-staging
-      image_version: "master"
+      image_version: "1c86d3d"
       istag:
         enabled: false
       pet-battle-infra:

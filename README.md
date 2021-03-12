@@ -6,17 +6,16 @@ If you want to learn how to create this project read [DEVELOPMENT.md](DEVELOPMEN
 
 We use a Pull Model of deployment - Tekton for the CI pipeline, and ArgoCD to deploy changes using GitOps.
 
-![pull-model.png](images/pull-model.png)
+![pull-model.png](docs/images/pull-model.png)
 ### 🤠 For the impatient 🤠
 
 Just run this code as a cluster admin user:
 ```bash
 # clone this repo and
-cd ubiquitous-journey
 # bootstrap to install argocd and create projects
 helm upgrade --install bootstrap -f bootstrap/values-bootstrap.yaml bootstrap --create-namespace --namespace labs-bootstrap
 # Create GitHub and ArgoCD secrets
-../tekton/secrets/create-petbattle-secrets.sh -t <GITHUB_TOKEN> -s <WEBHOOK_SECRET> -a <ARGOCD_USERNAME>
+./tekton/secrets/create-petbattle-secrets.sh -t <GITHUB_TOKEN> -s <WEBHOOK_SECRET> -a <ARGOCD_USERNAME>
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
 # start a pipeline run
