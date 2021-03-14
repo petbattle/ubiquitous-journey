@@ -188,7 +188,7 @@ spec:
           value: "kustomize build $1 | oc apply -f-"
         - name: ARGS
           value:
-            - "$(params.APPLICATION_NAME)/cicd/tekton/applications/build"
+            - "$(params.APPLICATION_NAME)/cicd/applications/build"
       runAfter:
         - npm-run-build
 
@@ -329,7 +329,7 @@ spec:
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_TEST_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
-        value: "tekton/applications/deployment/values-applications-test.yaml"
+        value: "applications/deployment/values-applications-test.yaml"
       runAfter:
       - oc-tag-image-test
 
@@ -345,7 +345,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/tekton/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-test.yaml
         - name: release_name
@@ -395,7 +395,7 @@ spec:
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_STAGE_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
-        value: "tekton/applications/deployment/values-applications-stage.yaml"
+        value: "applications/deployment/values-applications-stage.yaml"
       runAfter:
       - oc-tag-image-stage
 
@@ -411,7 +411,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/tekton/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-stage.yaml
         - name: release_name

@@ -87,7 +87,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/tekton/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-test.yaml
         - name: release_name
@@ -128,7 +128,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/tekton/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-stage.yaml
         - name: release_name
