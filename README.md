@@ -13,6 +13,7 @@ Just run this code as a cluster admin user:
 ```bash
 # clone this repo and
 # bootstrap to install argocd and create projects
+helm dependency up bootstrap/
 helm upgrade --install bootstrap -f bootstrap/values-bootstrap.yaml bootstrap --create-namespace --namespace labs-bootstrap
 # Create GitHub and ArgoCD secrets
 ./tekton/secrets/create-petbattle-secrets.sh -t <GITHUB_TOKEN> -s <WEBHOOK_SECRET> -a <ARGOCD_USERNAME>
@@ -52,6 +53,7 @@ oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=t
 ```
 
 ## To Be Done
+- [ ] fix the need to login to argocd before running create-petbattle-secrets.sh
 - [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
 - [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
