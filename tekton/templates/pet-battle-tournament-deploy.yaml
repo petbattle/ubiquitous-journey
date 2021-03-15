@@ -20,7 +20,7 @@ objects:
   spec:
     serviceAccountName: pipeline
     serviceAccountNames:
-      - taskName: helm-install-apps-dev
+      - taskName: helm-install-from-chartrepo
         serviceAccountName: argocd-application-controller
     pipelineRef:
       name: helm-deploy-pipeline
