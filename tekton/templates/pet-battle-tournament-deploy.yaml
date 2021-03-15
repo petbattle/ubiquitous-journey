@@ -20,7 +20,9 @@ objects:
   spec:
     serviceAccountName: pipeline
     serviceAccountNames:
-      - taskName: helm-install-apps-dev
+      - taskName: helm-argocd-apps-test
+        serviceAccountName: argocd-application-controller
+      - taskName: helm-argocd-apps-stage
         serviceAccountName: argocd-application-controller
     pipelineRef:
       name: helm-deploy-pipeline
