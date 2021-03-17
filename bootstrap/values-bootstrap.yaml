@@ -65,7 +65,7 @@ argocd-operator:
 
 sealed-secrets:
   # Disabled by default
-  enabled: false
+  enabled: true
   nameOverride: sealed-secrets
   fullnameOverride: sealed-secrets
   # namespace must exist, so we use labs-ci-cd by default.
