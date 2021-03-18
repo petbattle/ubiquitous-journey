@@ -67,7 +67,7 @@ applications:
     sync_policy: *sync_policy_true
   # Dev-Ex Dashboard
   - name: dev-ex-dashboard
-    enabled: true
+    enabled: false
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/dev-ex-dashboard
     destination: *pm_ns
