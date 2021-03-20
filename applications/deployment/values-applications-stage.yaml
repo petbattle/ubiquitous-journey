@@ -65,7 +65,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-staging
-      config_map: '{ "catsUrl": "https://pet-battle-api-labs-staging.apps.hivec.sandbox1049.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-staging.apps.hivec.sandbox1049.opentlc.com", "keycloak": { "url": "https://keycloak-labs-staging.apps.hivec.sandbox1049.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-staging.apps.hivec.sandbox1049.opentlc.com/*", "enableLogging": true } }'
+      config_map: '{ "catsUrl": "https://pet-battle-api-labs-staging.apps.hivec.sandbox380.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-staging.apps.hivec.sandbox380.opentlc.com", "keycloak": { "url": "https://keycloak-labs-staging.apps.hivec.sandbox380.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-staging.apps.hivec.sandbox380.opentlc.com/*", "enableLogging": true } }'
       image_version: "9f67a19"
     project:
       name: pet-battle-stage
@@ -87,7 +87,7 @@ applications:
       istag:
         enabled: false
       pet-battle-infra:
-        app_domain: apps.hivec.sandbox1049.opentlc.com
+        app_domain: apps.hivec.sandbox380.opentlc.com
         ignoreHelmHooks: true
     ignore_differences: *ignore_differences
     project:
