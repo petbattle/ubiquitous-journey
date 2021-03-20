@@ -109,7 +109,7 @@ applications:
       image_repository: quay.io
       image_name: pet-battle
       image_namespace: petbattle
-      image_version: "d0675ba"
+      image_version: "9f67a19"
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox1049.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox1049.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox1049.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox1049.opentlc.com/*", "enableLogging": true } }'
     project:
       name: pet-battle-test
