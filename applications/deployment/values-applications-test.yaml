@@ -102,14 +102,14 @@ applications:
     chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.1.2
+    source_ref: 1.0.5
     values:
       app_tag: 1.1.2
       fullnameOverride: pet-battle
       image_repository: quay.io
       image_name: pet-battle
       image_namespace: petbattle
-      image_version: "54b2d7d"
+      image_version: "d0675ba"
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox1049.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox1049.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox1049.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox1049.opentlc.com/*", "enableLogging": true } }'
     project:
       name: pet-battle-test
