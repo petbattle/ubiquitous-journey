@@ -24,6 +24,8 @@ spec:
     image: quay.io/eformat/openshift-helm:latest
     script: |
       #!/bin/sh
+      SONAR_USER=admin:admin123
+      
       cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
 
       TASKFILE=$(find . -type f -name report-task.txt)
@@ -41,11 +43,11 @@ spec:
       fi
       echo ${TURL}
 
-      AID=$(curl -s $TURL | jq -r .task.analysisId)
+      AID=$(curl -u ${SONAR_USER} -s $TURL | jq -r .task.analysisId)
       if [ -z ${AID} ]; then
         echo "Analysis ID not found"
         exit 1
-      fi  
+      fi
       echo ${AID}
 
       SERVERURL=$(cat ${TASKFILE} | grep serverUrl)
@@ -56,7 +58,7 @@ spec:
       fi 
       echo ${SURL}
 
-      BUILDSTATUS=$(curl -s $SURL/api/qualitygates/project_status?analysisId=${AID} | jq -r .projectStatus.status)
+      BUILDSTATUS=$(curl -u ${SONAR_USER} -s $SURL/api/qualitygates/project_status?analysisId=${AID} | jq -r .projectStatus.status)
       if [ "${BUILDSTATUS}" != "OK" ]; then
         echo "Failed Quality Gate - please check - $SURL/api/qualitygates/project_status?analysisId=${AID}"
         exit 1
