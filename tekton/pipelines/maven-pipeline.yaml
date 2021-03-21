@@ -123,6 +123,8 @@ spec:
           value:
             - '-Dsonar.host.url=http://sonarqube-sonarqube:9000'
             - '-Dsonar.userHome=/tmp/sonar'
+            - '-Dsonar.login=admin'
+            - '-Dsonar.password=admin123'
       runAfter:
         - fetch-cicd-repository
       workspaces:
