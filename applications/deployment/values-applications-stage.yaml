@@ -60,7 +60,7 @@ applications:
     destination: labs-staging
     source_ref: 1.0.0
     values:
-      app_tag: master
+      fathom: true
       fullnameOverride: pet-battle
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
