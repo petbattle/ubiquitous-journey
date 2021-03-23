@@ -44,10 +44,26 @@ applications:
     enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/jenkins
-    source_ref: "jenkins-0.0.24"
+    source_ref: "jenkins-1.0.0"
     sync_policy: *sync_policy_true
     destination: *ci_cd_ns
     values:
+      buildconfigs:
+        # Jenkins S2I from Red Hat Labs
+        - name: jenkins
+          strategy_type: "Source"
+          source_repo: https://github.com/rht-labs/s2i-config-jenkins.git
+          source_repo_ref: master
+          source_context_dir: '/'
+          builder_image_kind: "DockerImage"
+          builder_image_name: quay.io/openshift/origin-jenkins
+          builder_image_tag: "latest"
+        # Jenkins agents for running builds etc
+        # default names, versions, repo and paths set on the template
+        - name: jenkins-agent-npm
+        - name: jenkins-agent-graalvm
+        - name: jenkins-agent-helm
+        - name: jenkins-agent-argocd
       deployment:
         env_vars:
           - name: JVM_ARCH
