@@ -48,7 +48,7 @@ spec:
         helm repo update
         echo "installing helm chart..."
         if [ ! -z $(inputs.params.release_version) ]; then
-          helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.helm_repo_name)/$(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)" --version $(inputs.params.release_version) --skip-crds
+          helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.helm_repo_name)/$(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)" --set "image_name=$(inputs.params.release_name)-$(inputs.params.chart_name)" --version $(inputs.params.release_version) --skip-crds
         else
-          helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.helm_repo_name)/$(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)" --skip-crds
+          helm upgrade --wait --install --namespace "$(inputs.params.release_namespace)" $(inputs.params.release_name) $(inputs.params.helm_repo_name)/$(inputs.params.chart_name) --debug --set "$(inputs.params.overwrite_values)" --set "image_name=$(inputs.params.release_name)-$(inputs.params.chart_name)" --skip-crds
         fi
