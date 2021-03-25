@@ -101,3 +101,6 @@ applications:
     sync_policy_automated: true
     destination: labs-staging
     source_ref: master
+    project:
+      name: pet-battle-stage
+      enabled: true
