@@ -58,15 +58,15 @@ applications:
     chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: 1.0.1
+    source_ref: 1.0.3
     values:
       fathom: true
       fullnameOverride: pet-battle
-      image_repository: image-registry.openshift-image-registry.svc:5000
+      image_repository: quay.io
       image_name: pet-battle
-      image_namespace: labs-staging
+      image_namespace: petbattle
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-staging.apps.hivec.sandbox380.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-staging.apps.hivec.sandbox380.opentlc.com", "keycloak": { "url": "https://keycloak-labs-staging.apps.hivec.sandbox380.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-staging.apps.hivec.sandbox380.opentlc.com/*", "enableLogging": true } }'
-      image_version: "0916e43"
+      image_version: "1.2.8"
     project:
       name: pet-battle-stage
       enabled: true
