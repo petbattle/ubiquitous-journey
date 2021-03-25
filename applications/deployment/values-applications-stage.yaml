@@ -100,7 +100,7 @@ applications:
     source_path: chart
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: master
+    source_ref: main
     ignore_differences: *ignore_differences
     project:
       name: pet-battle-stage
