@@ -101,6 +101,7 @@ applications:
     sync_policy_automated: true
     destination: labs-staging
     source_ref: master
+    ignore_differences: *ignore_differences
     project:
       name: pet-battle-stage
       enabled: true
