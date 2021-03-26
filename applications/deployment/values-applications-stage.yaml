@@ -38,12 +38,12 @@ applications:
     chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: 1.0.13
+    source_ref: 1.0.14
     values:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: "ec9c41a"
+      image_version: "master"
       istag:
         enabled: false
       deploymentConfig: false
