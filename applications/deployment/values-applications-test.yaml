@@ -64,12 +64,12 @@ applications:
     chart_name: pet-battle-api
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.13
+    source_ref: 1.0.14
     values:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: "ec9c41a"
+      image_version: "master"
       istag:
         enabled: false
       deploymentConfig: false
@@ -102,14 +102,14 @@ applications:
     chart_name: pet-battle
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.3
+    source_ref: 1.0.6
     values:
       fullnameOverride: pet-battle
       image_repository: quay.io
       image_name: pet-battle
       image_namespace: petbattle
-      image_version: "1.2.8"
-      config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox380.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox380.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox380.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox380.opentlc.com/*", "enableLogging": true } }'
+      image_version: "master"
+      config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox1405.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox1405.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox1405.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox1405.opentlc.com/*", "enableLogging": true } }'
     project:
       name: pet-battle-test
       enabled: true
@@ -140,7 +140,7 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.32
+    source_ref: 1.0.33
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
@@ -150,7 +150,7 @@ applications:
       istag:
         enabled: false
       pet-battle-infra:
-        app_domain: apps.hivec.sandbox380.opentlc.com
+        app_domain: apps.hivec.sandbox1405.opentlc.com
         ignoreHelmHooks: true
     ignore_differences: *ignore_differences
     project:
