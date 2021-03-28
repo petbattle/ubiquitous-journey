@@ -262,3 +262,17 @@ applications:
     source_ref: main
     sync_policy: *sync_policy_true
     no_helm: true
+  - name: matomo
+    enabled: true
+    source: https://github.com/petbattle/pet-battle-analytics.git
+    source_path: charts/matomo
+    sync_policy: *sync_policy_true
+    destination: labs-ci-cd
+    source_ref: main
+    ignore_differences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+        - /spec/template/spec/containers/0/image
+        - /spec/template/spec/containers/1/image

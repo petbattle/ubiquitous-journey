@@ -93,15 +93,3 @@ applications:
     project:
       name: pet-battle-stage
       enabled: true
-  pb_analytics:
-    name: fathom
-    enabled: true
-    source: https://github.com/petbattle/pet-battle-analytics.git
-    source_path: chart
-    sync_policy_automated: true
-    destination: labs-staging
-    source_ref: main
-    ignore_differences: *ignore_differences
-    project:
-      name: pet-battle-stage
-      enabled: true
