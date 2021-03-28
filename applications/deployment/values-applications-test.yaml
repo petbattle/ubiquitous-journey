@@ -109,7 +109,7 @@ applications:
       image_name: pet-battle
       image_namespace: petbattle
       image_version: "1.2.8"
-      config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox380.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox380.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox380.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox380.opentlc.com/*", "enableLogging": true } }'
+      config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox1405.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox1405.opentlc.com", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox1405.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox1405.opentlc.com/*", "enableLogging": true } }'
     project:
       name: pet-battle-test
       enabled: true
@@ -150,7 +150,7 @@ applications:
       istag:
         enabled: false
       pet-battle-infra:
-        app_domain: apps.hivec.sandbox380.opentlc.com
+        app_domain: apps.hivec.sandbox1405.opentlc.com
         ignoreHelmHooks: true
     ignore_differences: *ignore_differences
     project:

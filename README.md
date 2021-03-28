@@ -16,6 +16,7 @@ Just run this code as a cluster admin user:
 helm dependency up bootstrap/
 helm upgrade --install bootstrap -f bootstrap/values-bootstrap.yaml bootstrap --create-namespace --namespace labs-bootstrap
 # Create GitHub and ArgoCD secrets
+# Login to ArgoCD WebUI and then run
 ./tekton/secrets/create-petbattle-secrets.sh -t <GITHUB_TOKEN> -s <WEBHOOK_SECRET> -a <ARGOCD_USERNAME>
 # give me ALL THE TOOLS, EXTRAS & OPSY THINGS !
 helm template -f argo-app-of-apps.yaml ubiquitous-journey/ | oc -n labs-ci-cd apply -f-
