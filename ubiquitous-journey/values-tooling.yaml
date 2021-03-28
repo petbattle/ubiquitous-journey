@@ -262,6 +262,7 @@ applications:
     source_ref: main
     sync_policy: *sync_policy_true
     no_helm: true
+  # Matamo
   - name: matomo
     enabled: true
     source: https://github.com/petbattle/pet-battle-analytics.git
