@@ -277,3 +277,12 @@ applications:
         - /spec/replicas
         - /spec/template/spec/containers/0/image
         - /spec/template/spec/containers/1/image
+   # Istio basic mesh
+  - name: istio
+    enabled: true
+    destination: openshift-operators
+    source: https://github.com/rht-labs/refactored-adventure
+    source_path: istio/istio-system
+    source_ref: master
+    sync_policy: *sync_policy_true
+    no_helm: true
