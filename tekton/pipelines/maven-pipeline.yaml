@@ -302,7 +302,7 @@ spec:
         - name: overwrite_values
           value: "$(HELM_OVERWRITE_VALUES)"
       runAfter:
-#        - oc-tag-image-dev
+        - oc-tag-image-dev
         - upload-chart
 
     - name: git-commit-test
