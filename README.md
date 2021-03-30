@@ -50,7 +50,7 @@ To create webhooks that trigger a full pipeline build and deployment in your git
 ```bash
 oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=pet-battle-api -p WEBHOOK_URL=http://$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=pet-battle -p WEBHOOK_URL=http://$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=tournamentservice-v1 -p WEBHOOK_URL=http://$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=tournamentservice -p WEBHOOK_URL=http://$(oc -n labs-ci-cd get route webhook -o custom-columns=ROUTE:.spec.host --no-headers) | oc -n labs-ci-cd create -f-
 oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=ubiquitous-journey -p WEBHOOK_URL=https://$(oc get route argocd-server --template='{{ .spec.host }}' -n labs-ci-cd)/api/webhook | oc -n labs-ci-cd create -f-
 ```
 

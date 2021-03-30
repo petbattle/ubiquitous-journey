@@ -116,7 +116,7 @@ applications:
   pet_battle_tournament_dev:
     name: pet-battle-tournament-dev
     enabled: false
-    source: https://github.com/petbattle/tournamentservice-v1.git
+    source: https://github.com/petbattle/tournamentservice.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
