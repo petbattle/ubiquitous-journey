@@ -11,7 +11,7 @@ objects:
   metadata:
     generateName: test-tagging-pipeline-
     labels:
-      git.tag: "${GIT_TAG}"
+      git.tag: "${GIT_BRANCH}"
     annotations:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
