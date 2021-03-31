@@ -57,4 +57,4 @@ spec:
         fi
 
         # tag by app version
-        oc -n $(params.BUILD_NAMESPACE) tag $(params.APPLICATION_NAME):latest $(params.DEPLOY_NAMESPACE)/$(params.APPLICATION_NAME):$VERSION"
+        oc -n $(params.BUILD_NAMESPACE) tag $(params.APPLICATION_NAME):latest $(params.DEPLOY_NAMESPACE)/$(params.APPLICATION_NAME):${VERSION}
