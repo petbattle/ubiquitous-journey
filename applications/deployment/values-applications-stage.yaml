@@ -82,7 +82,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-staging
-      image_version: "5dd4369"
+      image_version: "1744d0e"
       istag:
         enabled: false
       pet-battle-infra:
