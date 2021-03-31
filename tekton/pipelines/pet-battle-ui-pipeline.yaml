@@ -303,7 +303,7 @@ spec:
     - name: git-commit-test
       retries: 3
       taskRef:
-        name: git-commit-argo-versions
+        name: git-commit-argo-versions-npm
       workspaces:
         - name: git-auth-secret
           workspace: git-auth-secret
@@ -369,7 +369,7 @@ spec:
     - name: git-commit-stage
       retries: 3
       taskRef:
-        name: git-commit-argo-versions
+        name: git-commit-argo-versions-npm
       workspaces:
         - name: git-auth-secret
           workspace: git-auth-secret

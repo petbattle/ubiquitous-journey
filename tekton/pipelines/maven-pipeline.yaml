@@ -366,7 +366,7 @@ spec:
     - name: git-commit-stage
       retries: 3
       taskRef:
-        name: git-commit-argo-versions
+        name: git-commit-argo-versions-mvn
       workspaces:
         - name: git-auth-secret
           workspace: git-auth-secret
