@@ -11,7 +11,9 @@ resources:
 - argocd-sync-and-wait.yaml
 - nodejs.yaml
 - create-webhook-task.yaml
-- git-commit-argo-versions.yaml
+- git-commit-argo-versions-mvn.yaml
+- git-commit-argo-versions-npm.yaml
 - helm-upload-chart.yaml
 - sonarqube-quality-gate-check.yaml
-- oc-tag-image-from-maven.yaml
+- oc-tag-image-from-mvn.yaml
+- oc-tag-image-from-npm.yaml

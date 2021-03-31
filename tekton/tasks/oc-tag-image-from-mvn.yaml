@@ -1,0 +1,56 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: oc-tag-image-from-mvn
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+    tekton.dev/displayName: "oc tag image version (from helm chart)"
+spec:
+  description: >-
+    This Task can be used to tag image streams by looking at a helm chart image version
+
+  workspaces:
+  - name: output
+  params:
+  - name: APPLICATION_NAME
+    type: string
+    description: Application Name
+  - name: IMAGE
+    type: string
+    description: Maven base image
+    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+  - name: WORK_DIRECTORY
+    description: Directory to start build in (handle multiple branches)
+    type: string
+  - name: VERBOSE
+    description: log the commands used during execution
+    type: string
+    default: "true"
+  - name: BUILD_NAMESPACE
+    type: "labs-ci-cd"
+  - name: DEPLOY_NAMESPACE
+    type: string
+  steps:
+    - name: run-oc-tag-image-from-maven
+      image: $(params.IMAGE)
+      script: |
+        #!/usr/bin/bash
+        set -e
+        if [[ "$(params.VERBOSE)" == "true" ]] ; then
+          set -x
+        fi
+
+        # determine app version
+        cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        if [ -z "${VERSION}" ]; then
+          echo "🤷 no mvn application version found, exiting 🤷"
+          exit 1
+        fi
+
+        # tag by app version
+        oc -n $(params.BUILD_NAMESPACE) tag $(params.APPLICATION_NAME):latest $(params.DEPLOY_NAMESPACE)/$(params.APPLICATION_NAME):$VERSION"

@@ -21,8 +21,8 @@ spec:
     description: Application Name
   - name: IMAGE
     type: string
-    description: Maven base image
-    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+    description: npm base image
+    default: quay.io/eformat/jenkins-agent-npm:latest
   - name: WORK_DIRECTORY
     description: Directory for cicd config (handle multiple branches)
     type: string

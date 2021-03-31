@@ -219,7 +219,7 @@ spec:
 
     - name: oc-tag-image-dev
       taskRef:
-        name: oc-tag-image-from-maven
+        name: oc-tag-image-from-mvn
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -237,7 +237,7 @@ spec:
 
     - name: oc-tag-image-test
       taskRef:
-        name: oc-tag-image-from-maven
+        name: oc-tag-image-from-mvn
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -255,7 +255,7 @@ spec:
 
     - name: oc-tag-image-stage
       taskRef:
-        name: oc-tag-image-from-maven
+        name: oc-tag-image-from-mvn
       workspaces:
         - name: output
           workspace: shared-workspace
