@@ -38,7 +38,7 @@ objects:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"
     - name: GIT_BRANCH
-      value: "${GIT_TAG}"
+      value: "${GIT_BRANCH}"
     - name: HELM_CHART_VERSION
       value: "${HELM_CHART_VERSION}"
     - name: APP_OF_APPS_KEY

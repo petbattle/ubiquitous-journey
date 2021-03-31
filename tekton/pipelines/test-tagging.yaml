@@ -66,7 +66,7 @@ spec:
         value: "$(params.APPLICATION_NAME)/cicd"
       - name: WORK_DIRECTORY_APP
         value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
-      - name: GIT_TAG
+      - name: GIT_BRANCH
         value: "$(params.GIT_BRANCH)"
       - name: APP_OF_APPS_KEY
         value: "$(params.APP_OF_APPS_KEY)"
