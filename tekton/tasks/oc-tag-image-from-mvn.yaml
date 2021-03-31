@@ -15,8 +15,8 @@ spec:
 
   workspaces:
   - name: output
-    - name: maven-settings
-    - name: maven-m2
+  - name: maven-settings
+  - name: maven-m2
   params:
   - name: APPLICATION_NAME
     type: string
