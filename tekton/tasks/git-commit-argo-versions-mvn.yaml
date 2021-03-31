@@ -79,9 +79,10 @@ spec:
       image: $(params.IMAGE)
       script: |
         #!/usr/bin/bash
-        set -e
         if [[ "$(params.VERBOSE)" == "true" ]] ; then
           set -x
+        else
+          set +x
         fi
 
         # determine app version
