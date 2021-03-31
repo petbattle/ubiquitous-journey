@@ -69,7 +69,7 @@ spec:
       - name: GIT_TAG
         value: "$(params.GIT_BRANCH)"
       - name: APP_OF_APPS_KEY
-        value: "$(params.APP_OF_APPS_TEST_KEY)"
+        value: "$(params.APP_OF_APPS_KEY)"
       - name: ARGOCD_CONFIG_REPO_PATH
         value: "applications/deployment/values-applications-test.yaml"
       runAfter:
