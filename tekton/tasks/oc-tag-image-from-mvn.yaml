@@ -15,6 +15,8 @@ spec:
 
   workspaces:
   - name: output
+    - name: maven-settings
+    - name: maven-m2
   params:
   - name: APPLICATION_NAME
     type: string
@@ -36,7 +38,7 @@ spec:
   - name: DEPLOY_NAMESPACE
     type: string
   steps:
-    - name: run-oc-tag-image-from-maven
+    - name: run-oc-tag-image
       image: $(params.IMAGE)
       script: |
         #!/usr/bin/bash
@@ -48,7 +50,7 @@ spec:
         # determine app version
         cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
 
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        VERSION=$(mvn - -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
         if [ -z "${VERSION}" ]; then
           echo "🤷 no mvn application version found, exiting 🤷"
           exit 1

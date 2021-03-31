@@ -21,8 +21,8 @@ spec:
     description: Application Name
   - name: IMAGE
     type: string
-    description: Maven base image
-    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+    description: npm base image
+    default: quay.io/eformat/jenkins-agent-npm:latest
   - name: WORK_DIRECTORY
     description: Directory to start build in (handle multiple branches)
     type: string
@@ -36,7 +36,7 @@ spec:
   - name: DEPLOY_NAMESPACE
     type: string
   steps:
-    - name: run-oc-tag-image-from-maven
+    - name: run-oc-tag-image
       image: $(params.IMAGE)
       script: |
         #!/usr/bin/bash
@@ -48,9 +48,9 @@ spec:
         # determine app version
         cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
 
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        VERSION=$(npm run version --silent)
         if [ -z "${VERSION}" ]; then
-          echo "🤷 no mvn application version found, exiting 🤷"
+          echo "🤷 no npm application version found, exiting 🤷"
           exit 1
         fi
 
