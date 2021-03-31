@@ -7,7 +7,7 @@ metadata:
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: build-tool
-    tekton.dev/displayName: "git commint argo app-of-apps versions mvn"
+    tekton.dev/displayName: "git commit argo app-of-apps versions mvn"
 spec:
   description: >-
     This Task can be used to change app-of-apps versions

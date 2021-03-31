@@ -98,7 +98,7 @@ spec:
         - name: revision
           value: "main"
         - name: subdirectory
-          value: "$(params.APPLICATION_NAME)/cicd"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
         - name: deleteExisting
           value: "true"
       runAfter:
@@ -185,7 +185,7 @@ spec:
           value: "kustomize build $1 | oc apply -f-"
         - name: ARGS
           value:
-            - "$(params.APPLICATION_NAME)/cicd/applications/build"
+            - "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd/applications/build"
       runAfter:
         - maven-run
 
@@ -326,7 +326,7 @@ spec:
       - name: APPLICATION_NAME
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
       - name: WORK_DIRECTORY_APP
         value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       - name: GIT_TAG
@@ -350,7 +350,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-test.yaml
         - name: release_name
@@ -396,7 +396,7 @@ spec:
       - name: APPLICATION_NAME
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
       - name: WORK_DIRECTORY_APP
         value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       - name: GIT_TAG
@@ -420,7 +420,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-stage.yaml
         - name: release_name

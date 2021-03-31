@@ -42,7 +42,7 @@ spec:
         - name: revision
           value: "main"
         - name: subdirectory
-          value: "$(params.APPLICATION_NAME)/cicd"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
         - name: deleteExisting
           value: "true"
 
@@ -63,7 +63,7 @@ spec:
       - name: APPLICATION_NAME
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
       - name: WORK_DIRECTORY_APP
         value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       - name: GIT_TAG

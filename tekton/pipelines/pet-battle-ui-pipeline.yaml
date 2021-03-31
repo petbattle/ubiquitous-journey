@@ -71,7 +71,7 @@ spec:
         - name: refspec
           value: "$(params.GIT_REF)"
         - name: subdirectory
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: deleteExisting
           value: "true"
 
@@ -87,7 +87,7 @@ spec:
         - name: revision
           value: "main"
         - name: subdirectory
-          value: "$(params.APPLICATION_NAME)/cicd"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
         - name: deleteExisting
           value: "true"
       runAfter:
@@ -103,7 +103,7 @@ spec:
           value:
             - "install"
         - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
         - fetch-cicd-repository
       workspaces:
@@ -121,7 +121,7 @@ spec:
             - "run"
             - "test:ci"
         - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
         - npm-install
       workspaces:
@@ -139,7 +139,7 @@ spec:
             - "run"
             - "sonar"
         - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -155,7 +155,7 @@ spec:
           workspace: shared-workspace
       params:
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
       - code-analysis
 
@@ -170,7 +170,7 @@ spec:
             - "run"
             - "build"
         - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -188,7 +188,7 @@ spec:
           value: "kustomize build $1 | oc apply -f-"
         - name: ARGS
           value:
-            - "$(params.APPLICATION_NAME)/cicd/applications/build"
+            - "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd/applications/build"
       runAfter:
         - npm-run-build
 
@@ -200,7 +200,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: SCRIPT
-          value: "oc start-build $1 --from-dir=$(params.APPLICATION_NAME)/$(params.GIT_REF) --follow"
+          value: "oc start-build $1 --from-dir=$(params.APPLICATION_NAME)/$(params.GIT_BRANCH) --follow"
         - name: ARGS
           value:
             - "$(params.APPLICATION_NAME)"
@@ -216,7 +216,7 @@ spec:
           workspace: shared-workspace
       params:
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
         - oc-start-build
 
@@ -312,9 +312,9 @@ spec:
       - name: APPLICATION_NAME
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
       - name: WORK_DIRECTORY_APP
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       - name: GIT_TAG
         value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
@@ -336,7 +336,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-test.yaml
         - name: release_name
@@ -378,9 +378,9 @@ spec:
       - name: APPLICATION_NAME
         value: "$(params.APPLICATION_NAME)"
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/cicd"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd"
       - name: WORK_DIRECTORY_APP
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       - name: GIT_TAG
         value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
@@ -402,7 +402,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: charts_dir
-          value: "$(params.APPLICATION_NAME)/cicd/applications/deployment"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/cicd/applications/deployment"
         - name: values_file
           value: argo-app-of-apps-stage.yaml
         - name: release_name
