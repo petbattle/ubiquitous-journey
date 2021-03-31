@@ -7,6 +7,8 @@ metadata:
 spec:
   workspaces:
     - name: shared-workspace
+    - name: maven-settings
+    - name: maven-m2
     - name: git-auth-secret
   params:
   - name: APPLICATION_NAME
