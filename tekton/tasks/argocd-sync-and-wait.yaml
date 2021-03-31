@@ -29,10 +29,9 @@ spec:
       image: argoproj/argocd:$(params.argocd-version)
       script: |
         #set -ex
-        argocd app wait $(params.application-name) --server $(params.argocd-server) --health $(params.flags) --timeout 120 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        argocd app wait $(params.application-name) --operation --server $(params.argocd-server) --health $(params.flags) --timeout 120 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
         if [ ! -z $(params.revision) ]; then
           argocd app sync $(params.application-name) --server $(params.argocd-server) --revision $(params.revision) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
         else
           argocd app sync $(params.application-name) --server $(params.argocd-server) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
         fi
-        argocd app wait $(params.application-name) --server $(params.argocd-server) --health $(params.flags) --timeout 120 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
