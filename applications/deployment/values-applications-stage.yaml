@@ -43,7 +43,7 @@ applications:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: "master"
+      image_version: "1ba6455"
       istag:
         enabled: false
       deploymentConfig: false
@@ -82,7 +82,7 @@ applications:
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-staging
-      image_version: "master"
+      image_version: "5dd4369"
       istag:
         enabled: false
       pet-battle-infra:
