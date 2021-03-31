@@ -85,7 +85,7 @@ spec:
         # determine app version
         cd $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)
 
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        VERSION=$(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
         if [ -z "${VERSION}" ]; then
           echo "🤷 no mvn application version found, exiting 🤷"
           exit 1
