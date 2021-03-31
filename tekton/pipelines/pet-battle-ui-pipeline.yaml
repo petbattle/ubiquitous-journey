@@ -220,65 +220,57 @@ spec:
       runAfter:
         - oc-start-build
 
-    # - name: oc-tag-image-dev
-    #   taskRef:
-    #     name: openshift-client
-    #   workspaces:
-    #     - name: output
-    #       workspace: shared-workspace
-    #   params:
-    #     - name: SCRIPT
-    #       value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-    #     - name: ARGS
-    #       value:
-    #         - "$(params.APPLICATION_NAME)"
-    #         - "$(params.DEV_NAMESPACE)"
-    #         - "$(params.BUILD_NAMESPACE)"
-    #         - "$(params.GIT_SHORT_REVISION)"
-    #   runAfter:
-    #     - upload-chart
-
-    - name: oc-tag-image-test
-      when:
-        - Input: "$(params.GIT_BRANCH)"
-          Operator: in
-          Values: ["master"]
+    - name: oc-tag-image-dev
       taskRef:
-        name: openshift-client
+        name: oc-tag-image-from-npm
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: SCRIPT
-          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)"
-            - "$(params.TEST_NAMESPACE)"
-            - "$(params.BUILD_NAMESPACE)"
-            - "$(params.GIT_SHORT_REVISION)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: DEPLOY_NAMESPACE
+          value: "$(params.DEV_NAMESPACE)"
+      runAfter:
+        - upload-chart
+
+    - name: oc-tag-image-test
+      taskRef:
+        name: oc-tag-image-from-npm
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: DEPLOY_NAMESPACE
+          value: "$(params.TEST_NAMESPACE)"
       runAfter:
         - upload-chart
 
     - name: oc-tag-image-stage
-      when:
-        - Input: "$(params.GIT_BRANCH)"
-          Operator: in
-          Values: ["master"]
       taskRef:
-        name: openshift-client
+        name: oc-tag-image-from-npm
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: SCRIPT
-          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)"
-            - "$(params.STAGE_NAMESPACE)"
-            - "$(params.BUILD_NAMESPACE)"
-            - "$(params.GIT_SHORT_REVISION)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: DEPLOY_NAMESPACE
+          value: "$(params.STAGE_NAMESPACE)"
       runAfter:
         - upload-chart
 
