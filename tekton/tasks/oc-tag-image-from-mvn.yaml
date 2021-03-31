@@ -30,7 +30,8 @@ spec:
     type: string
     default: "true"
   - name: BUILD_NAMESPACE
-    type: "labs-ci-cd"
+    type: string
+    default: "labs-ci-cd"
   - name: DEPLOY_NAMESPACE
     type: string
   steps:
