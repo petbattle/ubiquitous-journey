@@ -82,7 +82,7 @@ spec:
         - name: refspec
           value: "$(params.GIT_REF)"
         - name: subdirectory
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: deleteExisting
           value: "true"
 
@@ -113,7 +113,7 @@ spec:
         - name: MAVEN_OPTS
           value: "$(params.MAVEN_OPTS)"
         - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: GOALS
           value:
             - install
@@ -144,7 +144,7 @@ spec:
           workspace: shared-workspace
       params:
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
       - code-analysis
 
@@ -157,7 +157,7 @@ spec:
         - name: MAVEN_OPTS
           value: "$(params.MAVEN_OPTS)"
         - name: WORK_DIRECTORY
-          value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: GOALS
           value:
             - "package"
@@ -197,7 +197,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: SCRIPT
-          value: "oc start-build $1 --from-dir=$(params.APPLICATION_NAME)/$(params.GIT_REF) --follow"
+          value: "oc start-build $1 --from-dir=$(params.APPLICATION_NAME)/$(params.GIT_BRANCH) --follow"
         - name: ARGS
           value:
             - "$(params.APPLICATION_NAME)"
@@ -213,69 +213,61 @@ spec:
           workspace: shared-workspace
       params:
       - name: WORK_DIRECTORY
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
       runAfter:
         - oc-start-build
 
     - name: oc-tag-image-dev
       taskRef:
-        name: openshift-client
+        name: oc-tag-image-from-maven
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: SCRIPT
-          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)"
-            - "$(params.DEV_NAMESPACE)"
-            - "$(params.BUILD_NAMESPACE)"
-            - "$(params.GIT_SHORT_REVISION)-$(params.APPLICATION_NAME)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: DEPLOY_NAMESPACE
+          value: "$(params.DEV_NAMESPACE)"
       runAfter:
         - upload-chart
 
     - name: oc-tag-image-test
-      when:
-        - Input: "$(params.GIT_BRANCH)"
-          Operator: in
-          Values: ["master"]
       taskRef:
-        name: openshift-client
+        name: oc-tag-image-from-maven
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: SCRIPT
-          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)"
-            - "$(params.TEST_NAMESPACE)"
-            - "$(params.BUILD_NAMESPACE)"
-            - "$(params.GIT_SHORT_REVISION)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: DEPLOY_NAMESPACE
+          value: "$(params.TEST_NAMESPACE)"
       runAfter:
         - upload-chart
 
     - name: oc-tag-image-stage
-      when:
-        - Input: "$(params.GIT_BRANCH)"
-          Operator: in
-          Values: ["master"]
       taskRef:
-        name: openshift-client
+        name: oc-tag-image-from-maven
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: SCRIPT
-          value: "oc -n $3 tag $1:latest $2/$1:$4" # tag by git revision
-        - name: ARGS
-          value:
-            - "$(params.APPLICATION_NAME)"
-            - "$(params.STAGE_NAMESPACE)"
-            - "$(params.BUILD_NAMESPACE)"
-            - "$(params.GIT_SHORT_REVISION)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: DEPLOY_NAMESPACE
+          value: "$(params.STAGE_NAMESPACE)"
       runAfter:
         - upload-chart
 
@@ -308,7 +300,7 @@ spec:
     - name: git-commit-test
       retries: 3
       taskRef:
-        name: git-commit-argo-versions
+        name: git-commit-argo-versions-mvn
       workspaces:
         - name: git-auth-secret
           workspace: git-auth-secret
@@ -320,7 +312,7 @@ spec:
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/cicd"
       - name: WORK_DIRECTORY_APP
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
       - name: GIT_TAG
         value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY
@@ -386,7 +378,7 @@ spec:
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/cicd"
       - name: WORK_DIRECTORY_APP
-        value: "$(params.APPLICATION_NAME)/$(params.GIT_REF)"
+        value: "$(params.APPLICATION_NAME)/$(params.GIT_GIT_BRANCH)"
       - name: GIT_TAG
         value: "$(params.GIT_REVISION)"
       - name: APP_OF_APPS_KEY

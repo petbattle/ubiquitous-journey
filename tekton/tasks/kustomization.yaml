@@ -14,3 +14,4 @@ resources:
 - git-commit-argo-versions.yaml
 - helm-upload-chart.yaml
 - sonarqube-quality-gate-check.yaml
+- oc-tag-image-from-maven.yaml
