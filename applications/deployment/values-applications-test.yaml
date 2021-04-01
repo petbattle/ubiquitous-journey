@@ -140,7 +140,7 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.33
+    source_ref: 1.0.34
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
