@@ -64,6 +64,7 @@ applications:
         - name: jenkins-agent-graalvm
         - name: jenkins-agent-helm
         - name: jenkins-agent-argocd
+        - name: jenkins-agent-zap
       deployment:
         env_vars:
           - name: JVM_ARCH
