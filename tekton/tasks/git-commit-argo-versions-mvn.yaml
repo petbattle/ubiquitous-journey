@@ -1,0 +1,138 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-commit-argo-versions-mvn
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+    tekton.dev/displayName: "git commit argo app-of-apps versions mvn"
+spec:
+  description: >-
+    This Task can be used to change app-of-apps versions
+
+  workspaces:
+  - name: output
+  - name: git-auth-secret
+  - name: maven-settings
+  - name: maven-m2
+  params:
+  - name: APPLICATION_NAME
+    type: string
+    description: Application Name
+  - name: IMAGE
+    type: string
+    description: Maven base image
+    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+  - name: WORK_DIRECTORY
+    description: Directory for cicd config (handle multiple branches)
+    type: string
+  - name: WORK_DIRECTORY_APP
+    description: Directory to start build in (handle multiple branches)
+    type: string
+  - name: GIT_REPO_URL
+    type: string
+    description: Git cicd repo url
+    default: "github.com/petbattle/ubiquitous-journey.git"
+  - name: GIT_USER_NAME
+    type: string
+    description: |
+      Git user name for performing git operation.
+    default: "tekton"
+  - name: GIT_USER_EMAIL
+    type: string
+    description: |
+      Git user email for performing git operation.
+    default: "tekton@rht-labs.bot.com"
+  - name: GIT_TAG
+    description: The Git Tag (branch,tag,revision) to set in app of apps values
+    type: string
+    default: "master"
+  - name: HELM_CHART_VERSION
+    type: string
+    default: ""
+  - name: HTTPPROXY
+    description: git HTTP proxy server for non-SSL requests
+    type: string
+    default: ""
+  - name: HTTPSPROXY
+    description: git HTTPS proxy server for SSL requests
+    type: string
+    default: ""
+  - name: NOPROXY
+    description: git no proxy - opt out of proxying HTTP/HTTPS requests
+    type: string
+    default: ""
+  - name: VERBOSE
+    description: log the commands used during execution
+    type: string
+    default: "true"
+  - name: ARGOCD_CONFIG_REPO_PATH
+    description: The App Of Apps file path
+    type: string
+    default: ""
+  - name: APP_OF_APPS_KEY
+    type: string
+  steps:
+    - name: run-git-commit-argo-versions
+      image: $(params.IMAGE)
+      script: |
+        #!/usr/bin/bash
+        if [[ "$(params.VERBOSE)" == "true" ]] ; then
+          set -x
+        else
+          set +x
+        fi
+
+        # determine app version
+        cd $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)
+
+        VERSION=$(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
+        if [ -z "${VERSION}" ]; then
+          echo "🤷 no mvn application version found, exiting 🤷"
+          exit 1
+        fi
+
+        cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+
+        test -z $(params.HTTPPROXY) || export HTTP_PROXY=$(params.HTTPPROXY)
+        test -z $(params.HTTPSPROXY) || export HTTPS_PROXY=$(params.HTTPSPROXY)
+        test -z $(params.NOPROXY) || export NO_PROXY=$(params.NOPROXY)
+
+        # Setting up the config for the git
+        git config --global user.email $(params.GIT_USER_EMAIL)
+        git config --global user.name $(params.GIT_USER_NAME)
+        git config --global push.default simple
+        git config --global pull.rebase false
+
+        # Set app suite values overrides in app-of-apps file to Git SHA's
+        YQ_ARG_0=.applications.$(params.APP_OF_APPS_KEY).enabled
+        YQ_ARG_1=.applications.$(params.APP_OF_APPS_KEY).source_ref
+        YQ_ARG_2=.applications.$(params.APP_OF_APPS_KEY).values.image_version
+        GIT_REF=$(params.GIT_TAG)
+        yq eval -i ${YQ_ARG_0}=true $(params.ARGOCD_CONFIG_REPO_PATH)
+        # helm chart version provided
+        if [ ! -z $(params.HELM_CHART_VERSION) ]; then
+          yq eval -i ${YQ_ARG_1}=\"${HELM_CHART_VERSION}\" "$(params.ARGOCD_CONFIG_REPO_PATH)"
+        else
+          # set from application code
+          yq eval -i ${YQ_ARG_1}=\"$(yq eval '.version' $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)/chart/Chart.yaml)\" "$(params.ARGOCD_CONFIG_REPO_PATH)"
+        fi
+        # use maven pom.xml version
+        yq eval -i ${YQ_ARG_2}=\"${VERSION}\" $(params.ARGOCD_CONFIG_REPO_PATH)
+
+        # Auto commit, we are on detached HEAD, Trunk based development we are on master/main
+        # git branch origin/main || rc=$?
+        git checkout main
+        git add $(params.ARGOCD_CONFIG_REPO_PATH)
+        git commit -m "🚀 AUTOMATED COMMIT - Deployment $(params.APPLICATION_NAME) $(params.GIT_TAG) ${VERSION} 🚀" || rc=$?
+        git pull
+        git remote set-url origin  https://foobar:$(cat $(workspaces.git-auth-secret.path)/password)@$(params.GIT_REPO_URL)
+        git push
+
+        EXIT_CODE="$?"
+        if [ "$EXIT_CODE" != 0 ]
+        then
+          exit $EXIT_CODE
+        fi

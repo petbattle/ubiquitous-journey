@@ -1,13 +1,13 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: git-commit-argo-versions
+  name: git-commit-argo-versions-npm
   labels:
     app.kubernetes.io/version: "0.1"
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: build-tool
-    tekton.dev/displayName: "git commint argo app-of-apps versions"
+    tekton.dev/displayName: "git commit argo app-of-apps versions npm"
 spec:
   description: >-
     This Task can be used to change app-of-apps versions
@@ -21,8 +21,8 @@ spec:
     description: Application Name
   - name: IMAGE
     type: string
-    description: Maven base image
-    default: quay.io/eformat/jenkins-agent-mvn-mandrel:latest
+    description: npm base image
+    default: quay.io/eformat/jenkins-agent-npm:latest
   - name: WORK_DIRECTORY
     description: Directory for cicd config (handle multiple branches)
     type: string
@@ -80,6 +80,17 @@ spec:
         set -e
         if [[ "$(params.VERBOSE)" == "true" ]] ; then
           set -x
+        else
+          set +x
+        fi
+
+        # determine app version
+        cd $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)
+
+        VERSION=$(npm run version --silent)
+        if [ -z "${VERSION}" ]; then
+          echo "🤷 no npm application version found, exiting 🤷"
+          exit 1
         fi
 
         cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
@@ -107,13 +118,14 @@ spec:
           # set from application code
           yq eval -i ${YQ_ARG_1}=\"$(yq eval '.version' $(workspaces.output.path)/$(params.WORK_DIRECTORY_APP)/chart/Chart.yaml)\" "$(params.ARGOCD_CONFIG_REPO_PATH)"
         fi
-        yq eval -i ${YQ_ARG_2}=\"${GIT_REF::7}\" $(params.ARGOCD_CONFIG_REPO_PATH)
+        # use npm app version
+        yq eval -i ${YQ_ARG_2}=\"${VERSION}\" $(params.ARGOCD_CONFIG_REPO_PATH)        
 
         # Auto commit, we are on detached HEAD, Trunk based development we are on master/main
         # git branch origin/main || rc=$?
         git checkout main
         git add $(params.ARGOCD_CONFIG_REPO_PATH)
-        git commit -m "🚀 AUTOMATED COMMIT - Deployment $(params.APPLICATION_NAME) $(params.GIT_TAG) 🚀" || rc=$?
+        git commit -m "🚀 AUTOMATED COMMIT - Deployment $(params.APPLICATION_NAME) $(params.GIT_TAG) ${VERSION} 🚀" || rc=$?
         git pull
         git remote set-url origin  https://foobar:$(cat $(workspaces.git-auth-secret.path)/password)@$(params.GIT_REPO_URL)
         git push

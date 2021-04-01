@@ -1,6 +1,7 @@
-apiVersion: v1
-name: pb-api-deploy
-description: pet battle api deployment
+apiVersion: v2
+name: pet-battle-deploy-suite
+description: Pet Battle Suite Deployment
 type: application
-version: 0.0.1
-appVersion: 0.0.1
+version: 1.0.0
+appVersion: 1.0.0
+icon: https://avatars1.githubusercontent.com/u/68044996?s=200&v=4

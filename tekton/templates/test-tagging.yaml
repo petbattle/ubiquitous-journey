@@ -11,7 +11,7 @@ objects:
   metadata:
     generateName: test-tagging-pipeline-
     labels:
-      git.tag: "${GIT_TAG}"
+      git.tag: "${GIT_BRANCH}"
     annotations:
       argocd.argoproj.io/sync-options: Prune=false
       argocd.argoproj.io/compare-options: IgnoreExtraneous
@@ -25,14 +25,20 @@ objects:
     - name: shared-workspace
       persistentVolumeClaim:
         claimName: build-images
+    - name: maven-settings
+      persistentVolumeClaim:
+        claimName: maven-source
+    - name: maven-m2
+      persistentVolumeClaim:
+        claimName: maven-m2
     - name: git-auth-secret
       secret:
         secretName: git-auth
     params:
     - name: APPLICATION_NAME
       value: "${APPLICATION_NAME}"
-    - name: GIT_TAG
-      value: "${GIT_TAG}"
+    - name: GIT_BRANCH
+      value: "${GIT_BRANCH}"
     - name: HELM_CHART_VERSION
       value: "${HELM_CHART_VERSION}"
     - name: APP_OF_APPS_KEY
@@ -47,12 +53,9 @@ parameters:
   value: pet-battle-api
 - description: Git Tag (branch/tag/ref) of image
   displayName: Git Tag (branch/tag/ref) of image
-  name: GIT_TAG
+  name: GIT_BRANCH
   required: true
   value: "master"
-- description: Helm Chart Version (Optional)
-  displayName: Helm Chart Version (Optional)
-  name: HELM_CHART_VERSION
 - description: Argo app of app key name (use underscores only)
   displayName: Argo app of app key name (use underscores only)
   name: APP_OF_APPS_KEY

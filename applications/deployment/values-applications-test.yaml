@@ -69,7 +69,7 @@ applications:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: "master"
+      image_version: "1.0.1"
       istag:
         enabled: false
       deploymentConfig: false
@@ -108,7 +108,7 @@ applications:
       image_repository: quay.io
       image_name: pet-battle
       image_namespace: petbattle
-      image_version: "master"
+      image_version: "1.3.1"
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-test.apps.hivec.sandbox1405.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.hivec.sandbox1405.opentlc.com", "matomoUrl": "https://matomo-labs-ci-cd.apps.hivec.sandbox1405.opentlc.com/", "keycloak": { "url": "https://keycloak-labs-test.apps.hivec.sandbox1405.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-test.apps.hivec.sandbox1405.opentlc.com/*", "enableLogging": true } }'
     project:
       name: pet-battle-test
@@ -116,7 +116,7 @@ applications:
   pet_battle_tournament_dev:
     name: pet-battle-tournament-dev
     enabled: false
-    source: https://github.com/petbattle/tournamentservice-v1.git
+    source: https://github.com/petbattle/tournamentservice.git
     source_path: chart
     sync_policy_automated: true
     destination: labs-dev
@@ -140,13 +140,13 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-test
-    source_ref: 1.0.33
+    source_ref: 1.0.34
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle
       image_namespace: labs-test
-      image_version: "master"
+      image_version: "1.0.1"
       istag:
         enabled: false
       pet-battle-infra:

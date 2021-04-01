@@ -43,7 +43,7 @@ applications:
       fullnameOverride: pet-battle-api
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
-      image_version: "master"
+      image_version: "1.0.1"
       istag:
         enabled: false
       deploymentConfig: false
@@ -65,7 +65,7 @@ applications:
       image_name: pet-battle
       image_namespace: petbattle
       config_map: '{ "catsUrl": "https://pet-battle-api-labs-staging.apps.hivec.sandbox1405.opentlc.com", "tournamentsUrl": "https://pet-battle-tournament-labs-staging.apps.hivec.sandbox1405.opentlc.com", "matomoUrl": "https://matomo-labs-ci-cd.apps.hivec.sandbox1405.opentlc.com/", "keycloak": { "url": "https://keycloak-labs-staging.apps.hivec.sandbox1405.opentlc.com/auth/", "realm": "pbrealm", "clientId": "pbclient", "redirectUri": "https://pet-battle-labs-staging.apps.hivec.sandbox1405.opentlc.com/*", "enableLogging": true } }'
-      image_version: "master"
+      image_version: "1.3.1"
     project:
       name: pet-battle-stage
       enabled: true
@@ -76,13 +76,13 @@ applications:
     chart_name: pet-battle-tournament
     sync_policy_automated: true
     destination: labs-staging
-    source_ref: 1.0.33
+    source_ref: 1.0.34
     values:
       fullnameOverride: pet-battle-tournament
       image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-tournament
       image_namespace: labs-staging
-      image_version: "master"
+      image_version: "1.0.1"
       istag:
         enabled: false
       pet-battle-infra:

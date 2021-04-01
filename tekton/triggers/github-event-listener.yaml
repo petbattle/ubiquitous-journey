@@ -51,7 +51,7 @@ spec:
         - cel:
             filter: >-
               (header.match('X-GitHub-Event', 'push') &&
-                body.repository.full_name == 'petbattle/tournamentservice-v1')
+                body.repository.full_name == 'petbattle/tournamentservice')
             overlays:
             - key: truncated_sha
               expression: "body.head_commit.id.truncate(7)"
@@ -69,7 +69,7 @@ spec:
             filter: >-
               (header.match('X-GitHub-Event', 'pull_request') &&
                 body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
-                body.pull_request.head.repo.full_name == 'petbattle/tournamentservice-v1'
+                body.pull_request.head.repo.full_name == 'petbattle/tournamentservice'
             overlays:
             - key: truncated_sha
               expression: "body.pull_request.head.sha.truncate(7)"
