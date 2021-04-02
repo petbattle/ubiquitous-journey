@@ -13,6 +13,10 @@ metadata:
 spec:
   sourceRepos:
   - '*'
+{{- if $project.cluster_resource_white_list }}
+  clusterResourceWhitelist:
+{{- toYaml $project.cluster_resource_white_list | nindent 2 }}
+{{- end }}
 {{- if $project.destinations }}
   destinations:
 {{- toYaml $project.destinations | nindent 2 }}

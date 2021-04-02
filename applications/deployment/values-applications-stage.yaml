@@ -30,6 +30,11 @@ argocd_projects:
   - enabled: true
     name: pet-battle-stage
     destinations: *stage_allowed_destinations
+    cluster_resource_white_list:
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRole'
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRoleBinding'
 applications:
   pet_battle_api_stage:
     name: pet-battle-api-stage

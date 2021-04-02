@@ -33,9 +33,19 @@ argocd_projects:
   - enabled: true
     name: pet-battle-dev
     destinations: *dev_allowed_destinations
+    cluster_resource_white_list:
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRole'
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRoleBinding'
   - enabled: true
     name: pet-battle-test
     destinations: *test_allowed_destinations
+    cluster_resource_white_list:
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRole'
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRoleBinding'
 applications:
   pet_battle_api_dev:
     name: pet-battle-api-dev
