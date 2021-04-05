@@ -3,6 +3,7 @@ kind: Kustomization
 
 bases:
 - persistent-volume-claims/aws
+#- persistent-volume-claims/crc
 - rolebindings
 - tasks
 - pipelines
