@@ -35,4 +35,3 @@ spec:
         else
           argocd app sync $(params.application-name) --server $(params.argocd-server) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
         fi
-        argocd app get $(params.application-name) --server $(params.argocd-server) --hard-refresh 
