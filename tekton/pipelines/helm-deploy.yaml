@@ -109,6 +109,8 @@ spec:
       params:
       - name: application-name
         value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)"
+      - name: argocd-project
+        value: "pet-battle-test"
       - name: flags
         value: --insecure
       - name: revision
@@ -150,6 +152,8 @@ spec:
       params:
       - name: application-name
         value: "-l app.kubernetes.io/instance=$(params.APPLICATION_NAME)" 
+      - name: argocd-project
+        value: "pet-battle-stage"
       - name: flags
         value: --insecure
       - name: revision

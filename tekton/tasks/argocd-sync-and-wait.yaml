@@ -11,6 +11,9 @@ spec:
   - name: application-name
     type: string
     description: name of the application to sync
+  - name: argocd-project
+    type: string
+    description: name of the project
   - name: revision
     type: string
     description: the revision to sync to
@@ -29,9 +32,16 @@ spec:
       image: argoproj/argocd:$(params.argocd-version)
       script: |
         #set -ex
-        argocd app wait $(params.application-name) --operation --server $(params.argocd-server) --health $(params.flags) --timeout 120 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
-        if [ ! -z $(params.revision) ]; then
-          argocd app sync $(params.application-name) --server $(params.argocd-server) --revision $(params.revision) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
-        else
-          argocd app sync $(params.application-name) --server $(params.argocd-server) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        set +x
+        APPNAME=`argocd app list $(params.application-name) --server $(params.argocd-server) $(params.flags) -p $(params.argocd-project) -o name --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)`
+        if [ -z "${APPNAME}" ]; then
+          echo "🤷 Could not find app $(params.application-name) in project $(params.argocd-project) ? 🤷"
+          exit 1
         fi
+        argocd app wait ${APPNAME} --operation --server $(params.argocd-server) --health $(params.flags) --timeout 120 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        if [ ! -z $(params.revision) ]; then
+          argocd app sync ${APPNAME} --server $(params.argocd-server) --revision $(params.revision) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        else
+          argocd app sync ${APPNAME} --server $(params.argocd-server) $(params.flags) --timeout 600 --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
+        fi
+        argocd app get ${APPNAME} --server $(params.argocd-server) --hard-refresh $(params.flags) --auth-token $(cat $(workspaces.argocd-env-secret.path)/password)
