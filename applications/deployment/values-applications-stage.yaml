@@ -102,8 +102,8 @@ applications:
       name: pet-battle-stage
       enabled: true
   _stage:
-    source_ref: "null"
+    source_ref: ""
     values:
-      image_version: "null"
+      image_version: ""
       image_namespace: petbattle
       image_repository: quay.io
