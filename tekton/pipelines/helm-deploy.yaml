@@ -54,7 +54,7 @@ spec:
       when:
         - Input: "$(params.GIT_BRANCH)"
           Operator: notin
-          Values: ["master"]
+          Values: ["master","trunk","main"]
       taskRef:
         name: helm-install-from-chartrepo
       params:
@@ -79,7 +79,7 @@ spec:
       when:
         - Input: "$(params.GIT_BRANCH)"
           Operator: in
-          Values: ["master"]
+          Values: ["master","trunk","main"]
       taskRef:
         name: helm-install-from-source
       workspaces:
@@ -122,7 +122,7 @@ spec:
       when:
         - Input: "$(params.GIT_BRANCH)"
           Operator: in
-          Values: ["master"]
+          Values: ["master","trunk","main"]
       taskRef:
         name: helm-install-from-source
       workspaces:

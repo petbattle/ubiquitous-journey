@@ -240,6 +240,10 @@ spec:
         - upload-chart
 
     - name: oc-tag-image-test
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: in
+          Values: ["master","trunk","main"]
       taskRef:
         name: oc-tag-image-from-mvn
       workspaces:
@@ -262,6 +266,10 @@ spec:
         - upload-chart
 
     - name: oc-tag-image-stage
+      when:
+        - Input: "$(params.GIT_BRANCH)"
+          Operator: in
+          Values: ["master","trunk","main"]
       taskRef:
         name: oc-tag-image-from-mvn
       workspaces:
@@ -287,7 +295,7 @@ spec:
       when:
         - Input: "$(params.GIT_BRANCH)"
           Operator: notin
-          Values: ["master"]
+          Values: ["master","trunk","main"]
       taskRef:
         name: helm-install-from-chartrepo
       params:
@@ -342,7 +350,7 @@ spec:
       when:
         - Input: "$(params.GIT_BRANCH)"
           Operator: in
-          Values: ["master"]
+          Values: ["master","trunk","main"]
       taskRef:
         name: helm-install-from-source
       workspaces:
@@ -414,7 +422,7 @@ spec:
       when:
         - Input: "$(params.GIT_BRANCH)"
           Operator: in
-          Values: ["master"]
+          Values: ["master","trunk","main"]
       taskRef:
         name: helm-install-from-source
       workspaces:
