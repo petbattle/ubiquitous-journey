@@ -1,0 +1,45 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: allure-post-report
+  labels:
+    app.kubernetes.io/version: "0.2"
+    rht-labs.com/uj: ubiquitous-journey
+spec:
+  description: >-
+    This task used for uploading test reports to allure
+  workspaces:
+    - name: output
+  params:
+    - name: APPLICATION_NAME
+      type: string
+      default: ""
+    - name: IMAGE
+      description: the image to use to upload results
+      type: string
+      default: "quay.io/eformat/jenkins-agent-graalvm:latest"
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: ALLURE_USERNAME
+      description: "Allure Username"
+      default: "admin"
+    - name: ALLURE_PASSWORD
+      description: "Allure Password"
+      default: "password"
+    - name: ALLURE_HOST
+      description: "Allure Host"
+      default: "https://allure-labs-ci-cd.apps.voda-1.apac-1.rht-labs.com"
+  steps:
+    - name: runner
+      image: $(params.IMAGE)
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      script: |
+        #!/bin/bash
+        #set -x
+        git clone https://github.com/eformat/allure.git && cd allure
+        ./scripts/send_results.sh $(params.APPLICATION_NAME) \
+          $(workspaces.output.path)/$(params.WORK_DIRECTORY) \
+          $(params.ALLURE_USERNAME) \
+          $(params.ALLURE_PASSWORD) \
+          $(params.ALLURE_HOST)

@@ -135,6 +135,20 @@ spec:
         - name: output
           workspace: shared-workspace
 
+    - name: save-test-results
+      taskRef:
+        name: allure-post-report
+      params:
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+      runAfter:
+        - code-analysis
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+
     - name: quality-gate-check
       retries: 1
       taskRef:
@@ -146,7 +160,7 @@ spec:
       - name: WORK_DIRECTORY
         value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
-      - code-analysis
+      - save-test-results
 
     - name: maven-run
       taskRef:

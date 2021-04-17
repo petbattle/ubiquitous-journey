@@ -17,3 +17,4 @@ resources:
 - sonarqube-quality-gate-check.yaml
 - oc-tag-image-from-mvn.yaml
 - oc-tag-image-from-npm.yaml
+- allure-post-report.yaml
