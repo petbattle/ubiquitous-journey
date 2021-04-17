@@ -287,3 +287,16 @@ applications:
     source_ref: master
     sync_policy: *sync_policy_true
     no_helm: true
+  # Allure
+  - name: allure
+    enabled: true
+    source: https://github.com/eformat/allure
+    source_path: "chart"
+    source_ref: "main"
+    sync_policy: *sync_policy_true
+    destination: *ci_cd_ns
+    ignore_differences:
+      - group: apps
+        kind: Deployment
+        jsonPointers:
+          - /spec/template/spec/containers/0/image
