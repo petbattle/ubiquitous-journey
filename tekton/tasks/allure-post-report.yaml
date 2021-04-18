@@ -29,7 +29,7 @@ spec:
       default: "password"
     - name: ALLURE_HOST
       description: "Allure Host"
-      default: "https://allure-labs-ci-cd.apps.voda-1.apac-1.rht-labs.com"
+      default: "http://allure.labs-ci-cd.svc.cluster.local:5050"
   steps:
     - name: runner
       image: $(params.IMAGE)
