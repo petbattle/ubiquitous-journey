@@ -1,0 +1,28 @@
+---
+kind: "CronJob"
+apiVersion: "batch/v1beta1"
+metadata:
+  name: "tekton-tidy"
+  namespace: "labs-ci-cd"
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          activeDeadlineSeconds: 600
+          containers:
+          - name: "tekton-tidy"
+            image: "quay.io/eformat/openshift-helm:latest"
+            command:
+              - "/bin/bash"
+              - "-c"
+              - |
+                tkn -n labs-ci-cd pr delete -f -n labs-ci-cd --keep 20
+                tkn -n labs-ci-cd tr delete -f -n labs-ci-cd --keep 40
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+  schedule: "@daily"
+  successfulJobsHistoryLimit: 5

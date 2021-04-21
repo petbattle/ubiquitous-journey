@@ -12,5 +12,6 @@ resources:
 - helm-upgrade-from-repo.yaml
 - test-chart-upload.yaml
 - test-tagging.yaml
+- tekton-tidy-job.yaml
 
 namespace: labs-ci-cd
