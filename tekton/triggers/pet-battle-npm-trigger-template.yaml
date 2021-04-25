@@ -40,6 +40,8 @@ spec:
           name: pet-battle-ui-pipeline
         podTemplate:
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
             fsGroup: 0
         params:
           - name: APPLICATION_NAME

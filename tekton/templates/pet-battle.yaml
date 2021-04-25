@@ -22,6 +22,8 @@ objects:
       name: pet-battle-ui-pipeline
     podTemplate:
       securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
         fsGroup: 0
     workspaces:
     - name: shared-workspace

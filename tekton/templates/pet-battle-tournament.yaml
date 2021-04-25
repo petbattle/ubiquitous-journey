@@ -24,6 +24,8 @@ objects:
         serviceAccountName: argocd-application-controller
     podTemplate:
       securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
         fsGroup: 0
     pipelineRef:
       name: maven-pipeline
