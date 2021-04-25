@@ -22,7 +22,8 @@ objects:
       name: maven-pipeline
     podTemplate:
       securityContext:
-        runAsNonRoot: true 
+        runAsNonRoot: true
+        runAsUser: 1001
         fsGroup: 0
     workspaces:
     - name: shared-workspace
