@@ -22,7 +22,8 @@ spec:
             - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
-      - ref: github-trigger-binding
+      - kind: TriggerBinding
+        ref: github-trigger-binding
       template:
         ref: pet-battle-api-maven-trigger-template
     - name: pet-battle-api-webhook-pr
@@ -42,7 +43,8 @@ spec:
             - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
-      - ref: github-trigger-binding-pr
+      - kind: TriggerBinding
+        ref: github-trigger-binding-pr
       template:
         ref: pet-battle-api-maven-trigger-template
 
@@ -60,7 +62,8 @@ spec:
             - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
-      - ref: github-trigger-binding
+      - kind: TriggerBinding
+        ref: github-trigger-binding
       template:
         ref: pet-battle-tournament-maven-trigger-template
     - name: pet-battle-tournament-webhook-pr
@@ -80,7 +83,8 @@ spec:
             - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
-      - ref: github-trigger-binding-pr
+      - kind: TriggerBinding
+        ref: github-trigger-binding-pr
       template:
         ref: pet-battle-tournament-maven-trigger-template
 
@@ -98,7 +102,8 @@ spec:
             - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
-      - ref: github-trigger-binding
+      - kind: TriggerBinding
+        ref: github-trigger-binding
       template:
         name: pet-battle-npm-trigger-template
     - name: pet-battle-webhook-pr
@@ -118,7 +123,8 @@ spec:
             - key: app_of_apps_key
               expression: "body.repository.name.replace('-','_',-1)"
       bindings:
-      - ref: github-trigger-binding-pr
+      - kind: TriggerBinding
+        ref: github-trigger-binding-pr
       template:
         ref: pet-battle-npm-trigger-template
 ---
