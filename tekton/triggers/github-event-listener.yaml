@@ -62,7 +62,7 @@ spec:
       bindings:
       - ref: github-trigger-binding
       template:
-        name: pet-battle-tournament-maven-trigger-template
+        ref: pet-battle-tournament-maven-trigger-template
     - name: pet-battle-tournament-webhook-pr
       interceptors: # fixme add secret.ref
         - cel:
