@@ -138,7 +138,7 @@ metadata:
     eventlistener: github-webhook
 spec:
   port:
-    targetPort: 8080
+    targetPort: http-listener
   to:
     kind: 'Service'
     name: el-github-webhook
