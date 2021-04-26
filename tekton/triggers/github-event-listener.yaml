@@ -10,17 +10,21 @@ spec:
   triggers:
     - name: pet-battle-api-webhook-all-branches
       interceptors: # fixme add secret.ref
-        - cel:
-            filter: >-
-              (header.match('X-GitHub-Event', 'push') &&
-                body.repository.full_name == 'petbattle/pet-battle-api')
-            overlays:
-            - key: truncated_sha
-              expression: "body.head_commit.id.truncate(7)"
-            - key: branch_name
-              expression: "body.ref.split('/')[2]"
-            - key: app_of_apps_key
-              expression: "body.repository.name.replace('-','_',-1)"
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: >-
+                (header.match('X-GitHub-Event', 'push') &&
+                  body.repository.full_name == 'petbattle/pet-battle-api')
+            - name: overlays
+              value:
+                - key: truncated_sha
+                  expression: "body.head_commit.id.truncate(7)"
+                - key: branch_name
+                  expression: "body.ref.split('/')[2]"
+                - key: app_of_apps_key
+                  expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - kind: TriggerBinding
         ref: github-trigger-binding
@@ -28,20 +32,24 @@ spec:
         ref: pet-battle-api-maven-trigger-template
     - name: pet-battle-api-webhook-pr
       interceptors: # fixme add secret.ref
-        - cel:
-            filter: >-
-              (header.match('X-GitHub-Event', 'pull_request') &&
-                body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
-                body.pull_request.head.repo.full_name == 'petbattle/pet-battle-api'
-            overlays:
-            - key: truncated_sha
-              expression: "body.pull_request.head.sha.truncate(7)"
-            - key: branch_name
-              expression: body.pull_request.head.ref
-            - key: pr
-              expression: body.pull_request.number
-            - key: app_of_apps_key
-              expression: "body.repository.name.replace('-','_',-1)"
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: >-
+                (header.match('X-GitHub-Event', 'pull_request') &&
+                  body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
+                  body.pull_request.head.repo.full_name == 'petbattle/pet-battle-api'
+            - name: overlays
+              value:
+                - key: truncated_sha
+                  expression: "body.pull_request.head.sha.truncate(7)"
+                - key: branch_name
+                  expression: body.pull_request.head.ref
+                - key: pr
+                  expression: body.pull_request.number
+                - key: app_of_apps_key
+                  expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - kind: TriggerBinding
         ref: github-trigger-binding-pr
@@ -50,17 +58,21 @@ spec:
 
     - name: pet-battle-tournament-webhook-all-branches
       interceptors: # fixme add secret.ref
-        - cel:
-            filter: >-
-              (header.match('X-GitHub-Event', 'push') &&
-                body.repository.full_name == 'petbattle/tournamentservice')
-            overlays:
-            - key: truncated_sha
-              expression: "body.head_commit.id.truncate(7)"
-            - key: branch_name
-              expression: "body.ref.split('/')[2]"
-            - key: app_of_apps_key
-              expression: "body.repository.name.replace('-','_',-1)"
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: >-
+                (header.match('X-GitHub-Event', 'push') &&
+                  body.repository.full_name == 'petbattle/tournamentservice')
+            - name: overlays
+              value:
+                - key: truncated_sha
+                  expression: "body.head_commit.id.truncate(7)"
+                - key: branch_name
+                  expression: "body.ref.split('/')[2]"
+                - key: app_of_apps_key
+                  expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - kind: TriggerBinding
         ref: github-trigger-binding
@@ -68,20 +80,24 @@ spec:
         ref: pet-battle-tournament-maven-trigger-template
     - name: pet-battle-tournament-webhook-pr
       interceptors: # fixme add secret.ref
-        - cel:
-            filter: >-
-              (header.match('X-GitHub-Event', 'pull_request') &&
-                body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
-                body.pull_request.head.repo.full_name == 'petbattle/tournamentservice'
-            overlays:
-            - key: truncated_sha
-              expression: "body.pull_request.head.sha.truncate(7)"
-            - key: branch_name
-              expression: body.pull_request.head.ref
-            - key: pr
-              expression: body.pull_request.number
-            - key: app_of_apps_key
-              expression: "body.repository.name.replace('-','_',-1)"
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: >-
+                (header.match('X-GitHub-Event', 'pull_request') &&
+                  body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
+                  body.pull_request.head.repo.full_name == 'petbattle/tournamentservice'
+            - name: overlays
+              value:
+                - key: truncated_sha
+                  expression: "body.pull_request.head.sha.truncate(7)"
+                - key: branch_name
+                  expression: body.pull_request.head.ref
+                - key: pr
+                  expression: body.pull_request.number
+                - key: app_of_apps_key
+                  expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - kind: TriggerBinding
         ref: github-trigger-binding-pr
@@ -90,17 +106,21 @@ spec:
 
     - name: pet-battle-webhook-all-branches
       interceptors: # fixme add secret.ref
-        - cel:
-            filter: >-
-              (header.match('X-GitHub-Event', 'push') &&
-                body.repository.full_name == 'petbattle/pet-battle')
-            overlays:
-            - key: truncated_sha
-              expression: "body.head_commit.id.truncate(7)"
-            - key: branch_name
-              expression: "body.ref.split('/')[2]"
-            - key: app_of_apps_key
-              expression: "body.repository.name.replace('-','_',-1)"
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: >-
+                (header.match('X-GitHub-Event', 'push') &&
+                  body.repository.full_name == 'petbattle/pet-battle')
+            - name: overlays
+              value:
+                - key: truncated_sha
+                  expression: "body.head_commit.id.truncate(7)"
+                - key: branch_name
+                  expression: "body.ref.split('/')[2]"
+                - key: app_of_apps_key
+                  expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - kind: TriggerBinding
         ref: github-trigger-binding
@@ -108,20 +128,24 @@ spec:
         ref: pet-battle-npm-trigger-template
     - name: pet-battle-webhook-pr
       interceptors: # fixme add secret.ref
-        - cel:
-            filter: >-
-              (header.match('X-GitHub-Event', 'pull_request') &&
-                body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
-                body.pull_request.head.repo.full_name == 'petbattle/pet-battle'
-            overlays:
-            - key: truncated_sha
-              expression: "body.pull_request.head.sha.truncate(7)"
-            - key: branch_name
-              expression: body.pull_request.head.ref
-            - key: pr
-              expression: body.pull_request.number
-            - key: app_of_apps_key
-              expression: "body.repository.name.replace('-','_',-1)"
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: >-
+                (header.match('X-GitHub-Event', 'pull_request') &&
+                  body.action == 'opened' || body.action == 'reopened' || body.action == 'synchronize') &&
+                  body.pull_request.head.repo.full_name == 'petbattle/pet-battle'
+            - name: overlays
+              value:
+                - key: truncated_sha
+                  expression: "body.pull_request.head.sha.truncate(7)"
+                - key: branch_name
+                  expression: body.pull_request.head.ref
+                - key: pr
+                  expression: body.pull_request.number
+                - key: app_of_apps_key
+                  expression: "body.repository.name.replace('-','_',-1)"
       bindings:
       - kind: TriggerBinding
         ref: github-trigger-binding-pr
