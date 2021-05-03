@@ -165,7 +165,7 @@ applications:
           - /spec
   # Zalenium
   - name: zalenium
-    enabled: true
+    enabled: false
     source: https://github.com/zalando/zalenium.git
     source_path: charts/zalenium
     source_ref: "master"
