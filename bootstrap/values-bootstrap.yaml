@@ -42,7 +42,6 @@ argocd-operator:
   enabled: true
   name: argocd
   namespace: *ci_cd
-  instancelabel: rht-labs.com/uj
 
   # operator manages upgrades etc
   version: v1.8.7
@@ -66,6 +65,38 @@ argocd-operator:
       - name: *dev
       - name: *test
       - name: *stage
+
+  # https://argocd-operator.readthedocs.io/en/latest/reference/argocd/
+  argocd_cr:
+    accounts:
+      accounts.admin: login, apiKey
+    applicationInstanceLabelKey: rht-labs.com/uj
+    grafana:
+      enabled: true
+      route:
+        enabled: true
+      size: 1
+    prometheus:
+      enabled: true
+      route:
+        enabled: true
+      size: 1
+    ha:
+      enabled: false
+    rbac:
+      defaultPolicy: role:admin
+    secrets: []
+    server:
+      route:
+        enabled: true
+      autoscale:
+        enabled: false
+      service:
+        type: ClusterIP
+    initialRepositories: |
+      - name: redhat-cop
+        type: helm
+        url: https://redhat-cop.github.io/helm-charts
 
 sealed-secrets:
   # Disabled by default
