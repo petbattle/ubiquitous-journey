@@ -44,7 +44,6 @@ argocd-operator:
   namespace: *ci_cd
 
   # operator manages upgrades etc
-  version: v1.8.7
   operator:
     version: argocd-operator.v0.0.14
     channel: alpha
@@ -68,6 +67,7 @@ argocd-operator:
 
   # https://argocd-operator.readthedocs.io/en/latest/reference/argocd/
   argocd_cr:
+    version: v1.8.7
     accounts:
       accounts.admin: login, apiKey
     applicationInstanceLabelKey: rht-labs.com/uj
