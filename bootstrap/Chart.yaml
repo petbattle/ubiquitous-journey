@@ -12,7 +12,7 @@ dependencies:
     repository: https://redhat-cop.github.io/helm-charts
   - name: argocd-operator
     version: "1.1.2"
-    repository: https://eformat.github.io/helm-charts
+    repository: https://redhat-cop.github.io/helm-charts
   - name: sealed-secrets
     version: "1.13.2"
     repository: https://bitnami-labs.github.io/sealed-secrets
