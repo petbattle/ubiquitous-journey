@@ -5,4 +5,4 @@ metadata:
 spec:
   name: "Pet Battle Local"
   connectionConfig:
-    url: https://admin:admin123@sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts
+    url: http://admin:admin123@sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts
