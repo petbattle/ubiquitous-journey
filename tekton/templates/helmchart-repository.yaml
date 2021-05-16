@@ -1,0 +1,8 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: pet-battle-local
+spec:
+  name: "Pet Battle Local"
+  connectionConfig:
+    url: https://admin:admin123@sonatype-nexus-service.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts

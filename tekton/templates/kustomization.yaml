@@ -13,5 +13,6 @@ resources:
 - test-chart-upload.yaml
 - test-tagging.yaml
 - tekton-tidy-job.yaml
+- helmchart-repository.yaml
 
 namespace: labs-ci-cd

@@ -56,13 +56,11 @@ oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=u
 
 ## To Be Done
 - [ ] fix the need to login to argocd before running create-petbattle-secrets.sh
-- [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault
-- [ ] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
+- [ ] make secrets handling more realistic - use sealed secrets or hashicorp vault - https://www.openshift.com/blog/integrating-hashicorp-vault-in-openshift-4, quarkus hashicorp integration - https://quarkus.io/guides/vault, nexus, sonarqube secrets remove from code
 - [ ] ubi quarkus build image with tools, check base now we have new images (using custom ones)
 - [ ] code quality check should include the branch name generated for sonarqube
 - [ ] dev-ex-dashboard configure - REPLACE this with Console Links Chart when ready!! https://github.com/redhat-cop/helm-charts/pull/109
 - [ ] add nsfw apps to this guide
-- [ ] add HelmChartRepository to UJ - need this to merge for nexus support https://github.com/openshift/console/pull/7711,https://github.com/openshift/console/pull/7841
 - [ ] add E2E tests written between test -> stage promotion
 - [ ] get Helm Release Notes working for pb apps in openshift
 - [X] delete deprecated tekton conditionals once pipeline operator updated -> when syntax
@@ -72,4 +70,6 @@ oc -n labs-ci-cd process create-webhook -p GITHUB_ORG=petbattle -p GITHUB_REPO=u
 - [X] split test, stage deploys - app of apps
 - [X] boostrap crd's is two step process on an empty cluster. need this in a pipeline somewhere
 - [X] code quality gates - configure pipeline args to fail on quality gates
-- [X] Automate These Secrets:
+- [X] Automate These Secrets
+- [X] tekton-tidy.sh, clean artifacts in workspace, add to UJ day2
+- [X] add HelmChartRepository to UJ - need this to merge for nexus support https://github.com/openshift/console/pull/7711,https://github.com/openshift/console/pull/7841
