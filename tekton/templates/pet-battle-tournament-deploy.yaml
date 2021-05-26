@@ -21,9 +21,9 @@ objects:
     serviceAccountName: pipeline
     serviceAccountNames:
       - taskName: helm-argocd-apps-test
-        serviceAccountName: argocd-application-controller
+        serviceAccountName: argocd-argocd-application-controller
       - taskName: helm-argocd-apps-stage
-        serviceAccountName: argocd-application-controller
+        serviceAccountName: argocd-argocd-application-controller
     pipelineRef:
       name: helm-deploy-pipeline
     podTemplate:

@@ -21,7 +21,7 @@ objects:
     serviceAccountName: pipeline
     serviceAccountNames:
       - taskName: helm-install-apps-dev
-        serviceAccountName: argocd-application-controller
+        serviceAccountName: argocd-argocd-application-controller
     podTemplate:
       securityContext:
         runAsNonRoot: true
