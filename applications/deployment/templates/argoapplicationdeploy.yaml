@@ -56,7 +56,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
-      validate: true
 {{- end }}
 {{- if .ignore_differences}}
 {{ toYaml .ignore_differences | indent 2 }}
