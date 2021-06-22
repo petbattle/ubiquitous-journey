@@ -86,8 +86,8 @@ applications:
           password: admin123
       sealed_secrets:
         - name: super-dooper
-          username: AgB/grntdfN18LZBShx60WA625WLlibUaMuSqHFwFdvYkwt9DLRt1r74N5ynUEqwlO4nasUXZvKxx27a02rIBwvju9V+xTQzQand7uXY8Xw7FGBc0X3zR3ISQN3BVao0R3TWWdvZLxClM3apmNf1V24URqUBL3sDMnkBVSBbZhLycw0K23+YvVEMIa8u40sTkQWQWiXWwwVKQUkaZsKwH8Zl7JAyhvmOLJomQOhx/YZLZyo1fB8rW918OogVH2CU378sl384At1J5s/iNUOqVIYINMF2Prm2Cthnp7um89Tj0D+UGU22eWtpgCIjaXScRLCbCQ6LVElyX+CgZ7YABhKtGHeJxfbK3wpfuaCuEfaYWCl72+9+JpIcimgrow36rcfZIPrTrWTyS/sq8DwfVs+isGGBDo1iFmT0q+Qb49fLcwgXgk6tgWrW1+3pY19fJxf3+NqpDQcrjhpCVH6aPNodwHCLB78tkigtNBDNWdhyIhKzOjdjB4Z3BdR33qdqZ7aKu+EJWD+Is9FZRWRfIKKaDoK46hjpIy5QF6A7yPoc/EIy8U9J6N1J6+EXGPCyMYM08NQDNf+qxH3M+jR9oA8Gfsoijk8MaN0kH5THZOkLymLeCvspFNLsb1MgKpxnF4YsnXa8V3liraHUAIk8Ws6qX03wHukG0aNDds60UKpvBye+6BoZr3JCvRepNVyXTvgJahStBA==
-          password: AgDHwG8l1ExPDFJv9YI30j4x9GglpLRUuWWJzvfrrP5H/6Mnxoh3rK4H54zz0dYSkkKOBtwYcbEBUDowqalffDSy9UxsOQYIA9BvvT3oDXGFUTwQ6ENfV2JcQ2+RhC4Y/6Q6jOhEw0Jvwrj8Lis8Ois6ZfU+0L2ZK3t9cByNQ45mpwU+elUYx4vYDAoKgqmHIGNwPsQDRf3FvT/VwrmoOXpF2vO2y22FPCFdadlNkmciW0Wd1Q08Ox0G+Wd5P2mvOsGJKHOj6gvovBwtQDSGjM0cJBedPI66XYqTIaAgMwhvGVy6GQ823q05qv5JU97E9DOIysNHKmcqnnz3mh4uhQWGGgX2llQSTObQ7GsbW14O6pznrV46bgc5hwISVvs/MKw23GkIguFdeSerUQlZMRrxcimL9Shq39K6UXI/fEQGtl3rNRnNKCydETnFu4sT0r+COqkA1tqnF2dJTwDaobG0xsORxpP78PtavnYXSXDzoju3XqGrA/GgSBlgn4Hq/yv2LVvDcPJwzG0Y6hXtbxbAje1EKhI8ZC2/n/e/iLsBMyM33Z99d6y7h+JIH0OQEaRdVLhRL2bFLypTH5oriOhvLO2DVAA7lcqf6F2kRr4bxo2+rbUKisKT1VI8OrdEcyhNklfaja7wNjQMve99TSJNAIfv7htCAd660WBLG0x6VeZSrjnU7jJl+s1tkg5tMJWz8WMxN6DD1wyJlA==
+          username: AgA49U/QWVvbVlS1Ectj/up4sL4C+ArohwrnMUEDxD3xV189NtUMYLc3sJGrVid6Vfnj5YD9PUVZOwoLa5Hk+6wQjcC7wzoOLpw4v5bZh54aba0Df6m5v4oXydY8v4nxN5qJuzkP5ItVb26TgLDerQa7CWsi1n13labdXFCiA8BVD1Gk6nBsl4bSeFP49EOZ4h+WE0bhYPv6zF93DfbXkdrkvJVwBJjmItvakGTBsssyqigMc2lhvUwDpPn2g08qKzuVI3AYJQcpUjAbI7K2Lm/NBE6+thF0izBGLA/Dcwof7yBRTjzZwKF9c36goSA69W61mFtbQ4wg2w/wJPWqncfhpw4LuexwKL1ReJXEiqjhHXp8Cl/0CLPpVXDOXIc8S2slRTSpbQKFZozYnxZcyUn3x8Cp9gfZnPII3V2Ed0okpzs2Sc96EuZBK9dG5hsybeAHnCsVIUFGQliHucGqvJ7P+ftAYsLx/HV8DrK+Qw7hGUAl00RDMLwszfvoRKmB2ixuBwC/W7ZVEMN6m/sRTEUK4plm/vFnxCgElO6D0MXNObOepQCCdfSA+EavT7Lr9C8wSywPpVAXX/GryoPpLpPmph2XKXFOqke3jJLIPgfpt4jfDJAfNI1Gu/xVlsCHUNd9+xb1T+ZbwPf+A1u+baFxa0J6SwtamwWFQ1nQygnjp7f1uB8AnaLqsNhM1X6ZohK5uj3D5Q==
+          password: AgDlIk7mouElHZtmfpQKxl/lMlMFALaxCoPcl/t9Z7mPJRSkoBlCS7mV1VfhRcqRwbVgDjK0AdIDFAMIs/IOtn2mhHQUgqfIXWcMO5GAQgcsJg/AZD7nrUST3pdk1N5U7xLc3rIrvfdBy5+IQTNVMLz3OUaEjMb1eSUixKBWW7jGJn3kVIMimFECWiceQznrlmJlhDwvKjLg3nMd/A3I9e7hkYg8IfyxL1D5gsnnVBg0ew6fVhhPeA8YrsWICFBLY4X3ZtkfGIeOz620UGCkRgj9u7I63M/mlRzjgJQi0CiHGol23O8anX1MK4JEK9xNUBlfPfFHiSjNb0ySmJY46CBtg2Q1qDQDw1XyBi0CTxDJDoaCqBAnIZp4TYzIYYXj2iEFDG2/+muvdR600cf34fy6ZG68ZE4gEw6jYJr7qOeoTVoDsfYImTIrRDuVskyl15TEblRzYz44CnWBymRrUNgibZ4qv8Rgc9tBXGOJYzeJiqTJJCAXHmpCuuNEvRoI04ss79KH7qhXIWFVjKhCf+5cktk9y6gdZ0TjLvap9UHd30bPshdROSihDetZvn0aldd+1X6tJYb+6Re4R2sSOErF46V+jC5qMMlLoTYSq/tf6R/gWEs3HQrvNfhv4gxpvqAUTg2QmdoPPyrBAmeCgfgeipQw8PH2ZU2UTshbEmK9BThUW7VlDqQfd9EpdOq88k6dr4oLRhoHOBEMTQ==
     ignore_differences:
       - group: apps.openshift.io
         kind: DeploymentConfig
@@ -125,7 +125,7 @@ applications:
           pactBrokerBasicAuthPassword: thisisdefinitelynotmypassword
   # Sonarqube
   - name: sonarqube
-    enabled: true
+    enabled: false
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: "charts/sonarqube"
     source_ref: "sonarqube-0.0.15"
@@ -142,7 +142,7 @@ applications:
           - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.7/sonar-dependency-check-plugin-2.0.7.jar
   # Sonarqube setup
   - name: sonarqube-setup
-    enabled: true
+    enabled: false
     source: https://github.com/eformat/sonarqube-jobs
     source_path: charts/quality-gate
     sync_policy: *sync_policy_true
@@ -154,7 +154,7 @@ applications:
           enabled: false
   # CodeReady Workspaces
   - name: crw
-    enabled: false
+    enabled: true
     destination: crw
     source: https://github.com/rht-labs/refactored-adventure
     source_path: crw/base
@@ -168,7 +168,7 @@ applications:
           - /spec
   # Zalenium
   - name: zalenium
-    enabled: true
+    enabled: false
     source: https://github.com/zalando/zalenium.git
     source_path: charts/zalenium
     source_ref: "master"
@@ -228,7 +228,7 @@ applications:
     no_helm: true
   # CertUtils
   - name: cert-utils
-    enabled: true
+    enabled: false
     destination: openshift-operators
     source: https://github.com/rht-labs/refactored-adventure
     source_path: cert-utils/base
@@ -237,7 +237,7 @@ applications:
     no_helm: true
   # Knative
   - name: knative
-    enabled: true
+    enabled: false
     destination: openshift-serverless
     source: https://github.com/rht-labs/refactored-adventure
     source_path: knative/serving
@@ -268,7 +268,7 @@ applications:
     no_helm: true
   # Matamo
   - name: matomo
-    enabled: true
+    enabled: false
     source: https://github.com/petbattle/pet-battle-analytics.git
     source_path: charts/matomo
     sync_policy: *sync_policy_true
@@ -283,7 +283,7 @@ applications:
         - /spec/template/spec/containers/1/image
    # Istio basic mesh
   - name: istio
-    enabled: true
+    enabled: false
     destination: openshift-operators
     source: https://github.com/rht-labs/refactored-adventure
     source_path: istio/istio-system
@@ -292,7 +292,7 @@ applications:
     no_helm: true
   # Allure
   - name: allure
-    enabled: true
+    enabled: false
     source: https://github.com/eformat/allure
     source_path: "chart"
     source_ref: "main"
