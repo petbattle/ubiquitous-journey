@@ -70,7 +70,7 @@ argocd-operator:
     version: v2.0.2
     accounts:
       accounts.admin: login, apiKey
-    applicationInstanceLabelKey: rht-labs.com/uj
+    applicationInstanceLabelKey: petbattle.app/uj
     grafana:
       enabled: true
       route:
