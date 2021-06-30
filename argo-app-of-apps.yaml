@@ -25,7 +25,7 @@ applications:
       - values-tooling.yaml
   - name: uj-extras
     destination: labs-ci-cd
-    enabled: true
+    enabled: false
     source: https://github.com/petbattle/ubiquitous-journey.git
     source_path: ubiquitous-journey/
     source_ref: main
