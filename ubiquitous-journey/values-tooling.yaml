@@ -76,7 +76,7 @@ applications:
           - name: JENKINS_OPTS
             value: '--sessionTimeout=180'
           - name: GITHUB_ACCOUNT
-            value: 'petbattle'
+            value: 'tersian'
           - name: GITHUB_ORG
             value: 'true'
       persistence: false
