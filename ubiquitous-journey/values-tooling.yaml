@@ -78,7 +78,7 @@ applications:
           - name: GITHUB_ACCOUNT
             value: 'tersian'
           - name: GITHUB_ORG
-            value: 'true'
+            value: 'false'
       persistence: false
       source_secrets:
         - name: nexus-password
