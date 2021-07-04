@@ -76,6 +76,8 @@ if [ -z ${GITHUB_TOKEN} ] || [ -z ${WEBHOOK_SECRET} ] || [ -z ${ARGOCD_USERNAME}
     usage
 fi
 
+oc project labs-ci-cd
+
 oc delete pod -l app.kubernetes.io/name=argocd-server
 oc wait pod -l app.kubernetes.io/name=argocd-server --for=condition=Ready --timeout=100s
 
