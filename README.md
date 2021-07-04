@@ -28,15 +28,15 @@ oc -n labs-ci-cd process pet-battle-tournament | oc -n labs-ci-cd create -f-
 
 If you have already built and tagged images, you can redeploy the argocd application suite (helm template) using:
 ```bash
-oc -n labs-ci-cd process pet-battle-api-deploy -p HELM_CHART_VERSION=1.0.9 | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-deploy -p HELM_CHART_VERSION=1.0.5 | oc -n labs-ci-cd create -f-
-oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.32 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-api-deploy -p HELM_CHART_VERSION=1.0.15 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-deploy -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-tournament-deploy -p HELM_CHART_VERSION=1.0.39 | oc -n labs-ci-cd create -f-
 ```
 
 If you are on a branch called `develop`, you can test a deployment (the same as a helm update --install) using:
 ```bash
 # HELM_CHART_VERSION is Optional (it will pull latest chart from nexus helm chart repo if not specified)
-oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=develop -p GIT_BRANCH=develop -p HELM_CHART_VERSION=1.0.6 | oc -n labs-ci-cd create -f-
+oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=develop -p GIT_BRANCH=develop -p HELM_CHART_VERSION=1.0.15 | oc -n labs-ci-cd create -f-
 # OR
 oc -n labs-ci-cd process pet-battle-api-deploy -p GIT_SHORT_REVISION=develop -p GIT_BRANCH=develop | oc -n labs-ci-cd create -f-
 ```
