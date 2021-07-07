@@ -1,0 +1,35 @@
+app_name: pet-battle
+replicas: 1
+# build info not used atm
+build:
+  enabled: false
+  build_tag: latest
+  source_docker_file_path: Dockerfile
+  # source_context_dir: "/"
+  # source_ref: master
+  # source_repo: https://github.com/springdo/pet-battle.git
+# Docker deets
+image_repository: quay.io
+image_name: pet-battle
+image_namespace: petbattle
+# likely over written by the Argo definition
+image_version: latest
+a_b_deploy:
+  weight: 100
+  # svc_name:
+fathom: false
+# OCP route
+route: true
+# custom end point injected by config map. This is likely to changed
+config_map: '{
+  "catsUrl": "https://pet-battle-api-labs-test.apps.openshift-4712-hbzcs.do500.redhatlabs.dev",
+  "tournamentsUrl": "https://pet-battle-tournament-labs-test.apps.openshift-4712-hbzcs.do500.redhatlabs.dev",
+  "matomoUrl": "https://pba-matomo-exp.apps.openshift-4712-hbzcs.do500.redhatlabs.dev/",
+  "keycloak": {
+    "url": "https://keycloak-labs-test.apps.openshift-4712-hbzcs.do500.redhatlabs.dev/auth/",
+    "realm": "pbrealm",
+    "clientId": "pbclient",
+    "redirectUri": "https://pet-battle-petbattle.apps.openshift-4712-hbzcs.do500.redhatlabs.dev/*",
+    "enableLogging": true
+  }
+}'

@@ -76,18 +76,14 @@ applications:
           - name: JENKINS_OPTS
             value: '--sessionTimeout=180'
           - name: GITHUB_ACCOUNT
-            value: 'petbattle'
+            value: 'tersian'
           - name: GITHUB_ORG
-            value: 'true'
+            value: 'false'
       persistence: false
       source_secrets:
         - name: nexus-password
           username: admin
           password: admin123
-      #sealed_secrets:
-      #  - name: super-dooper
-      #    username: AgB/grntdfN18LZBShx60WA625WLlibUaMuSqHFwFdvYkwt9DLRt1r74N5ynUEqwlO4nasUXZvKxx27a02rIBwvju9V+xTQzQand7uXY8Xw7FGBc0X3zR3ISQN3BVao0R3TWWdvZLxClM3apmNf1V24URqUBL3sDMnkBVSBbZhLycw0K23+YvVEMIa8u40sTkQWQWiXWwwVKQUkaZsKwH8Zl7JAyhvmOLJomQOhx/YZLZyo1fB8rW918OogVH2CU378sl384At1J5s/iNUOqVIYINMF2Prm2Cthnp7um89Tj0D+UGU22eWtpgCIjaXScRLCbCQ6LVElyX+CgZ7YABhKtGHeJxfbK3wpfuaCuEfaYWCl72+9+JpIcimgrow36rcfZIPrTrWTyS/sq8DwfVs+isGGBDo1iFmT0q+Qb49fLcwgXgk6tgWrW1+3pY19fJxf3+NqpDQcrjhpCVH6aPNodwHCLB78tkigtNBDNWdhyIhKzOjdjB4Z3BdR33qdqZ7aKu+EJWD+Is9FZRWRfIKKaDoK46hjpIy5QF6A7yPoc/EIy8U9J6N1J6+EXGPCyMYM08NQDNf+qxH3M+jR9oA8Gfsoijk8MaN0kH5THZOkLymLeCvspFNLsb1MgKpxnF4YsnXa8V3liraHUAIk8Ws6qX03wHukG0aNDds60UKpvBye+6BoZr3JCvRepNVyXTvgJahStBA==
-      #    password: AgDHwG8l1ExPDFJv9YI30j4x9GglpLRUuWWJzvfrrP5H/6Mnxoh3rK4H54zz0dYSkkKOBtwYcbEBUDowqalffDSy9UxsOQYIA9BvvT3oDXGFUTwQ6ENfV2JcQ2+RhC4Y/6Q6jOhEw0Jvwrj8Lis8Ois6ZfU+0L2ZK3t9cByNQ45mpwU+elUYx4vYDAoKgqmHIGNwPsQDRf3FvT/VwrmoOXpF2vO2y22FPCFdadlNkmciW0Wd1Q08Ox0G+Wd5P2mvOsGJKHOj6gvovBwtQDSGjM0cJBedPI66XYqTIaAgMwhvGVy6GQ823q05qv5JU97E9DOIysNHKmcqnnz3mh4uhQWGGgX2llQSTObQ7GsbW14O6pznrV46bgc5hwISVvs/MKw23GkIguFdeSerUQlZMRrxcimL9Shq39K6UXI/fEQGtl3rNRnNKCydETnFu4sT0r+COqkA1tqnF2dJTwDaobG0xsORxpP78PtavnYXSXDzoju3XqGrA/GgSBlgn4Hq/yv2LVvDcPJwzG0Y6hXtbxbAje1EKhI8ZC2/n/e/iLsBMyM33Z99d6y7h+JIH0OQEaRdVLhRL2bFLypTH5oriOhvLO2DVAA7lcqf6F2kRr4bxo2+rbUKisKT1VI8OrdEcyhNklfaja7wNjQMve99TSJNAIfv7htCAd660WBLG0x6VeZSrjnU7jJl+s1tkg5tMJWz8WMxN6DD1wyJlA==
     ignore_differences:
       - group: apps.openshift.io
         kind: DeploymentConfig
@@ -125,7 +121,7 @@ applications:
           pactBrokerBasicAuthPassword: thisisdefinitelynotmypassword
   # Sonarqube
   - name: sonarqube
-    enabled: true
+    enabled: false
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: "charts/sonarqube"
     source_ref: "sonarqube-0.0.15"
@@ -142,7 +138,7 @@ applications:
           - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.7/sonar-dependency-check-plugin-2.0.7.jar
   # Sonarqube setup
   - name: sonarqube-setup
-    enabled: true
+    enabled: false
     source: https://github.com/eformat/sonarqube-jobs
     source_path: charts/quality-gate
     sync_policy: *sync_policy_true
@@ -154,7 +150,7 @@ applications:
           enabled: false
   # CodeReady Workspaces
   - name: crw
-    enabled: false
+    enabled: true
     destination: crw
     source: https://github.com/rht-labs/refactored-adventure
     source_path: crw/base
@@ -168,7 +164,7 @@ applications:
           - /spec
   # Zalenium
   - name: zalenium
-    enabled: true
+    enabled: false
     source: https://github.com/zalando/zalenium.git
     source_path: charts/zalenium
     source_ref: "master"
@@ -228,7 +224,7 @@ applications:
     no_helm: true
   # CertUtils
   - name: cert-utils
-    enabled: true
+    enabled: false
     destination: openshift-operators
     source: https://github.com/rht-labs/refactored-adventure
     source_path: cert-utils/base
@@ -237,7 +233,7 @@ applications:
     no_helm: true
   # Knative
   - name: knative
-    enabled: true
+    enabled: false
     destination: openshift-serverless
     source: https://github.com/rht-labs/refactored-adventure
     source_path: knative/serving
@@ -255,7 +251,7 @@ applications:
     no_helm: true
   # Matamo
   - name: matomo
-    enabled: true
+    enabled: false
     source: https://github.com/petbattle/pet-battle-analytics.git
     source_path: charts/matomo
     sync_policy: *sync_policy_true
@@ -270,7 +266,7 @@ applications:
         - /spec/template/spec/containers/1/image
    # Istio basic mesh
   - name: istio
-    enabled: true
+    enabled: false
     destination: openshift-operators
     source: https://github.com/rht-labs/refactored-adventure
     source_path: istio/istio-system
@@ -279,7 +275,7 @@ applications:
     no_helm: true
   # Allure
   - name: allure
-    enabled: true
+    enabled: false
     source: https://github.com/eformat/allure
     source_path: "chart"
     source_ref: "main"
