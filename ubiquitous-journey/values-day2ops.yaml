@@ -44,7 +44,7 @@ applications:
       prune_type: deployments
   # Container Security
   - name: container-security-operator
-    enabled: false
+    enabled: true
     destination: openshift-operators
     source: https://github.com/rht-labs/refactored-adventure.git
     source_path: container-security-operator/base
