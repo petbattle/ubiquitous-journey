@@ -2,9 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: sonarqube-quality-gate-check
-  labels:
-    app.kubernetes.io/version: "0.1"
-    rht-labs.com/uj: ubiquitous-journey
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: build-tool
